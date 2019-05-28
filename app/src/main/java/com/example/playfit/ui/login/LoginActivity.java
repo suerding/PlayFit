@@ -118,7 +118,7 @@ public class LoginActivity extends AppCompatActivity {
                 following: der Mustercode
                 Navigation.createNavigateOnClickListener(R.id.actionDetail,  bundle));
                  */
-                Navigation.createNavigateOnClickListener(R.id.activity_login));
+              Navigation.createNavigateOnClickListener(R.id.activity_main);
             }
         });
     }
