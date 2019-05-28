@@ -18,6 +18,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.navigation.Navigation;
+
 import com.example.playfit.R;
 import com.example.playfit.ui.login.LoginViewModel;
 import com.example.playfit.ui.login.LoginViewModelFactory;
@@ -111,9 +113,12 @@ public class LoginActivity extends AppCompatActivity {
                 loadingProgressBar.setVisibility(View.VISIBLE);
                 loginViewModel.login(usernameEditText.getText().toString(),
                         passwordEditText.getText().toString());
-
-                button.setOnClickListener(
-                        Navigation.createNavigateOnClickListener(R.id.actionDetail,  bundle))
+                //richitge ID muss eingefügt werden um Navigator zu enablen / anstatt von Bundle sollten die Session daten mitgegeben werden
+                /*
+                following: der Mustercode
+                Navigation.createNavigateOnClickListener(R.id.actionDetail,  bundle));
+                 */
+                Navigation.createNavigateOnClickListener(R.id.activity_login));
             }
         });
     }
