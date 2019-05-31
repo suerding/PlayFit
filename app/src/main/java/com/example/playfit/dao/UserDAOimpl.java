@@ -17,6 +17,7 @@ public class UserDAOimpl implements UserDAO {
         user.setUserID(1);
         user.setUserName("Basti");
         user.setUserPoints(0);
+        user.setUserEmail("sknobla2@smail.uni-koeln.de");
 
         users.add(user);
 
@@ -24,6 +25,6 @@ public class UserDAOimpl implements UserDAO {
 
     @Override
     public List<UserDTO> list() {
-        return null;
+        return users;
     }
 }

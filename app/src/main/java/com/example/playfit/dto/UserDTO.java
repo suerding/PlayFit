@@ -37,4 +37,14 @@ public class UserDTO {
     private int userPoints;
     private String userName;
     private int friendCount;
+
+    public String getUserEmail() {
+        return userEmail;
+    }
+
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
+    }
+
+    private String userEmail;
 }
