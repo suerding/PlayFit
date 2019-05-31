@@ -19,7 +19,7 @@ public class ProductDAOimpl implements ProductDAO {
        product.setProductID(1);
        product.setProductName("Banane");
        product.setLocation("Bonn");
-       product.setPointRate("5");
+       product.setPointRate(5);
 
         products.add(product);
 

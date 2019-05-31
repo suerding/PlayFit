@@ -3,7 +3,7 @@ package com.example.playfit.dto;
 public class ProductDTO {
 
     private int productID;
-    private int productName;
+    private String productName;
 
     public int getProductID() {
         return productID;
@@ -13,11 +13,11 @@ public class ProductDTO {
         this.productID = productID;
     }
 
-    public int getProductName() {
+    public String getProductName() {
         return productName;
     }
 
-    public void setProductName(int productName) {
+    public void setProductName(String productName) {
         this.productName = productName;
     }
 
