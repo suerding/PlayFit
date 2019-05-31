@@ -11,6 +11,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 
+import androidx.navigation.Navigation;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -35,7 +37,7 @@ public class MainActivity extends AppCompatActivity
         */
 
         DrawerLayout drawer = findViewById(R.id.activity_main);
-        NavigationView navigationView = findViewById(R.id.nav_view);
+        NavigationView navigationView = findViewById(R.id.nav_main);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
@@ -82,9 +84,9 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
-            // Handle the camera action
+           Navigation.createNavigateOnClickListener(R.id.activity_main);
         } else if (id == R.id.nav_profile) {
-
+            Navigation.createNavigateOnClickListener(R.id.activity_profile);
         } else if (id == R.id.nav_friends) {
 
         } else if (id == R.id.nav_maps) {
