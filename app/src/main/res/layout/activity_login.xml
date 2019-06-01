@@ -16,9 +16,10 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="268dp"
+        android:layout_marginTop="356dp"
         android:layout_marginEnd="24dp"
         android:autofillHints="@string/prompt_email"
+        android:backgroundTint="#39B096"
         android:hint="@string/prompt_email"
         android:inputType="textEmailAddress"
         android:selectAllOnFocus="true"
@@ -34,8 +35,9 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="24dp"
         android:autofillHints="@string/prompt_password"
+        android:backgroundTint="#39B096"
         android:hint="@string/prompt_password"
-        android:imeActionLabel="@string/action_sign_in_short"
+        android:imeActionLabel="@string/action_sign_in"
         android:imeOptions="actionDone"
         android:inputType="textPassword"
         android:selectAllOnFocus="true"
@@ -52,6 +54,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="48dp"
         android:layout_marginBottom="64dp"
+        android:backgroundTint="#39B096"
         android:enabled="false"
         android:text="@string/action_sign_in"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -75,4 +78,12 @@
         app:layout_constraintStart_toStartOf="@+id/password"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.3" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="231dp"
+        android:layout_height="228dp"
+        app:srcCompat="@mipmap/ic_launcher_foreground"
+        tools:layout_editor_absoluteX="75dp"
+        tools:layout_editor_absoluteY="55dp" />
 </android.support.constraint.ConstraintLayout>
