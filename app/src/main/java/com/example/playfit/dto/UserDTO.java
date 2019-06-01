@@ -1,6 +1,12 @@
 package com.example.playfit.dto;
 
 public class UserDTO {
+    private int userID;
+    private int userPoints;
+    private String userName;
+    private int friendCount;
+    private String userEmail;
+
     public int getUserID() {
         return userID;
     }
@@ -33,10 +39,7 @@ public class UserDTO {
         this.friendCount = friendCount;
     }
 
-    private int userID;
-    private int userPoints;
-    private String userName;
-    private int friendCount;
+
 
     public String getUserEmail() {
         return userEmail;
@@ -46,5 +49,5 @@ public class UserDTO {
         this.userEmail = userEmail;
     }
 
-    private String userEmail;
+
 }

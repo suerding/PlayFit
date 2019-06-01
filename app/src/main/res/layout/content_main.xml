@@ -6,15 +6,56 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".MainActivity"
+    tools:layout_editor_absoluteY="56dp"
     tools:showIn="@layout/app_bar_main">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <Button
+        android:id="@+id/button"
+        android:layout_width="166dp"
+        android:layout_height="141dp"
+        android:text="@string/menu_maps"
+        tools:layout_editor_absoluteX="214dp"
+        tools:layout_editor_absoluteY="413dp" />
 
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="166dp"
+        android:layout_height="141dp"
+        android:text="@string/menu_Friends"
+        tools:layout_editor_absoluteX="25dp"
+        tools:layout_editor_absoluteY="411dp" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="166dp"
+        android:layout_height="141dp"
+        android:onClick="@string/navigation_drawer_open"
+        android:text="@string/menu_Profile"
+        tools:layout_editor_absoluteX="214dp"
+        tools:layout_editor_absoluteY="241dp" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="163dp"
+        android:layout_height="141dp"
+        android:text="@string/menu_scan"
+        tools:layout_editor_absoluteX="25dp"
+        tools:layout_editor_absoluteY="241dp" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="82dp"
+        android:layout_height="52dp"
+        android:text="345"
+        android:textSize="36sp"
+        tools:layout_editor_absoluteX="164dp"
+        tools:layout_editor_absoluteY="59dp" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="21dp"
+        android:text="Playfit Points"
+        tools:layout_editor_absoluteX="162dp"
+        tools:layout_editor_absoluteY="111dp" />
 </android.support.constraint.ConstraintLayout>
