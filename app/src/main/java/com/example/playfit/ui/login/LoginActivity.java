@@ -70,9 +70,10 @@ public class LoginActivity extends AppCompatActivity {
                     updateUiWithUser(loginResult.getSuccess());
                 }
                 setResult(Activity.RESULT_OK);
-
+                //hier muss der Navigator eingefügt werden
+                Navigation.createNavigateOnClickListener(R.id.activity_main);
                 //Complete and destroy login activity once successful
-                finish();
+                //finish();
             }
         });
 
@@ -113,12 +114,7 @@ public class LoginActivity extends AppCompatActivity {
                 loadingProgressBar.setVisibility(View.VISIBLE);
                 loginViewModel.login(usernameEditText.getText().toString(),
                         passwordEditText.getText().toString());
-                //richitge ID muss eingefügt werden um Navigator zu enablen / anstatt von Bundle sollten die Session daten mitgegeben werden
-                /*
-                following: der Mustercode
-                Navigation.createNavigateOnClickListener(R.id.actionDetail,  bundle));
-                 */
-              Navigation.createNavigateOnClickListener(R.id.activity_main);
+
             }
         });
     }
