@@ -32,4 +32,5 @@
     <string name="contentProfile">Profile content test</string>
     <string name="title_activity_maps">MapsActivity</string>
     <string name="title_activity_friends">FriendsActivity</string>
+    <string name="action_sign_in_short">Sign in</string>
 </resources>

@@ -3,6 +3,7 @@ package com.example.playfit.ui.login;
 import android.app.Activity;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
@@ -18,8 +19,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.navigation.Navigation;
-
+import com.example.playfit.MainActivity;
 import com.example.playfit.R;
 import com.example.playfit.ui.login.LoginViewModel;
 import com.example.playfit.ui.login.LoginViewModelFactory;
@@ -70,10 +70,12 @@ public class LoginActivity extends AppCompatActivity {
                     updateUiWithUser(loginResult.getSuccess());
                 }
                 setResult(Activity.RESULT_OK);
-                //hier muss der Navigator eingefügt werden
-                Navigation.createNavigateOnClickListener(R.id.activity_main);
+
+                Intent mainIntent = new Intent(LoginActivity.this, MainActivity.class);
+                startActivity(mainIntent);
                 //Complete and destroy login activity once successful
-                //finish();
+                //
+                // finish();
             }
         });
 
@@ -111,9 +113,11 @@ public class LoginActivity extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                /*
                 loadingProgressBar.setVisibility(View.VISIBLE);
                 loginViewModel.login(usernameEditText.getText().toString(),
                         passwordEditText.getText().toString());
+                */
 
             }
         });
