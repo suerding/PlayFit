@@ -21,12 +21,20 @@ import android.widget.Toast;
 
 import com.example.playfit.MainActivity;
 import com.example.playfit.R;
+import com.example.playfit.dao.UserDAOimpl;
+import com.example.playfit.dto.UserDTO;
 import com.example.playfit.ui.login.LoginViewModel;
 import com.example.playfit.ui.login.LoginViewModelFactory;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class LoginActivity extends AppCompatActivity {
 
     private LoginViewModel loginViewModel;
+    private UserDAOimpl userDAO = new UserDAOimpl();
+    private String username;
+    private String password;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -39,7 +47,7 @@ public class LoginActivity extends AppCompatActivity {
         final EditText passwordEditText = findViewById(R.id.password);
         final Button loginButton = findViewById(R.id.login);
         final ProgressBar loadingProgressBar = findViewById(R.id.loading);
-
+        userDAO.createUser();
         loginViewModel.getLoginFormState().observe(this, new Observer<LoginFormState>() {
             @Override
             public void onChanged(@Nullable LoginFormState loginFormState) {
@@ -66,16 +74,17 @@ public class LoginActivity extends AppCompatActivity {
                 if (loginResult.getError() != null) {
                     showLoginFailed(loginResult.getError());
                 }
-                if (loginResult.getSuccess() != null) {
-                    updateUiWithUser(loginResult.getSuccess());
+                if (loginResult.getSuccess(username, password) != null) {
+                    updateUiWithUser(username);
+                    //Navigate to Main
+                    Intent mainIntent = new Intent(LoginActivity.this, MainActivity.class);
+                    startActivity(mainIntent);
+
                 }
                 setResult(Activity.RESULT_OK);
 
-                Intent mainIntent = new Intent(LoginActivity.this, MainActivity.class);
-                startActivity(mainIntent);
-                //Complete and destroy login activity once successful
-                //
-                // finish();
+
+
             }
         });
 
@@ -118,13 +127,17 @@ public class LoginActivity extends AppCompatActivity {
                 loginViewModel.login(usernameEditText.getText().toString(),
                         passwordEditText.getText().toString());
                 */
+                username = findViewById(R.id.username).toString();
+                password = findViewById(R.id.password).toString();
 
             }
         });
+
+
     }
 
-    private void updateUiWithUser(LoggedInUserView model) {
-        String welcome = getString(R.string.welcome) + model.getDisplayName();
+    private void updateUiWithUser(String username) {
+        String welcome = getString(R.string.welcome) + username;
         // TODO : initiate successful logged in experience
         Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
     }

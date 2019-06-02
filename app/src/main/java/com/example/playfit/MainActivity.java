@@ -1,5 +1,6 @@
 package com.example.playfit;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -24,17 +25,6 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
 
-        /*
-        //hier wird der Fehler geworfen, dass die fab Variable auf null läuft
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-        */
 
         DrawerLayout drawer = findViewById(R.id.activity_main);
         NavigationView navigationView = findViewById(R.id.nav_home);
@@ -84,13 +74,17 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
-           Navigation.createNavigateOnClickListener(R.id.activity_main);
+           Intent homeIntent = new Intent(MainActivity.this, MainActivity.class);
+           startActivity(homeIntent);
         } else if (id == R.id.nav_profile) {
-            Navigation.createNavigateOnClickListener(R.id.activity_profile);
+            Intent profileIntent = new Intent(MainActivity.this, ProfileActvity.class);
+            startActivity(profileIntent);
         } else if (id == R.id.nav_friends) {
-
+            Intent friendsIntent = new Intent(MainActivity.this, FriendsActivity.class);
+            startActivity(friendsIntent);
         } else if (id == R.id.nav_maps) {
-
+            Intent mapsIntent = new Intent(MainActivity.this, MapsActivity.class);
+            startActivity(mapsIntent);
         } else if (id == R.id.nav_scan) {
 
         } else if (id == R.id.nav_socialMedia) {

@@ -13,49 +13,72 @@
         android:id="@+id/button"
         android:layout_width="166dp"
         android:layout_height="141dp"
+        android:layout_marginTop="31dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="121dp"
         android:text="@string/menu_maps"
-        tools:layout_editor_absoluteX="214dp"
-        tools:layout_editor_absoluteY="413dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button3" />
 
     <Button
         android:id="@+id/button4"
         android:layout_width="166dp"
         android:layout_height="141dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginBottom="123dp"
         android:text="@string/menu_Friends"
-        tools:layout_editor_absoluteX="25dp"
-        tools:layout_editor_absoluteY="411dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/button3"
         android:layout_width="166dp"
         android:layout_height="141dp"
+        android:layout_marginStart="26dp"
+        android:layout_marginTop="123dp"
+        android:layout_marginEnd="31dp"
         android:onClick="@string/navigation_drawer_open"
         android:text="@string/menu_Profile"
-        tools:layout_editor_absoluteX="214dp"
-        tools:layout_editor_absoluteY="241dp" />
+        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/button2"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/button2"
         android:layout_width="163dp"
         android:layout_height="141dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="26dp"
+        android:layout_marginBottom="28dp"
         android:text="@string/menu_scan"
-        tools:layout_editor_absoluteX="25dp"
-        tools:layout_editor_absoluteY="241dp" />
+        app:layout_constraintBottom_toTopOf="@+id/button4"
+        app:layout_constraintEnd_toStartOf="@+id/button3"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="82dp"
         android:layout_height="52dp"
+        android:layout_marginStart="165dp"
+        android:layout_marginTop="59dp"
+        android:layout_marginEnd="165dp"
         android:text="345"
         android:textSize="36sp"
-        tools:layout_editor_absoluteX="164dp"
-        tools:layout_editor_absoluteY="59dp" />
+        app:layout_constraintBottom_toTopOf="@+id/textView3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="21dp"
+        android:layout_marginStart="162dp"
+        android:layout_marginEnd="165dp"
         android:text="Playfit Points"
-        tools:layout_editor_absoluteX="162dp"
-        tools:layout_editor_absoluteY="111dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
 </android.support.constraint.ConstraintLayout>

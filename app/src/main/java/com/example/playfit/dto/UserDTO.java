@@ -1,17 +1,27 @@
 package com.example.playfit.dto;
 
 public class UserDTO {
-    private int userID;
+    private String userID;
     private int userPoints;
     private String userName;
     private int friendCount;
     private String userEmail;
 
-    public int getUserID() {
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    private String password;
+
+    public String getUserID() {
         return userID;
     }
 
-    public void setUserID(int userID) {
+    public void setUserID(String userID) {
         this.userID = userID;
     }
 
@@ -48,6 +58,7 @@ public class UserDTO {
     public void setUserEmail(String userEmail) {
         this.userEmail = userEmail;
     }
+
 
 
 }

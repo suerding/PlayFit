@@ -2,6 +2,8 @@ package com.example.playfit.ui.login;
 
 import android.support.annotation.Nullable;
 
+import com.example.playfit.data.LoginDataSource;
+
 /**
  * Authentication result : success (user details) or error message.
  */
@@ -10,6 +12,7 @@ class LoginResult {
     private LoggedInUserView success;
     @Nullable
     private Integer error;
+    private LoginDataSource dataSource = new LoginDataSource();
 
     LoginResult(@Nullable Integer error) {
         this.error = error;
@@ -20,8 +23,13 @@ class LoginResult {
     }
 
     @Nullable
-    LoggedInUserView getSuccess() {
-        return success;
+    LoggedInUserView getSuccess(String username, String password) {
+        if(dataSource.login(username,password) == null) {
+            return null;
+        } else {
+            return success;
+        }
+
     }
 
     @Nullable

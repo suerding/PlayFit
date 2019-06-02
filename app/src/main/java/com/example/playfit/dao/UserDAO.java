@@ -7,4 +7,6 @@ import java.util.List;
 public interface UserDAO {
 
    List<UserDTO> list();
+
+   public Integer getUserIdbyName(String username);
 }
