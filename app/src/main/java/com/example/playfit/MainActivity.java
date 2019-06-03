@@ -1,3 +1,7 @@
+/*
+created by suerding
+finalized by sknobla
+ */
 package com.example.playfit;
 
 import android.content.Intent;
@@ -26,7 +30,7 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
 
-
+        //created by sknobla & suerding
         DrawerLayout drawer = findViewById(R.id.activity_main);
         NavigationView navigationView = findViewById(R.id.nav_menu);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(

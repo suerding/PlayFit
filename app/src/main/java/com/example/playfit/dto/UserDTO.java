@@ -1,3 +1,7 @@
+/*
+created by sknobla
+finalized by suerding
+ */
 package com.example.playfit.dto;
 
 public class UserDTO {

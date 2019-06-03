@@ -1,3 +1,7 @@
+/*
+created by sknobla & suerding
+finalized by suerding & sknobla
+ */
 package com.example.playfit;
 
 import android.content.Context;

@@ -1,3 +1,7 @@
+/*
+created by sknobla
+finalized by suerding
+ */
 package com.example.playfit.dao;
 
 import android.util.Log;
@@ -52,7 +56,7 @@ public class UserDAOimpl implements UserDAO {
         return this.users;
     }
 
-    //gibt die Stelle des Users in der Liste zurück
+    //created by suerding & sknobla
     @Override
     public Integer getUserIdbyName(String username) {
         this.createUser();
