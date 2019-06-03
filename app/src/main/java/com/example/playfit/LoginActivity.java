@@ -2,7 +2,6 @@ package com.example.playfit;
 
 import android.content.Context;
 import android.content.Intent;
-import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,6 +15,7 @@ import com.example.playfit.dao.UserDAOimpl;
 public class LoginActivity extends AppCompatActivity {
     Button camera;
     private Button loginButton;
+    private Button signupButton;
     private String username;
     private String password;
     private UserDAOimpl users = new UserDAOimpl();
@@ -25,6 +25,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         loginButton = findViewById(R.id.loginButton);
+        signupButton = findViewById(R.id.signupButton);
         users.createUser();
 
 
@@ -57,6 +58,17 @@ public class LoginActivity extends AppCompatActivity {
                     startActivity(loginIntent);
                 }
             }});
+        signupButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+            EditText usernametemp = findViewById(R.id.username);
+            EditText passwordtemp = findViewById(R.id.password);
+            username = usernametemp.getText().toString();
+            password = passwordtemp.getText().toString();
+            users.newUser(username, password);
+            Intent loginIntent = new Intent(LoginActivity.this, LoginActivity.class);
+            startActivity(loginIntent);
+            }
+        });
 
 
 
