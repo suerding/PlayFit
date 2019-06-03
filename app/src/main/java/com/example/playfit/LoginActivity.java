@@ -1,5 +1,6 @@
 package com.example.playfit;
 
+import android.content.Context;
 import android.content.Intent;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.playfit.dao.UserDAOimpl;
 
@@ -30,12 +32,12 @@ public class LoginActivity extends AppCompatActivity {
                 EditText usernametemp = findViewById(R.id.username);
                 EditText passwordtemp = findViewById(R.id.password);
                 username = usernametemp.getText().toString();
-                Log.d("USERNAME",username);
+                Log.d("USERNAME", username);
                 password = passwordtemp.getText().toString();
-                if(usernameCheck(username, password)){
+                if (usernameCheck(username, password)) {
                     Intent loginIntent = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(loginIntent);
-                }else {
+                } else {
                     Context context = getApplicationContext();
                     CharSequence text = "invalid credientials";
                     int duration = Toast.LENGTH_SHORT;
@@ -46,6 +48,7 @@ public class LoginActivity extends AppCompatActivity {
                     Intent loginIntent = new Intent(LoginActivity.this, LoginActivity.class);
                     startActivity(loginIntent);
                 }
+            }});
 
 
 
