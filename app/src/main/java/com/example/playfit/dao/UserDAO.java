@@ -8,5 +8,5 @@ public interface UserDAO {
 
    List<UserDTO> list();
 
-   public Integer getUserIdbyName(String username);
+   Integer getUserIdbyName(String username);
 }
