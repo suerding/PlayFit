@@ -16,11 +16,18 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.view.View;
+import android.widget.Button;
 
 import androidx.navigation.Navigation;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private Button profileButton;
+    private Button friendsButton;
+    private Button mapsButton;
+    private Button scanButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +36,7 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        dashboardButtons();
 
         //created by sknobla & suerding
         DrawerLayout drawer = findViewById(R.id.activity_main);
@@ -40,6 +48,50 @@ public class MainActivity extends AppCompatActivity
         if (navigationView != null) {
             navigationView.setNavigationItemSelectedListener(this);
         }
+    }
+
+    private void dashboardButtons() {
+        //created by suerding - profileButton
+        profileButton = findViewById(R.id.buttonProfile);
+        profileButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent profileIntent = new Intent(MainActivity.this,ProfileActvity.class );
+                startActivity(profileIntent);
+            }
+        });
+
+        //created by suerding - friendsButton
+        friendsButton = findViewById(R.id.buttonFriends);
+        friendsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent friendsIntent = new Intent(MainActivity.this,FriendsActivity.class );
+                startActivity(friendsIntent);
+            }
+        });
+
+        //created by suerding - mapsButton
+        mapsButton = findViewById(R.id.buttonMaps);
+        mapsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent mapsIntent = new Intent(MainActivity.this,MapsActivity.class );
+                startActivity(mapsIntent);
+            }
+        });
+
+        //created by suerding - scanButton
+        scanButton = findViewById(R.id.buttonScan);
+        scanButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent scanIntent = new Intent(MainActivity.this,ScanActivity.class );
+                startActivity(scanIntent);
+            }
+        });
+
+
     }
 
     @Override

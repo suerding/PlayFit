@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.playfit.dao.UserDAOimpl;
+import com.example.playfit.data.Session;
 
 public class LoginActivity extends AppCompatActivity {
     Button camera;
@@ -22,6 +23,7 @@ public class LoginActivity extends AppCompatActivity {
     private Button signupButton;
     private String username;
     private String password;
+    private Session session = new Session();
     private UserDAOimpl users = new UserDAOimpl();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +47,7 @@ public class LoginActivity extends AppCompatActivity {
                 password = passwordtemp.getText().toString();
                 if (usernameCheck(username)) {
                     if(passwordCheck(username, password)) {
+                        session.create(username);
                         Intent loginIntent = new Intent(LoginActivity.this, MainActivity.class);
                         startActivity(loginIntent);
                     } else {

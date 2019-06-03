@@ -10,50 +10,61 @@
     tools:showIn="@layout/app_bar_main">
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/buttonMaps"
         android:layout_width="166dp"
         android:layout_height="141dp"
-        android:layout_marginTop="31dp"
-        android:layout_marginEnd="28dp"
+        android:layout_marginStart="23dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
         android:layout_marginBottom="121dp"
         android:text="@string/menu_maps"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button3"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/buttonFriends"
+        app:layout_constraintTop_toBottomOf="@+id/buttonProfile"
         app:layout_constraintVertical_bias="0.133" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/buttonFriends"
         android:layout_width="166dp"
         android:layout_height="141dp"
-        android:layout_marginStart="28dp"
-        android:layout_marginBottom="160dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="156dp"
         android:text="@string/menu_Friends"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonScan"
+        app:layout_constraintVertical_bias="1.0" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/buttonProfile"
         android:layout_width="166dp"
         android:layout_height="141dp"
-        android:layout_marginTop="196dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="170dp"
         android:layout_marginEnd="28dp"
+        android:layout_marginBottom="38dp"
         android:onClick="@string/navigation_drawer_open"
         android:text="@string/menu_Profile"
+        app:layout_constraintBottom_toTopOf="@+id/buttonMaps"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toEndOf="@+id/buttonScan"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.060000002" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/buttonScan"
         android:layout_width="163dp"
         android:layout_height="141dp"
-        android:layout_marginStart="25dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="196dp"
         android:layout_marginEnd="26dp"
-        android:layout_marginBottom="36dp"
         android:text="@string/menu_scan"
-        app:layout_constraintBottom_toTopOf="@+id/button4"
-        app:layout_constraintEnd_toStartOf="@+id/button3"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toStartOf="@+id/buttonProfile"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView2"
