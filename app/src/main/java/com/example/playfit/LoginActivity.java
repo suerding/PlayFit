@@ -27,20 +27,28 @@ public class LoginActivity extends AppCompatActivity {
         loginButton = findViewById(R.id.loginButton);
         users.createUser();
 
+
         loginButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                Context context = getApplicationContext();
+                CharSequence text = "invalid credientials";
+                int duration = Toast.LENGTH_SHORT;
                 EditText usernametemp = findViewById(R.id.username);
                 EditText passwordtemp = findViewById(R.id.password);
                 username = usernametemp.getText().toString();
                 Log.d("USERNAME", username);
                 password = passwordtemp.getText().toString();
-                if (usernameCheck(username, password)) {
-                    Intent loginIntent = new Intent(LoginActivity.this, MainActivity.class);
-                    startActivity(loginIntent);
+                if (usernameCheck(username)) {
+                    if(passwordCheck(username, password)) {
+                        Intent loginIntent = new Intent(LoginActivity.this, MainActivity.class);
+                        startActivity(loginIntent);
+                    } else {
+                        Toast toast = Toast.makeText(context, text, duration);
+                        toast.show();
+
+                    }
                 } else {
-                    Context context = getApplicationContext();
-                    CharSequence text = "invalid credientials";
-                    int duration = Toast.LENGTH_SHORT;
+
 
                     Toast toast = Toast.makeText(context, text, duration);
                     toast.show();
@@ -55,10 +63,19 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    public boolean usernameCheck(String username, String password){
+    public boolean usernameCheck(String username){
         int userID = users.getUserIdbyName(username);
         Log.d("userID", "userID " + userID);
         if(userID != 9999 && username.equals(users.list().get(userID).getUserName())){
+            return true;
+        }else
+            return false;
+    }
+
+    public boolean passwordCheck(String username, String password){
+        int userID = users.getUserIdbyName(username);
+        Log.d("userID", "userID " + userID);
+        if(userID != 9999 && password.equals(users.list().get(userID).getPassword())){
             return true;
         }else
             return false;
