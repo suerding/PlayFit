@@ -34,9 +34,9 @@
     <item android:title="Communicate">
         <menu>
             <item
-                android:id="@+id/nav_socialMedia"
-                android:icon="@drawable/ic_menu_send"
-                android:title="@string/menu_socialmedia" />
+                android:id="@+id/nav_logout"
+                android:icon="@android:drawable/ic_lock_power_off"
+                android:title="@string/logout" />
         </menu>
     </item>
 

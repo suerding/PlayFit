@@ -1,8 +1,10 @@
 package com.example.playfit;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.View;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -72,6 +74,7 @@ public class ScanActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
+    //created by suerding - Navigatorlogik
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -79,16 +82,31 @@ public class ScanActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_tools) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
+            Log.d("navHome","Nav_home");
+            Intent homeIntent = new Intent(ScanActivity.this, MainActivity.class);
+            startActivity(homeIntent);
+        } else if (id == R.id.nav_profile) {
+            finish();
+            Log.d("navProfile","Nav_profile");
+            Intent profileIntent = new Intent(ScanActivity.this, ProfileActvity.class);
+            startActivity(profileIntent);
+            return true;
+        } else if (id == R.id.nav_friends) {
+            finish();
+            Intent friendsIntent = new Intent(ScanActivity.this, FriendsActivity.class);
+            startActivity(friendsIntent);
+        } else if (id == R.id.nav_maps) {
+            finish();
+            Intent mapsIntent = new Intent(ScanActivity.this, MapsActivity.class);
+            startActivity(mapsIntent);
+        } else if (id == R.id.nav_scan) {
+            finish();
+            Intent scanIntent = new Intent(ScanActivity.this, ScanActivity.class);
+            startActivity(scanIntent);
+        } else if (id == R.id.nav_logout) {
+            finish();
+            Log.d("navSocial","Nav_Social");
+        } else if (id == R.id.nav_settings) {
 
         }
 

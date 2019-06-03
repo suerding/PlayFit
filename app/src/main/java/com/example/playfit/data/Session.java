@@ -26,4 +26,9 @@ public class Session {
         loggedInUser = null;
         // hier könnte noch das Intent korrekt beendet werden
     }
+
+    public UserDTO getSession(){
+        return loggedInUser;
+    }
+
 }

@@ -19,7 +19,7 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 
-import androidx.navigation.Navigation;
+import com.example.playfit.data.Session;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity
     private Button friendsButton;
     private Button mapsButton;
     private Button scanButton;
+    public Session session;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,11 +37,12 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+
         dashboardButtons();
 
         //created by sknobla & suerding
         DrawerLayout drawer = findViewById(R.id.activity_main);
-        NavigationView navigationView = findViewById(R.id.nav_menu);
+        NavigationView navigationView = findViewById(R.id.nav_view);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
@@ -126,32 +128,43 @@ public class MainActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
+    //created by suerding - Navigatorlogik
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
+            finish();
             Log.d("navHome","Nav_home");
            Intent homeIntent = new Intent(MainActivity.this, MainActivity.class);
            startActivity(homeIntent);
         } else if (id == R.id.nav_profile) {
+            finish();
             Log.d("navProfile","Nav_profile");
             Intent profileIntent = new Intent(MainActivity.this, ProfileActvity.class);
             startActivity(profileIntent);
             return true;
         } else if (id == R.id.nav_friends) {
+            finish();
             Intent friendsIntent = new Intent(MainActivity.this, FriendsActivity.class);
             startActivity(friendsIntent);
         } else if (id == R.id.nav_maps) {
+            finish();
             Intent mapsIntent = new Intent(MainActivity.this, MapsActivity.class);
             startActivity(mapsIntent);
         } else if (id == R.id.nav_scan) {
-        } else if (id == R.id.nav_socialMedia) {
+            finish();
+            Intent scanIntent = new Intent(MainActivity.this, ScanActivity.class);
+            startActivity(scanIntent);
+        } else if (id == R.id.nav_logout) {
+            finish();
             Log.d("navSocial","Nav_Social");
         } else if (id == R.id.nav_settings) {
 
+        }else if (id== R.id.nav_logout){
+            session.close();
+            finish();
         }
 
         DrawerLayout drawer = findViewById(R.id.activity_main);
