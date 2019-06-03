@@ -67,9 +67,12 @@ public class UserDAOimpl implements UserDAO {
         }
         return 9999;
     }
-    public void newUser(String username, String password){
+    public UserDAOimpl newUser(String username, String password, UserDAOimpl userlist){
         UserDTO nUser = new UserDTO();
         nUser.setUserName(username);
         nUser.setPassword(password);
+        userlist.list().add(nUser);
+        Log.d("newUser", users.get(3).getUserName());
+        return userlist;
     }
 }

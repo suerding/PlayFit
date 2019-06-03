@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
@@ -27,15 +28,15 @@ public class MainActivity extends AppCompatActivity
 
 
         DrawerLayout drawer = findViewById(R.id.activity_main);
-        NavigationView navigationView = findViewById(R.id.nav_home);
+        NavigationView navigationView = findViewById(R.id.nav_menu);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
-//        navigationView.setNavigationItemSelectedListener(this);
+       navigationView.setNavigationItemSelectedListener(draw);
     }
 
-    @Override
+    @Overrides
     public void onBackPressed() {
         DrawerLayout drawer = findViewById(R.id.activity_main);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
@@ -74,11 +75,14 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
+            Log.d("navHome","Nav_home");
            Intent homeIntent = new Intent(MainActivity.this, MainActivity.class);
            startActivity(homeIntent);
         } else if (id == R.id.nav_profile) {
+            Log.d("navProfile","Nav_profile");
             Intent profileIntent = new Intent(MainActivity.this, ProfileActvity.class);
             startActivity(profileIntent);
+            return true;
         } else if (id == R.id.nav_friends) {
             Intent friendsIntent = new Intent(MainActivity.this, FriendsActivity.class);
             startActivity(friendsIntent);
@@ -86,9 +90,8 @@ public class MainActivity extends AppCompatActivity
             Intent mapsIntent = new Intent(MainActivity.this, MapsActivity.class);
             startActivity(mapsIntent);
         } else if (id == R.id.nav_scan) {
-
         } else if (id == R.id.nav_socialMedia) {
-
+            Log.d("navSocial","Nav_Social");
         } else if (id == R.id.nav_settings) {
 
         }

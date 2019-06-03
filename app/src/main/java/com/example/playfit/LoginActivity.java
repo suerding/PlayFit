@@ -64,7 +64,8 @@ public class LoginActivity extends AppCompatActivity {
             EditText passwordtemp = findViewById(R.id.password);
             username = usernametemp.getText().toString();
             password = passwordtemp.getText().toString();
-            users.newUser(username, password);
+            users = users.newUser(username, password, users);
+            Log.d("istUser",users.list().get(3).getUserName());
             Intent loginIntent = new Intent(LoginActivity.this, LoginActivity.class);
             startActivity(loginIntent);
             }
