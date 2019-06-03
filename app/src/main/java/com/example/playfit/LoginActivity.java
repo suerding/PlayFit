@@ -1,19 +1,18 @@
 package com.example.playfit;
 
-import android.content.Context;
 import android.content.Intent;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.example.playfit.dao.UserDAOimpl;
-import com.example.playfit.dto.UserDTO;
 
 public class LoginActivity extends AppCompatActivity {
+    Button camera;
     private Button loginButton;
     private String username;
     private String password;
@@ -48,8 +47,9 @@ public class LoginActivity extends AppCompatActivity {
                     startActivity(loginIntent);
                 }
 
-            }
-        });
+
+
+
     }
 
     public boolean usernameCheck(String username, String password){
