@@ -1,6 +1,7 @@
 package com.example.playfit;
 
 import android.content.Intent;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,13 +12,33 @@ import android.widget.EditText;
 import com.example.playfit.dao.UserDAOimpl;
 
 public class LoginActivity extends AppCompatActivity {
+    Button camera;
     private Button loginButton;
     private String username;
     private String password;
     private UserDAOimpl users;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+
+        /* super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_login);
+        camera = (Button)findViewById(R.id.button);
+        camera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    Intent intent = new Intent();
+                    intent.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
+                    startActivity(intent);
+                } catch (Exception e) {
+
+                    e.printStackTrace();
+                }
+            }
+        });
+
+
+     */  super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
         loginButton = findViewById(R.id.loginButton);
@@ -38,7 +59,6 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(loginIntent);
             }
         });
-
 
 
 
