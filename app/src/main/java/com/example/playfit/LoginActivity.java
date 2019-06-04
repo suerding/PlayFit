@@ -18,7 +18,7 @@ import com.example.playfit.dao.UserDAOimpl;
 import com.example.playfit.data.Session;
 
 public class LoginActivity extends AppCompatActivity {
-    Button camera;
+
     private Button loginButton;
     private Button signupButton;
     private String username;
