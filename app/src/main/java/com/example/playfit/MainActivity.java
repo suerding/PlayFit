@@ -6,6 +6,7 @@ package com.example.playfit;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.util.Log;
@@ -83,6 +84,24 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
+        //created by sfriedr8 & fhaedric
+        scanButton = findViewById(R.id.buttonScan);
+        scanButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    Intent intent = new Intent();
+                    intent.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
+                    startActivity(intent);
+                }
+                catch (Exception e){
+                    e.printStackTrace();
+                }
+
+            }
+        });
+
+        /*
         //created by suerding - scanButton
         scanButton = findViewById(R.id.buttonScan);
         scanButton.setOnClickListener(new View.OnClickListener() {
@@ -92,6 +111,7 @@ public class MainActivity extends AppCompatActivity
                 startActivity(scanIntent);
             }
         });
+        */
 
 
     }
