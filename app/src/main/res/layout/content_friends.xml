@@ -21,6 +21,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/searchView" />
 
+    // erstellt von fhaedric
     <Button
         android:id="@+id/freund2"
         android:layout_width="0dp"
@@ -34,7 +35,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/freund1" />
 
-
+    // erstellt von fhaedric
     <Button
         android:id="@+id/freund3"
         android:layout_width="0dp"
@@ -47,7 +48,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/freund2" />
-
+    // erstellt von fhaedric
     <Button
         android:id="@+id/freund4"
         android:layout_width="0dp"
@@ -60,7 +61,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/freund3" />
-
+    // erstellt von fhaedric
     <SearchView
         android:id="@+id/searchView"
         android:layout_width="0dp"
