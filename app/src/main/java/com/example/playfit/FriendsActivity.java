@@ -19,9 +19,12 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.widget.Button;
 
 public class FriendsActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private Button friendsprofileButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +32,9 @@ public class FriendsActivity extends AppCompatActivity
         setContentView(R.layout.activity_friends);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        friendButtons();
+
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,6 +51,50 @@ public class FriendsActivity extends AppCompatActivity
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
     }
+
+    private void friendButtons() {
+        //created by fhaedric - friend1button
+        friendsprofileButton = findViewById(R.id.freund1);
+        friendsprofileButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent profileIntent = new Intent(FriendsActivity.this,ProfileActvity.class );
+                startActivity(profileIntent);
+            }
+        });
+
+        //created by fhaedric - friend2button
+        friendsprofileButton = findViewById(R.id.freund2);
+        friendsprofileButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent profileIntent = new Intent(FriendsActivity.this,ProfileActvity.class );
+                startActivity(profileIntent);
+            }
+        });
+
+        //created by fhaedric - friend3button
+        friendsprofileButton = findViewById(R.id.freund3);
+        friendsprofileButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent profileIntent = new Intent(FriendsActivity.this,ProfileActvity.class );
+                startActivity(profileIntent);
+            }
+        });
+
+        //created by fhaedric - friend4button
+        friendsprofileButton = findViewById(R.id.freund4);
+        friendsprofileButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent profileIntent = new Intent(FriendsActivity.this,ProfileActvity.class );
+                startActivity(profileIntent);
+            }
+        });
+
+    }
+
 
     @Override
     public void onBackPressed() {
