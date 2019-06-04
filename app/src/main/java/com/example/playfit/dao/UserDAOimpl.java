@@ -41,10 +41,10 @@ public class UserDAOimpl implements UserDAO {
 
         //Add Fritz
         user.setUserID("9");
-        user.setUserName("Fritz");
+        user.setUserName("F");
         user.setUserPoints(0);
-        user.setUserEmail("user@smail.uni-koeln.de");
-        user.setPassword("Fritz123");
+        user.setUserEmail("fhaedric@smail.uni-koeln.de");
+        user.setPassword("F123");
         users.add(user);
         user = new UserDTO();
 
