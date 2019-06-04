@@ -45,6 +45,8 @@ public class LoginActivity extends AppCompatActivity {
                 username = usernametemp.getText().toString();
                 Log.d("USERNAME", username);
                 password = passwordtemp.getText().toString();
+                ((EditText) findViewById(R.id.username)).getText().clear();
+                ((EditText) findViewById(R.id.password)).getText().clear();
                 if (usernameCheck(username)) {
                     if(passwordCheck(username, password)) {
                         session.create(username);
