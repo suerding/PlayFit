@@ -26,8 +26,8 @@ import com.example.playfit.dao.UserDAOimpl;
 import com.example.playfit.data.Session;
 import com.example.playfit.dto.UserDTO;
 
-import static com.example.playfit.FriendsActivity.FRIENDSID;
 
+import static com.example.playfit.FriendsActivity.FRIENDSNAME;
 import static com.example.playfit.LoginActivity.USERNAME;
 
 public class FriendsDetailActivity extends AppCompatActivity
@@ -48,9 +48,11 @@ public class FriendsDetailActivity extends AppCompatActivity
         SharedPreferences sessionPreferences = getSharedPreferences(LoginActivity.SESSION, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sessionPreferences.edit();
         session.create(sessionPreferences.getString(USERNAME,"Default"));
-        SharedPreferences friendsPreferences = getSharedPreferences(FRIENDSID,0);
-        String friendsID   = friendsPreferences.getString(FRIENDSID, "DEFAULT");
-        friend = users.getUserbyID(friendsID);
+
+        SharedPreferences friendsPreferences = getSharedPreferences(FRIENDSNAME,0);
+        String friendsName   = friendsPreferences.getString(FRIENDSNAME, "DEFAULT");
+        friend = users.list().get(users.getUserIdbyName(friendsName));
+
         Log.d("usertest", friend.getUserName());
 
         FloatingActionButton fab = findViewById(R.id.fab);

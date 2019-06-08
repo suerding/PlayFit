@@ -22,12 +22,18 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.playfit.dao.FriendsDAOimpl;
 import com.example.playfit.dao.UserDAOimpl;
 import com.example.playfit.data.Session;
 import com.example.playfit.dto.UserDTO;
+
+import java.util.ArrayList;
 
 import static com.example.playfit.LoginActivity.USERNAME;
 
@@ -38,7 +44,11 @@ public class FriendsActivity extends AppCompatActivity
     private Session session = new Session();
     private UserDAOimpl users = new UserDAOimpl();
     SharedPreferences sharedPreferences;
-    public static final String FRIENDSID = "id";
+    public static final String FRIENDSNAME = "name";
+    private ListView friendsListView;
+    private ArrayAdapter<String> friendsadapter;
+    private ArrayList<String> friendsarrayList;
+    private FriendsDAOimpl friends = new FriendsDAOimpl();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +63,9 @@ public class FriendsActivity extends AppCompatActivity
         SharedPreferences.Editor editor = sharedPreferences.edit();
         session.create(sharedPreferences.getString(USERNAME,"Default"));
 
-        friendButtons();
+        //friendButtons();
+        friendsList();
+
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -77,8 +89,45 @@ public class FriendsActivity extends AppCompatActivity
         navUsername.setText("Hi " + session.getSession().getUserName());
         TextView emailTextview = (TextView) headerView.findViewById(R.id.emailText);
         emailTextview.setText(session.getSession().getUserEmail());
+
+        //friends list listener
+        friendsListView = (ListView) findViewById(R.id.friendsList);
+        friendsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String selectedItem = (String) parent.getItemAtPosition(position);
+                setDetails(selectedItem);
+                Intent friendsintent = new Intent(FriendsActivity.this, FriendsDetailActivity.class);
+                startActivity(friendsintent);
+            }
+        });
+
     }
 
+    private void setDetails(String selectedItem) {
+        Log.d("selectedItem", selectedItem);
+        sharedPreferences = getSharedPreferences(FRIENDSNAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(FRIENDSNAME, selectedItem);
+        editor.commit();
+    }
+
+    //created by suerding
+    private void friendsList() {
+        friends.createforuser(session.getSession().getUserID());
+        friendsListView = (ListView) findViewById(R.id.friendsList);
+        friendsarrayList = new ArrayList<String>();
+        friendsadapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, friendsarrayList);
+
+        for(int i = 0; i < friends.list().size(); i++){
+            friendsarrayList.add(friends.list().get(i).getUserName());
+            friendsadapter.notifyDataSetChanged();
+        }
+
+        friendsListView.setAdapter(friendsadapter);
+    }
+
+    /*
     private void friendButtons() {
         //created by fhaedric - friend1button
         friendsprofileButton = findViewById(R.id.freund1);
@@ -128,6 +177,7 @@ public class FriendsActivity extends AppCompatActivity
         });
 
     }
+    */
 
 
     @Override
