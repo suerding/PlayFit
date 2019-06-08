@@ -127,6 +127,7 @@ public class FriendsActivity extends AppCompatActivity
         friendsListView.setAdapter(friendsadapter);
     }
 
+
     /*
     private void friendButtons() {
         //created by fhaedric - friend1button
