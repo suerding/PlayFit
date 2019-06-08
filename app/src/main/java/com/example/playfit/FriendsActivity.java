@@ -5,7 +5,9 @@ finalized by sknobla
  */
 package com.example.playfit;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -21,11 +23,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.widget.Button;
+import android.widget.TextView;
+
+import com.example.playfit.data.Session;
+
+import static com.example.playfit.LoginActivity.USERNAME;
 
 public class FriendsActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private Button friendsprofileButton;
+    private Session session = new Session();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +41,11 @@ public class FriendsActivity extends AppCompatActivity
         setContentView(R.layout.activity_friends);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        //sessionhandling - created by suerding
+        SharedPreferences sharedPreferences = getSharedPreferences(LoginActivity.SESSION, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        session.create(sharedPreferences.getString(USERNAME,"Default"));
 
         friendButtons();
 
@@ -51,6 +64,13 @@ public class FriendsActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
+
+        //Nav_view header - created by suerding
+        View headerView = navigationView.getHeaderView(0);
+        TextView navUsername = (TextView) headerView.findViewById(R.id.nav_header_title);
+        navUsername.setText("Hi " + session.getSession().getUserName());
+        TextView emailTextview = (TextView) headerView.findViewById(R.id.emailText);
+        emailTextview.setText(session.getSession().getUserEmail());
     }
 
     private void friendButtons() {

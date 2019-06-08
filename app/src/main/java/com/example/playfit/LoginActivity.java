@@ -6,6 +6,7 @@ package com.example.playfit;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -21,35 +22,55 @@ public class LoginActivity extends AppCompatActivity {
 
     private Button loginButton;
     private Button signupButton;
+    private EditText usernameField;
+    private EditText passwordField;
     private String username;
     private String password;
-    private Session session = new Session();
+    public Session session = new Session();
     private UserDAOimpl users = new UserDAOimpl();
+    SharedPreferences sharedPreferences;
+    public static final String SESSION = "Session" ;
+    public static final String USERNAME = "username" ;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        usernameField = findViewById(R.id.username);
+        passwordField = findViewById(R.id.password);
         loginButton = findViewById(R.id.loginButton);
         signupButton = findViewById(R.id.signupButton);
         users.createUser();
+        sharedPreferences = getSharedPreferences(SESSION, Context.MODE_PRIVATE);
 
+        //has to be edited - sollte das manuelle Löschen erübrigen
+        usernameField.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("entered", "entered");
+                usernameField.getText().clear();
+                passwordField.getText().clear();
+            }
+        });
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Context context = getApplicationContext();
                 CharSequence text = "invalid credientials";
                 int duration = Toast.LENGTH_SHORT;
-                EditText usernametemp = findViewById(R.id.username);
-                EditText passwordtemp = findViewById(R.id.password);
-                username = usernametemp.getText().toString();
+
+                username = usernameField.getText().toString();
                 Log.d("USERNAME", username);
-                password = passwordtemp.getText().toString();
+                password = passwordField.getText().toString();
                 ((EditText) findViewById(R.id.username)).getText().clear();
                 ((EditText) findViewById(R.id.password)).getText().clear();
                 if (usernameCheck(username)) {
                     if(passwordCheck(username, password)) {
-                        session.create(username);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putString(USERNAME, username);
+                        editor.commit();
                         Intent loginIntent = new Intent(LoginActivity.this, MainActivity.class);
                         startActivity(loginIntent);
                     } else {

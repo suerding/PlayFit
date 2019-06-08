@@ -60,9 +60,6 @@ public class UserDAOimpl implements UserDAO {
     @Override
     public Integer getUserIdbyName(String username) {
         this.createUser();
-        Log.d("ifCheck", this.list().get(0).getUserName());
-        Log.d("ifCheck", this.list().get(1).getUserName());
-        Log.d("ifCheck", this.list().get(2).getUserName());
         for (int i = 0; i < list().size(); i++) {
             if (username.equals(list().get(i).getUserName())) {
                 return i;

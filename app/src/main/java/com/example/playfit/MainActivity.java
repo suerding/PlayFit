@@ -4,7 +4,9 @@ finalized by sknobla
  */
 package com.example.playfit;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.view.GravityCompat;
@@ -19,8 +21,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import com.example.playfit.data.Session;
+import com.example.playfit.dto.UserDTO;
+
+import static com.example.playfit.LoginActivity.USERNAME;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -29,17 +36,22 @@ public class MainActivity extends AppCompatActivity
     private Button friendsButton;
     private Button mapsButton;
     private Button scanButton;
-    public Session session;
+    private Session session = new Session();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //sessionhandling - created by suerding
+        SharedPreferences sharedPreferences = getSharedPreferences(LoginActivity.SESSION, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        session.create(sharedPreferences.getString(USERNAME,"Default"));
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         dashboardButtons();
-
         //created by sknobla & suerding
         DrawerLayout drawer = findViewById(R.id.activity_main);
         NavigationView navigationView = findViewById(R.id.nav_view);
@@ -50,6 +62,13 @@ public class MainActivity extends AppCompatActivity
         if (navigationView != null) {
             navigationView.setNavigationItemSelectedListener(this);
         }
+
+        //Nav_view header - created by suerding
+        View headerView = navigationView.getHeaderView(0);
+        TextView navUsername = (TextView) headerView.findViewById(R.id.nav_header_title);
+        navUsername.setText("Hi " + session.getSession().getUserName());
+        TextView emailTextview = (TextView) headerView.findViewById(R.id.emailText);
+        emailTextview.setText(session.getSession().getUserEmail());
     }
 
     private void dashboardButtons() {

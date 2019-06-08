@@ -4,21 +4,17 @@ finalized by
  */
 package com.example.playfit.data;
 
-import android.content.Intent;
-import android.util.Log;
-
 import com.example.playfit.dao.UserDAOimpl;
 import com.example.playfit.dto.UserDTO;
 
-public class Session {
-    public Session(){
+public class Session implements Sess{
 
-    }
     private UserDTO loggedInUser = new UserDTO();
     private UserDAOimpl users = new UserDAOimpl();
 
     public void create(String username){
         loggedInUser = users.list().get(users.getUserIdbyName(username));
+
         return;
     }
 
@@ -28,7 +24,7 @@ public class Session {
     }
 
     public UserDTO getSession(){
-        return loggedInUser;
+        return this.loggedInUser;
     }
 
 }
