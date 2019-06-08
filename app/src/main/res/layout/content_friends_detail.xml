@@ -9,14 +9,58 @@
     tools:showIn="@layout/app_bar_friends_detail">
 
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/nameOfFriend"
+        android:layout_width="244dp"
+        android:layout_height="41dp"
+        android:layout_marginStart="83dp"
+        android:layout_marginTop="13dp"
+        android:layout_marginEnd="84dp"
+        android:text="@string/menu_Friends"
+        android:textIsSelectable="false"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+
+    <ImageView
+        android:id="@+id/imageView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="176dp"
-        android:layout_marginTop="88dp"
-        android:layout_marginEnd="188dp"
-        android:text="@string/menu_Friends"
+        android:layout_marginStart="141dp"
+        android:layout_marginTop="31dp"
+        android:layout_marginEnd="142dp"
+        android:layout_marginBottom="13dp"
+        app:layout_constraintBottom_toTopOf="@+id/nameOfFriend"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@tools:sample/avatars[3]" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="86dp"
+        android:layout_height="38dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="36dp"
+        android:text="Points"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nameOfFriend" />
+
+    <TextView
+        android:id="@+id/points"
+        android:layout_width="154dp"
+        android:layout_height="36dp"
+        android:layout_marginStart="17dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="8dp"
+        android:textSize="24sp"
+        android:textStyle="italic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/textView6"
+        app:layout_constraintTop_toBottomOf="@+id/nameOfFriend" />
 </android.support.constraint.ConstraintLayout>

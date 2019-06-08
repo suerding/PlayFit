@@ -1,8 +1,15 @@
+/*
+created by suerding
+ */
+
 package com.example.playfit;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.View;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -13,9 +20,22 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.widget.TextView;
+
+import com.example.playfit.dao.UserDAOimpl;
+import com.example.playfit.data.Session;
+import com.example.playfit.dto.UserDTO;
+
+import static com.example.playfit.FriendsActivity.FRIENDSID;
+
+import static com.example.playfit.LoginActivity.USERNAME;
 
 public class FriendsDetailActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private Session session = new Session();
+    private UserDTO friend = new UserDTO();
+    private UserDAOimpl users = new UserDAOimpl();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +43,16 @@ public class FriendsDetailActivity extends AppCompatActivity
         setContentView(R.layout.activity_friends_detail);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        //sessionhandling - created by suerding
+        SharedPreferences sessionPreferences = getSharedPreferences(LoginActivity.SESSION, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sessionPreferences.edit();
+        session.create(sessionPreferences.getString(USERNAME,"Default"));
+        SharedPreferences friendsPreferences = getSharedPreferences(FRIENDSID,0);
+        String friendsID   = friendsPreferences.getString(FRIENDSID, "DEFAULT");
+        friend = users.getUserbyID(friendsID);
+        Log.d("usertest", friend.getUserName());
+
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -38,6 +68,34 @@ public class FriendsDetailActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
+
+        //Nav_view header - created by suerding
+        View headerView = navigationView.getHeaderView(0);
+        TextView navUsername = (TextView) headerView.findViewById(R.id.nav_header_title);
+        navUsername.setText("Hi " + session.getSession().getUserName());
+        TextView emailTextview = (TextView) headerView.findViewById(R.id.emailText);
+        emailTextview.setText(session.getSession().getUserEmail());
+
+        //created by suerding
+        frienddetails();
+    }
+
+    private void frienddetails() {
+        //Name
+        TextView friendsNameView = findViewById(R.id.nameOfFriend);
+        String friendsName = friend.getUserName();
+        friendsNameView.setText(friendsName);
+
+        //picture
+
+        //fullname
+
+        //points
+        TextView friendsPointsView = findViewById(R.id.points);
+        String friendsPoints =  Integer.toString(friend.getUserPoints());
+        friendsPointsView.setText(friendsPoints);
+
+        //recentChallenges
     }
 
     @Override

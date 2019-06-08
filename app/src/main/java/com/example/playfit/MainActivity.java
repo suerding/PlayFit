@@ -21,11 +21,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.playfit.data.Session;
-import com.example.playfit.dto.UserDTO;
+
 
 import static com.example.playfit.LoginActivity.USERNAME;
 

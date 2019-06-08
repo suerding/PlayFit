@@ -25,7 +25,9 @@ import android.view.Menu;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.playfit.dao.UserDAOimpl;
 import com.example.playfit.data.Session;
+import com.example.playfit.dto.UserDTO;
 
 import static com.example.playfit.LoginActivity.USERNAME;
 
@@ -34,6 +36,9 @@ public class FriendsActivity extends AppCompatActivity
 
     private Button friendsprofileButton;
     private Session session = new Session();
+    private UserDAOimpl users = new UserDAOimpl();
+    SharedPreferences sharedPreferences;
+    public static final String FRIENDSID = "id";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +48,7 @@ public class FriendsActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         //sessionhandling - created by suerding
+        users.createUser();
         SharedPreferences sharedPreferences = getSharedPreferences(LoginActivity.SESSION, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         session.create(sharedPreferences.getString(USERNAME,"Default"));
@@ -76,11 +82,18 @@ public class FriendsActivity extends AppCompatActivity
     private void friendButtons() {
         //created by fhaedric - friend1button
         friendsprofileButton = findViewById(R.id.freund1);
+        //zu testzwecken erstmal ID = 0 - created by suerding
+        UserDTO friend = users.list().get(0);
+        String friendsID = friend.getUserID();
+        sharedPreferences = getSharedPreferences(FRIENDSID, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(FRIENDSID, friendsID);
+        editor.commit();
         friendsprofileButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent profileIntent = new Intent(FriendsActivity.this,ProfileActvity.class );
-                startActivity(profileIntent);
+                Intent detailIntent = new Intent(FriendsActivity.this,FriendsDetailActivity.class );
+                startActivity(detailIntent);
             }
         });
 

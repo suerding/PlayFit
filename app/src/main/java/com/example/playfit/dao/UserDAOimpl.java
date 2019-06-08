@@ -22,7 +22,7 @@ public class UserDAOimpl implements UserDAO {
         //Add user
         user.setUserID("1");
         user.setUserName("Basti");
-        user.setUserPoints(0);
+        user.setUserPoints(5);
         user.setUserEmail("sknobla2@smail.uni-koeln.de");
         user.setPassword("user123");
         users.add(user);
@@ -32,7 +32,7 @@ public class UserDAOimpl implements UserDAO {
         //Add Simon
         user.setUserID("2");
         user.setUserName("Simon");
-        user.setUserPoints(0);
+        user.setUserPoints(15);
         user.setUserEmail("suerding@smail.uni-koeln.de");
         user.setPassword("Simon123");
         users.add(user);
@@ -42,7 +42,7 @@ public class UserDAOimpl implements UserDAO {
         //Add Fritz
         user.setUserID("9");
         user.setUserName("f");
-        user.setUserPoints(0);
+        user.setUserPoints(15);
         user.setUserEmail("fhaedric@smail.uni-koeln.de");
         user.setPassword("f1");
         users.add(user);
@@ -68,6 +68,7 @@ public class UserDAOimpl implements UserDAO {
         }
         return 9999;
     }
+
     public UserDAOimpl newUser(String username, String password, UserDAOimpl userlist){
         UserDTO nUser = new UserDTO();
         nUser.setUserName(username);
@@ -75,5 +76,18 @@ public class UserDAOimpl implements UserDAO {
         userlist.list().add(nUser);
         Log.d("newUser", users.get(3).getUserName());
         return userlist;
+    }
+
+    public UserDTO getUserbyID(String userID) {
+        UserDTO user = new UserDTO();
+        this.createUser();
+        for (int i = 0; i < list().size(); i++) {
+            if (userID.equals(list().get(i).getUserID())) {
+                user = list().get(i);
+                return user;
+            }
+
+        }
+        return null;
     }
 }
