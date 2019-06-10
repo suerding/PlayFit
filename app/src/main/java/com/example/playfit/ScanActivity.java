@@ -1,139 +1,46 @@
 package com.example.playfit;
 
-import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.util.Log;
-import android.view.View;
-import android.support.v4.view.GravityCompat;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.view.MenuItem;
-import android.support.design.widget.NavigationView;
-import android.support.v4.widget.DrawerLayout;
-
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.widget.TextView;
+import android.os.Bundle;
+import android.util.Log;
+import com.google.zxing.Result;
 
-import com.example.playfit.data.Session;
+import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
-import static com.example.playfit.LoginActivity.USERNAME;
+public class ScanActivity extends AppCompatActivity implements ZXingScannerView.ResultHandler{
 
-public class ScanActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
-
-    private Session session = new Session();
+    private ZXingScannerView mScannerView;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_scan);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        //sessionhandling - created by suerding
-        SharedPreferences sharedPreferences = getSharedPreferences(LoginActivity.SESSION, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        session.create(sharedPreferences.getString(USERNAME,"Default"));
-
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        NavigationView navigationView = findViewById(R.id.nav_view);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
-        navigationView.setNavigationItemSelectedListener(this);
-
-        //Nav_view header - created by suerding
-        View headerView = navigationView.getHeaderView(0);
-        TextView navUsername = (TextView) headerView.findViewById(R.id.nav_header_title);
-        navUsername.setText("Hi " + session.getSession().getUserName());
-        TextView emailTextview = (TextView) headerView.findViewById(R.id.emailText);
-        emailTextview.setText(session.getSession().getUserEmail());
+    public void onCreate(Bundle state) {
+        super.onCreate(state);
+        mScannerView = new ZXingScannerView(this);   // Programmatically initialize the scanner view
+        setContentView(mScannerView);                // Set the scanner view as the content view
     }
 
     @Override
-    public void onBackPressed() {
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
+    public void onResume() {
+        super.onResume();
+        mScannerView.setResultHandler(this); // Register ourselves as a handler for scan results.
+        mScannerView.startCamera();          // Start camera on resume
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.scan, menu);
-        return true;
+    public void onPause() {
+        super.onPause();
+        mScannerView.stopCamera();           // Stop camera on pause
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+    public void handleResult(Result rawResult) {
+        // Do something with the result here
+        Log.v("tag", rawResult.getText()); // Prints scan results
+        // Log.v("tag", rawResult.getBarcodeFormat().toString()); // Prints the scan format (qrcode, pdf417 etc.)
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
+        //MainActivity.tvresult.setText(rawResult.getText());
+        onBackPressed();
 
-        return super.onOptionsItemSelected(item);
-    }
-
-    //created by suerding - Navigatorlogik
-    @SuppressWarnings("StatementWithEmptyBody")
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
-
-        if (id == R.id.nav_home) {
-            Log.d("navHome","Nav_home");
-            Intent homeIntent = new Intent(ScanActivity.this, MainActivity.class);
-            startActivity(homeIntent);
-        } else if (id == R.id.nav_profile) {
-            finish();
-            Log.d("navProfile","Nav_profile");
-            Intent profileIntent = new Intent(ScanActivity.this, ProfileActvity.class);
-            startActivity(profileIntent);
-            return true;
-        } else if (id == R.id.nav_friends) {
-            finish();
-            Intent friendsIntent = new Intent(ScanActivity.this, FriendsActivity.class);
-            startActivity(friendsIntent);
-        } else if (id == R.id.nav_maps) {
-            finish();
-            Intent mapsIntent = new Intent(ScanActivity.this, MapsActivity.class);
-            startActivity(mapsIntent);
-        } else if (id == R.id.nav_scan) {
-            finish();
-            Intent scanIntent = new Intent(ScanActivity.this, ScanActivity.class);
-            startActivity(scanIntent);
-        } else if (id == R.id.nav_logout) {
-            finish();
-            Log.d("navSocial","Nav_Social");
-        } else if (id == R.id.nav_settings) {
-
-        }
-
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
+        // If you would like to resume scanning, call this method below:
+        //mScannerView.resumeCameraPreview(this);
     }
 }

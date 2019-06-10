@@ -22,7 +22,6 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-
 import com.example.playfit.data.Session;
 
 
@@ -106,14 +105,17 @@ public class MainActivity extends AppCompatActivity
         scanButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                try {
+                /*try {
                     Intent intent = new Intent();
                     intent.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
                     startActivity(intent);
                 }
                 catch (Exception e){
                     e.printStackTrace();
-                }
+                }*/
+                Intent mapsIntent = new Intent(MainActivity.this,ScanActivity.class );
+                startActivity(mapsIntent);
+
 
             }
         });
