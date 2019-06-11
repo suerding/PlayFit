@@ -4,6 +4,8 @@ finalized by suerding
  */
 package com.example.playfit.dto;
 
+import java.util.List;
+
 public class UserDTO {
     private String userID;
     private int userPoints;
@@ -12,6 +14,10 @@ public class UserDTO {
     private int friendCount;
     private String userEmail;
     private String name;
+    private List<GymDTO> gyms;
+    private List<ProductDTO> produkte;
+    private List<ShopDTO> shops;
+    private List<RewardDTO> rewards;
 
     public String getPassword() {
         return password;

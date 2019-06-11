@@ -18,4 +18,6 @@ public interface UserDAO {
 
    void revokePoints(int points, UserDTO user);
 
+
+
 }
