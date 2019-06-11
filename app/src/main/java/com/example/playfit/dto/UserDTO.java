@@ -7,6 +7,7 @@ package com.example.playfit.dto;
 public class UserDTO {
     private String userID;
     private int userPoints;
+    private int totalPoints;
     private String userName;
     private int friendCount;
     private String userEmail;
@@ -23,6 +24,16 @@ public class UserDTO {
     }
 
     private String password;
+
+
+    public int getTotalPoints() {
+        return totalPoints;
+    }
+
+    public void setTotalPoints(int totalPoints) {
+        this.totalPoints = totalPoints;
+    }
+
 
     public String getUserID() {
         return userID;

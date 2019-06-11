@@ -22,6 +22,8 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.example.playfit.data.Points;
 import com.example.playfit.data.Session;
 
 
@@ -67,6 +69,11 @@ public class MainActivity extends AppCompatActivity
         navUsername.setText("Hi " + session.getSession().getUserName());
         TextView emailTextview = (TextView) headerView.findViewById(R.id.emailText);
         emailTextview.setText(session.getSession().getUserEmail());
+
+
+        //Points test
+        Points points = new Points();
+        points.processPoints("Gym_Sportfabrik_20190611_7",  session.getSession() );
     }
 
     private void dashboardButtons() {

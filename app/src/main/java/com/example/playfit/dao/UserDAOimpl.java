@@ -142,6 +142,8 @@ public class UserDAOimpl implements UserDAO {
         int userPoints = user.getUserPoints();
         userPoints = userPoints + points;
         user.setUserPoints(userPoints);
+        user.setTotalPoints(userPoints);
+        users.get(getUserIdbyName(user.getUserName())).setUserPoints(userPoints);
     }
     public void revokePoints(int points, UserDTO user){
         int userPoints = user.getUserPoints();

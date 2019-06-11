@@ -1,7 +1,9 @@
 /*
-created by suerding
+created by suerding, sknobla2
  */
 package com.example.playfit.data;
+
+import android.util.Log;
 
 import com.example.playfit.dao.UserDAOimpl;
 import com.example.playfit.dto.UserDTO;
@@ -16,10 +18,19 @@ public class Points {
 
 
     public void processPoints(String input, UserDTO user){
-        switch(input){
-            case "Gym":
-                users.grantPoints(5, user);
-        }
+        String location = identifyLocation(input);
+        int points = identifyPoints(input);
+        users.grantPoints(points,user);
+
+    }
+
+    // Gym_Sportfabrik_20190611_7
+    private String identifyLocation(String input){
+        return input.split("_")[0];
+    }
+
+    private int identifyPoints(String input){
+        return Integer.parseInt(input.split("_")[3]);
     }
     }
 
