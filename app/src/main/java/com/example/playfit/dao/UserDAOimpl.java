@@ -124,6 +124,26 @@ public class UserDAOimpl implements UserDAO {
         Log.d("newUser", users.get(3).getUserName());
         return userlist;
     }
+    public void readUserXML(String[] xmlUsers)
+    {
+        UserDTO user = new UserDTO();
+      for (int i = 0; i < xmlUsers.length; i++)
+      {
+
+          //Add Basti - 0
+          user.setUserID(xmlUsers[0]);
+          user.setUserName(xmlUsers[1]);
+          //user.setName(xmlUsers[2]);
+          //user.setUserPoints(Integer.parseInt(xmlUsers[6]));
+          //user.setUserEmail(xmlUsers[4]);
+          //user.setPassword(xmlUsers[3]);
+          //user.setFriendCount(Integer.parseInt(xmlUsers[7]);
+          users.add(user);
+          user = new UserDTO();
+          Log.d("Knobie", users.get(i).getName());
+      }
+
+    }
 
     public UserDTO getUserbyID(String userID) {
         UserDTO user = new UserDTO();

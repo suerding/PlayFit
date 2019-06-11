@@ -22,6 +22,7 @@ public class Points {
         int points = identifyPoints(input);
         users.grantPoints(points,user);
 
+
     }
 
     // Gym_Sportfabrik_20190611_7

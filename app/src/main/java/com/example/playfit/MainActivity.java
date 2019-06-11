@@ -7,6 +7,7 @@ package com.example.playfit;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.view.GravityCompat;
@@ -23,6 +24,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.playfit.dao.UserDAOimpl;
 import com.example.playfit.data.Points;
 import com.example.playfit.data.Session;
 
@@ -72,8 +74,14 @@ public class MainActivity extends AppCompatActivity
 
 
         //Points test
-        Points points = new Points();
-        points.processPoints("Gym_Sportfabrik_20190611_7",  session.getSession() );
+        //Points points = new Points();
+        //points.processPoints("Gym_Sportfabrik_20190611_7",  session.getSession() );
+
+        //Read XML
+        //Resources res = getResources();
+        //UserDAOimpl users = new UserDAOimpl();
+        //users.readUserXML(res.getStringArray(R.array.User1));
+
     }
 
     private void dashboardButtons() {

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="User1">
+        <item name="userID">1</item>
+        <item name="userName">Basti</item>
+        <item name="name">SK</item>
+        <item name="passwort">Basti123</item>
+        <item name="userEmail">basti@mail.de</item>
+        <item name="userPoints">7</item>
+        <item name="totalPoints">300</item>
+        <item name="friendcount">2</item>
+    </string-array>
+    <string-array name="User2">
+        <item name="userID">2</item>
+        <item name="userName">SU</item>
+        <item name="name">Simon</item>
+        <item name="passwort">Simon123</item>
+        <item name="userEmail">simon@mail.de</item>
+        <item name="userPoints">24</item>
+        <item name="totalPoints">127</item>
+        <item name="friendcount">3</item>
+    </string-array>
+</resources>
