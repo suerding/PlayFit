@@ -78,9 +78,9 @@ public class MainActivity extends AppCompatActivity
         //points.processPoints("Gym_Sportfabrik_20190611_7",  session.getSession() );
 
         //Read XML
-        Resources res = getResources();
-        String[] test = res.getStringArray(R.array.User1);
-        Log.d("Knobie", String.valueOf(test.length));
+        //Resources res = getResources();
+        //String[] test = res.getStringArray(R.array.User1);
+        //Log.d("Knobie", String.valueOf(test.length));
         //UserDAOimpl users = new UserDAOimpl();
         //users.readUserXML(res.getStringArray(R.array.User1));
 
