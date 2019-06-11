@@ -13,4 +13,9 @@ public interface UserDAO {
    List<UserDTO> list();
 
    Integer getUserIdbyName(String username);
+
+   void grantPoints(int points, UserDTO user);
+
+   void revokePoints(int points, UserDTO user);
+
 }

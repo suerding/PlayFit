@@ -8,6 +8,10 @@ import android.util.Log;
 
 import com.example.playfit.dto.UserDTO;
 
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -133,4 +137,16 @@ public class UserDAOimpl implements UserDAO {
         }
         return null;
     }
+
+    public void grantPoints(int points, UserDTO user){
+        int userPoints = user.getUserPoints();
+        userPoints = userPoints + points;
+        user.setUserPoints(userPoints);
+    }
+    public void revokePoints(int points, UserDTO user){
+        int userPoints = user.getUserPoints();
+        userPoints = userPoints + points;
+        user.setUserPoints(userPoints);
+    }
+
 }
