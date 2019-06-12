@@ -7,6 +7,7 @@ package com.example.playfit;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -40,6 +41,17 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        //XML Import
+        Resources res = getResources();
+        String[] test = res.getStringArray(R.array.Metadaten);
+        int startint = R.array.Metadaten;
+        int counter = startint + Integer.parseInt(test[0]);
+        for (int i = startint+1; i <= counter; i++){
+            String[] user = res.getStringArray(i);
+            users.readUserXML(user);
+        }
+
 
         usernameField = findViewById(R.id.username);
         passwordField = findViewById(R.id.password);

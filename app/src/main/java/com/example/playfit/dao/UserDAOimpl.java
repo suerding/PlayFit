@@ -137,7 +137,7 @@ public class UserDAOimpl implements UserDAO {
           user.setPassword(xmlUsers[3]);
           user.setFriendCount(Integer.parseInt(xmlUsers[7]));
           users.add(user);
-          Log.d("Knobie", users.get(this.getUserIdbyName(user.getUserName())).getName());
+          Log.d("Knobie", user.getUserEmail());
 
     }
 
@@ -167,6 +167,16 @@ public class UserDAOimpl implements UserDAO {
         userPoints = userPoints - points;
         user.setUserPoints(userPoints);
         users.get(getUserIdbyName(user.getUserName())).setUserPoints(userPoints);
+    }
+
+    public void ausgabe(){
+        for (int i = 0; i < users.size(); i++)
+        {
+            Log.d("Nutzername", users.get(i).getUserName());
+            Log.d("Email", users.get(i).getUserEmail());
+            Log.d("Passwort", users.get(i).getPassword());
+
+        }
     }
 
 
