@@ -1,7 +1,9 @@
 package com.example.playfit.dao;
 
 import android.content.SharedPreferences;
+import android.util.Log;
 
+import com.example.playfit.dto.FriendsDTO;
 import com.example.playfit.dto.UserDTO;
 
 import java.util.ArrayList;
@@ -12,8 +14,8 @@ public class FriendsDAOimpl implements FriendsDAO {
     private UserDAOimpl users = new UserDAOimpl();
     SharedPreferences session;
 
-    public void createforuser(String userID){
-        users.createUser();
+    public void createforuser(String userID, UserDAOimpl users){
+
         if (userID.equals("1")){
             friends.add(users.list().get(1));
             friends.add(users.list().get(2));
@@ -55,9 +57,9 @@ public class FriendsDAOimpl implements FriendsDAO {
 
 
     @Override
-    public UserDTO getFriendbyID(String userID, String sessionUserID) {
+    public UserDTO getFriendbyID(String userID, String sessionUserID, UserDAOimpl users) {
         UserDTO user = new UserDTO();
-        this.createforuser(sessionUserID);
+        this.createforuser(sessionUserID, users);
         for (int i = 0; i < list().size(); i++) {
             if (userID.equals(list().get(i).getUserID())) {
                 user = list().get(i);
@@ -66,6 +68,25 @@ public class FriendsDAOimpl implements FriendsDAO {
 
         }
         return null;
+    }
+
+    public void readFriendsXML(String[] xmlFriends)
+    {
+        FriendsDTO friends = new FriendsDTO();
+        friends.setUserID(xmlFriends[0]);
+        friends.setFriendsID(xmlFriends[1]);
+
+    }
+
+    public UserDAOimpl getForUser(UserDTO user){
+        UserDAOimpl users = new UserDAOimpl();
+        for (int i =0; i<list().size(); i++){
+                if(user.equals(friends.get(i))){
+                    users.add(user);
+            }
+
+        }
+        return users;
     }
 
 

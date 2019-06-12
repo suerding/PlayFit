@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface FriendsDAO {
     List<UserDTO> list();
-    UserDTO getFriendbyID(String userID, String sessionUserID);
+    UserDTO getFriendbyID(String userID, String sessionUserID, UserDAOimpl users);
     void add(String userID, String username);
 }

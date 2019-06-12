@@ -26,6 +26,7 @@ import android.widget.TextView;
 import com.example.playfit.dao.UserDAOimpl;
 import com.example.playfit.data.Session;
 import com.example.playfit.dto.UserDTO;
+import com.google.gson.Gson;
 
 
 import static com.example.playfit.FriendsActivity.FRIENDSNAME;
@@ -37,6 +38,7 @@ public class FriendsDetailActivity extends AppCompatActivity
     private Session session = new Session();
     private UserDTO friend = new UserDTO();
     private UserDAOimpl users = new UserDAOimpl();
+    SharedPreferences sharedUsers;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +48,10 @@ public class FriendsDetailActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         //sessionhandling - created by suerding
+        sharedUsers = getSharedPreferences(LoginActivity.USERS, Context.MODE_PRIVATE); // users werden aus XML Read übergeben
+        Gson gson = new Gson();
+        String json = sharedUsers.getString("Users", "");
+        users = gson.fromJson(json, UserDAOimpl.class);
         SharedPreferences sessionPreferences = getSharedPreferences(LoginActivity.SESSION, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sessionPreferences.edit();
         session.create(sessionPreferences.getString(USERNAME,"Default"), users);
@@ -84,15 +90,19 @@ public class FriendsDetailActivity extends AppCompatActivity
     }
 
     private void frienddetails() {
-        //Name
-        TextView friendsNameView = findViewById(R.id.nameOfFriend);
-        String friendsName = friend.getUserName();
-        friendsNameView.setText(friendsName);
+        //userName
+        TextView friendsUsernameView = findViewById(R.id.nameOfFriend);
+        String friendsUser = friend.getUserName();
+        friendsUsernameView.setText(friendsUser);
 
         //picture
         ImageView friendsImage = findViewById(R.id.friendsImage);
         //friendsImage.setImageResource();
+
         //fullname
+        TextView friendsNameView = findViewById(R.id.friendsName);
+        String friendsName = friend.getName();
+        friendsNameView.setText(friendsName);
 
         //points
         TextView friendsPointsView = findViewById(R.id.points);

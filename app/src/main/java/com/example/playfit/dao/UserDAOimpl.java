@@ -19,6 +19,10 @@ public class UserDAOimpl implements UserDAO {
 
     private List<UserDTO> users = new ArrayList<>();
 
+    public void add(UserDTO user)
+    {
+        users.add(user);
+    }
     public void createUser() {
 
         UserDTO user = new UserDTO();

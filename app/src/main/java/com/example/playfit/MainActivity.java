@@ -52,9 +52,9 @@ public class MainActivity extends AppCompatActivity
         Gson gson = new Gson();
         String json = sharedUsers.getString("Users", "");
         users = gson.fromJson(json, UserDAOimpl.class);
-        SharedPreferences sharedPreferences = getSharedPreferences(LoginActivity.SESSION, Context.MODE_PRIVATE); // eigentliche Session
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        session.create(sharedPreferences.getString(USERNAME,"Default"), users);
+        SharedPreferences sharedSession = getSharedPreferences(LoginActivity.SESSION, Context.MODE_PRIVATE); // eigentliche Session
+        SharedPreferences.Editor editor = sharedSession.edit();
+        session.create(sharedSession.getString(USERNAME,"Default"), users);
         Log.d("benutzer", session.getSession().getUserName());
 
 

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="MetadataFriends">
+        <item name="Anzahl">7</item>
+    </string-array>
+    <string-array name="relation1">
+        <item name="akctiveUserID">1</item>
+        <item name="friendUserID">2</item>
+    </string-array>
+    <string-array name="relation2">
+        <item name="akctiveUserID">1</item>
+        <item name="friendUserID">3</item>
+    </string-array>
+    <string-array name="relation3">
+        <item name="akctiveUserID">1</item>
+        <item name="friendUserID">4</item>
+    </string-array>
+    <string-array name="relation4">
+        <item name="akctiveUserID">1</item>
+        <item name="friendUserID">5</item>
+    </string-array>
+    <string-array name="relation5">
+        <item name="akctiveUserID">2</item>
+        <item name="friendUserID">1</item>
+    </string-array>
+    <string-array name="relation6">
+        <item name="akctiveUserID">2</item>
+        <item name="friendUserID">3</item>
+    </string-array>
+    <string-array name="relation7">
+        <item name="akctiveUserID">2</item>
+        <item name="friendUserID">4</item>
+    </string-array>
+    <string-array name="relation8">
+        <item name="akctiveUserID">2</item>
+        <item name="friendUserID">5</item>
+    </string-array>
+    <string-array name="relation9">
+        <item name="akctiveUserID">2</item>
+        <item name="friendUserID">6</item>
+    </string-array>
+    <string-array name="relation10">
+        <item name="akctiveUserID">3</item>
+        <item name="friendUserID">2</item>
+    </string-array>
+    <string-array name="relation11">
+    <item name="akctiveUserID">3</item>
+    <item name="friendUserID">1</item>
+    </string-array>
+    <string-array name="relation12">
+        <item name="akctiveUserID">3</item>
+        <item name="friendUserID">4</item>
+    </string-array>
+    <string-array name="relation13">
+        <item name="akctiveUserID">3</item>
+        <item name="friendUserID">5</item>
+    </string-array>
+    <string-array name="relation14">
+        <item name="akctiveUserID">3</item>
+        <item name="friendUserID">6</item>
+    </string-array>
+    <string-array name="relation15">
+        <item name="akctiveUserID">3</item>
+        <item name="friendUserID">7</item>
+    </string-array>
+    <string-array name="relation16">
+        <item name="akctiveUserID">4</item>
+        <item name="friendUserID">1</item>
+    </string-array>
+</resources>

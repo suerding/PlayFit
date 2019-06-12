@@ -25,6 +25,7 @@ import android.widget.TextView;
 
 import com.example.playfit.dao.UserDAOimpl;
 import com.example.playfit.data.Session;
+import com.google.gson.Gson;
 
 import static com.example.playfit.LoginActivity.USERNAME;
 
@@ -33,6 +34,7 @@ public class ProfileActvity extends AppCompatActivity
 
     private Session session = new Session();
     private UserDAOimpl users = new UserDAOimpl();
+    SharedPreferences sharedUsers;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +43,10 @@ public class ProfileActvity extends AppCompatActivity
         Toolbar toolbar = findViewById(R.id.toolbar);
 
         //sessionhandling - created by suerding
+        sharedUsers = getSharedPreferences(LoginActivity.USERS, Context.MODE_PRIVATE); // users werden aus XML Read übergeben
+        Gson gson = new Gson();
+        String json = sharedUsers.getString("Users", "");
+        users = gson.fromJson(json, UserDAOimpl.class);
         SharedPreferences sharedPreferences = getSharedPreferences(LoginActivity.SESSION, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         session.create(sharedPreferences.getString(USERNAME,"Default"), users);

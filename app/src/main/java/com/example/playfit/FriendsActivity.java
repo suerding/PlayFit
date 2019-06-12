@@ -8,6 +8,7 @@ package com.example.playfit;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -32,6 +33,7 @@ import com.example.playfit.dao.FriendsDAOimpl;
 import com.example.playfit.dao.UserDAOimpl;
 import com.example.playfit.data.Session;
 import com.example.playfit.dto.UserDTO;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 
@@ -44,6 +46,7 @@ public class FriendsActivity extends AppCompatActivity
     private Session session = new Session();
     private UserDAOimpl users = new UserDAOimpl();
     SharedPreferences sharedPreferences;
+    SharedPreferences sharedUsers;
     public static final String FRIENDSNAME = "name";
     private ListView friendsListView;
     private ArrayAdapter<String> friendsadapter;
@@ -57,8 +60,21 @@ public class FriendsActivity extends AppCompatActivity
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        //XML Import
+        Resources res = getResources();
+        String[] test = res.getStringArray(R.array.MetadataFriends);
+        int startint = R.array.MetadataFriends;
+        int counter = startint + Integer.parseInt(test[0]);
+        for (int i = startint+1; i <= counter; i++){
+            String[] friend = res.getStringArray(i);
+            friends.readFriendsXML(friend);
+        }
+
         //sessionhandling - created by suerding
-        users.createUser();
+        sharedUsers = getSharedPreferences(LoginActivity.USERS, Context.MODE_PRIVATE); // users werden aus XML Read übergeben
+        Gson gson = new Gson();
+        String json = sharedUsers.getString("Users", "");
+        users = gson.fromJson(json, UserDAOimpl.class);
         SharedPreferences sharedPreferences = getSharedPreferences(LoginActivity.SESSION, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         session.create(sharedPreferences.getString(USERNAME,"Default"), users);
@@ -75,6 +91,7 @@ public class FriendsActivity extends AppCompatActivity
                         .setAction("Action", null).show();
             }
         });
+
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -114,7 +131,7 @@ public class FriendsActivity extends AppCompatActivity
 
     //created by suerding
     private void friendsList() {
-        friends.createforuser(session.getSession().getUserID());
+        friends.getForUser(session.getSession());
         friendsListView = (ListView) findViewById(R.id.friendsList);
         friendsarrayList = new ArrayList<String>();
         friendsadapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, friendsarrayList);
@@ -126,59 +143,6 @@ public class FriendsActivity extends AppCompatActivity
 
         friendsListView.setAdapter(friendsadapter);
     }
-
-
-    /*
-    private void friendButtons() {
-        //created by fhaedric - friend1button
-        friendsprofileButton = findViewById(R.id.freund1);
-        //zu testzwecken erstmal ID = 0 - created by suerding
-        UserDTO friend = users.list().get(0);
-        String friendsID = friend.getUserID();
-        sharedPreferences = getSharedPreferences(FRIENDSID, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(FRIENDSID, friendsID);
-        editor.commit();
-        friendsprofileButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent detailIntent = new Intent(FriendsActivity.this,FriendsDetailActivity.class );
-                startActivity(detailIntent);
-            }
-        });
-
-        //created by fhaedric - friend2button
-        friendsprofileButton = findViewById(R.id.freund2);
-        friendsprofileButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent profileIntent = new Intent(FriendsActivity.this,ProfileActvity.class );
-                startActivity(profileIntent);
-            }
-        });
-
-        //created by fhaedric - friend3button
-        friendsprofileButton = findViewById(R.id.freund3);
-        friendsprofileButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent profileIntent = new Intent(FriendsActivity.this,ProfileActvity.class );
-                startActivity(profileIntent);
-            }
-        });
-
-        //created by fhaedric - friend4button
-        friendsprofileButton = findViewById(R.id.freund4);
-        friendsprofileButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent profileIntent = new Intent(FriendsActivity.this,ProfileActvity.class );
-                startActivity(profileIntent);
-            }
-        });
-
-    }
-    */
 
 
     @Override

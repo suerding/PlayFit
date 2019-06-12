@@ -11,10 +11,7 @@ import android.content.res.Resources;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
-import android.view.WindowManager;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -47,8 +44,8 @@ public class LoginActivity extends AppCompatActivity {
 
         //XML Import
         Resources res = getResources();
-        String[] test = res.getStringArray(R.array.Metadaten);
-        int startint = R.array.Metadaten;
+        String[] test = res.getStringArray(R.array.MetadataUsers);
+        int startint = R.array.MetadataUsers;
         int counter = startint + Integer.parseInt(test[0]);
         for (int i = startint+1; i <= counter; i++){
             String[] user = res.getStringArray(i);
