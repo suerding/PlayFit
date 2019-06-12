@@ -4,6 +4,8 @@ finalized by
  */
 package com.example.playfit.data;
 
+import android.content.SharedPreferences;
+
 import com.example.playfit.dao.UserDAOimpl;
 import com.example.playfit.dto.UserDTO;
 
@@ -11,8 +13,9 @@ public class Session implements Sess{
 
     private UserDTO loggedInUser = new UserDTO();
     private UserDAOimpl users = new UserDAOimpl();
+    SharedPreferences sharedUsers;
 
-    public void create(String username){
+    public void create(String username, UserDAOimpl users){
         loggedInUser = users.list().get(users.getUserIdbyName(username));
 
         return;

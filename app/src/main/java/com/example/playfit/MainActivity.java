@@ -27,9 +27,11 @@ import android.widget.TextView;
 import com.example.playfit.dao.UserDAOimpl;
 import com.example.playfit.data.Points;
 import com.example.playfit.data.Session;
+import com.google.gson.Gson;
 
 
 import static com.example.playfit.LoginActivity.USERNAME;
+import static com.example.playfit.LoginActivity.USERS;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -39,14 +41,23 @@ public class MainActivity extends AppCompatActivity
     private Button mapsButton;
     private Button scanButton;
     private Session session = new Session();
+    private UserDAOimpl users = new UserDAOimpl();
+    SharedPreferences sharedUsers;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //sessionhandling - created by suerding
-        SharedPreferences sharedPreferences = getSharedPreferences(LoginActivity.SESSION, Context.MODE_PRIVATE);
+        sharedUsers = getSharedPreferences(LoginActivity.USERS, Context.MODE_PRIVATE); // users werden aus XML Read übergeben
+        Gson gson = new Gson();
+        String json = sharedUsers.getString("Users", "");
+        users = gson.fromJson(json, UserDAOimpl.class);
+        SharedPreferences sharedPreferences = getSharedPreferences(LoginActivity.SESSION, Context.MODE_PRIVATE); // eigentliche Session
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        session.create(sharedPreferences.getString(USERNAME,"Default"));
+        session.create(sharedPreferences.getString(USERNAME,"Default"), users);
+        Log.d("benutzer", session.getSession().getUserName());
+
+
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);

@@ -20,6 +20,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.playfit.dao.UserDAOimpl;
@@ -47,7 +48,7 @@ public class FriendsDetailActivity extends AppCompatActivity
         //sessionhandling - created by suerding
         SharedPreferences sessionPreferences = getSharedPreferences(LoginActivity.SESSION, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sessionPreferences.edit();
-        session.create(sessionPreferences.getString(USERNAME,"Default"));
+        session.create(sessionPreferences.getString(USERNAME,"Default"), users);
 
         SharedPreferences friendsPreferences = getSharedPreferences(FRIENDSNAME,0);
         String friendsName   = friendsPreferences.getString(FRIENDSNAME, "DEFAULT");
@@ -89,7 +90,8 @@ public class FriendsDetailActivity extends AppCompatActivity
         friendsNameView.setText(friendsName);
 
         //picture
-
+        ImageView friendsImage = findViewById(R.id.friendsImage);
+        //friendsImage.setImageResource();
         //fullname
 
         //points

@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import com.example.playfit.dao.UserDAOimpl;
 import com.example.playfit.data.Session;
+import com.google.gson.Gson;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -32,9 +33,11 @@ public class LoginActivity extends AppCompatActivity {
     private String password;
     public Session session = new Session();
     private UserDAOimpl users = new UserDAOimpl();
-    SharedPreferences sharedPreferences;
+    SharedPreferences sharedSession;
+    SharedPreferences sharedUsers;
     public static final String SESSION = "Session" ;
     public static final String USERNAME = "username" ;
+    public static final String USERS = "users";
 
 
     @Override
@@ -50,15 +53,22 @@ public class LoginActivity extends AppCompatActivity {
         for (int i = startint+1; i <= counter; i++){
             String[] user = res.getStringArray(i);
             users.readUserXML(user);
+
         }
+        sharedUsers = getSharedPreferences(USERS, Context.MODE_PRIVATE);
+        SharedPreferences.Editor usersEditor = sharedUsers.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(users);
+        usersEditor.putString("Users", json);
+        usersEditor.commit();
 
 
         usernameField = findViewById(R.id.username);
         passwordField = findViewById(R.id.password);
         loginButton = findViewById(R.id.loginButton);
         signupButton = findViewById(R.id.signupButton);
-        users.createUser();
-        sharedPreferences = getSharedPreferences(SESSION, Context.MODE_PRIVATE);
+        //users.createUser();
+        sharedSession = getSharedPreferences(SESSION, Context.MODE_PRIVATE);
 
         //has to be edited - sollte das manuelle Löschen erübrigen
         usernameField.setOnClickListener(new View.OnClickListener() {
@@ -83,9 +93,9 @@ public class LoginActivity extends AppCompatActivity {
                 ((EditText) findViewById(R.id.password)).getText().clear();
                 if (usernameCheck(username)) {
                     if(passwordCheck(username, password)) {
-                        SharedPreferences.Editor editor = sharedPreferences.edit();
-                        editor.putString(USERNAME, username);
-                        editor.commit();
+                        SharedPreferences.Editor editorSession = sharedSession.edit();
+                        editorSession.putString(USERNAME, username);
+                        editorSession.commit();
                         Intent loginIntent = new Intent(LoginActivity.this, MainActivity.class);
                         startActivity(loginIntent);
                     } else {
@@ -122,6 +132,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public boolean usernameCheck(String username){
+        Log.d("username", "entered");
         int userID = users.getUserIdbyName(username);
         Log.d("userID", "userID " + userID);
         if(userID != 9999 && username.equals(users.list().get(userID).getUserName())){

@@ -21,6 +21,7 @@ public class ScanActivity extends AppCompatActivity implements ZXingScannerView.
     private ZXingScannerView mScannerView;
     private Points points = new Points();
     private Session session = new Session();
+    private UserDAOimpl users = new UserDAOimpl();
 
     @Override
     public void onCreate(Bundle state) {
@@ -29,7 +30,7 @@ public class ScanActivity extends AppCompatActivity implements ZXingScannerView.
 
         setContentView(mScannerView);// Set the scanner view as the content view
         SharedPreferences sharedPreferences = getSharedPreferences(LoginActivity.SESSION, Context.MODE_PRIVATE);
-        session.create(sharedPreferences.getString(USERNAME,"Default"));
+        session.create(sharedPreferences.getString(USERNAME,"Default"), users);
         Log.d("benutzer", session.getSession().getUserName());
         points.processPoints("Gym_Sportfabrik_20190611_7",  session.getSession() );
     }

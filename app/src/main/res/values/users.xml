@@ -15,7 +15,7 @@
     </string-array>
     <string-array name="User2">
         <item name="userID">2</item>
-        <item name="userName">SU</item>
+        <item name="userName">Simon</item>
         <item name="name">Paul</item>
         <item name="passwort">Simon123</item>
         <item name="userEmail">simon@mail.de</item>

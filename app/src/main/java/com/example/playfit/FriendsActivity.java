@@ -61,7 +61,7 @@ public class FriendsActivity extends AppCompatActivity
         users.createUser();
         SharedPreferences sharedPreferences = getSharedPreferences(LoginActivity.SESSION, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        session.create(sharedPreferences.getString(USERNAME,"Default"));
+        session.create(sharedPreferences.getString(USERNAME,"Default"), users);
 
         //friendButtons();
         friendsList();

@@ -23,6 +23,7 @@ public class UserDAOimpl implements UserDAO {
 
         UserDTO user = new UserDTO();
 
+
         //Add Basti - 0
         user.setUserID("1");
         user.setUserName("Basti");
@@ -106,7 +107,7 @@ public class UserDAOimpl implements UserDAO {
     //created by suerding & sknobla
     @Override
     public Integer getUserIdbyName(String username) {
-        this.createUser();
+        //this.createUser();
         for (int i = 0; i < list().size(); i++) {
             if (username.equals(list().get(i).getUserName())) {
                 return i;

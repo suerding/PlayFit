@@ -23,6 +23,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.widget.TextView;
 
+import com.example.playfit.dao.UserDAOimpl;
 import com.example.playfit.data.Session;
 
 import static com.example.playfit.LoginActivity.USERNAME;
@@ -31,6 +32,7 @@ public class ProfileActvity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private Session session = new Session();
+    private UserDAOimpl users = new UserDAOimpl();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +43,7 @@ public class ProfileActvity extends AppCompatActivity
         //sessionhandling - created by suerding
         SharedPreferences sharedPreferences = getSharedPreferences(LoginActivity.SESSION, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        session.create(sharedPreferences.getString(USERNAME,"Default"));
+        session.create(sharedPreferences.getString(USERNAME,"Default"), users);
 
         setSupportActionBar(toolbar);
         FloatingActionButton fab = findViewById(R.id.fab);
