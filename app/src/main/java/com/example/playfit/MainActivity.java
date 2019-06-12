@@ -77,12 +77,16 @@ public class MainActivity extends AppCompatActivity
         //Points points = new Points();
         //points.processPoints("Gym_Sportfabrik_20190611_7",  session.getSession() );
 
-        //Read XML
-        //Resources res = getResources();
-        //String[] test = res.getStringArray(R.array.User1);
-        //Log.d("Knobie", String.valueOf(test.length));
-        //UserDAOimpl users = new UserDAOimpl();
-        //users.readUserXML(res.getStringArray(R.array.User1));
+        //XML Import
+        Resources res = getResources();
+        String[] test = res.getStringArray(R.array.Metadaten);
+        int startint = R.array.Metadaten;
+        int counter = startint + Integer.parseInt(test[0]);
+        for (int i = startint+1; i <= counter; i++){
+           String[] user = res.getStringArray(i);
+           UserDAOimpl users = new UserDAOimpl();
+           users.readUserXML(user);
+        }
 
     }
 
