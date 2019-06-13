@@ -185,7 +185,12 @@ public class UserDAOimpl implements UserDAO {
 
         }
     }
-    public List<E>
+    public void friendships(String[] xmlusers)
+    {
+        for (int i = 0; i < xmlusers.length;i++){
+            Log.d("Frage:", xmlusers[i]);
+        }
+    }
 
 
 }
