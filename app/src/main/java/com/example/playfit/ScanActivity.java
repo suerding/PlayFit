@@ -10,6 +10,7 @@ import com.example.playfit.dao.UserDAOimpl;
 import com.example.playfit.data.Points;
 import com.example.playfit.data.Session;
 import com.example.playfit.dto.UserDTO;
+import com.google.gson.Gson;
 import com.google.zxing.Result;
 
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
@@ -22,6 +23,9 @@ public class ScanActivity extends AppCompatActivity implements ZXingScannerView.
     private Points points = new Points();
     private Session session = new Session();
     private UserDAOimpl users = new UserDAOimpl();
+    private UserDTO loggedinUser = new UserDTO();
+    SharedPreferences sharedUsers;
+    SharedPreferences sharedSession;
 
     @Override
     public void onCreate(Bundle state) {
@@ -29,8 +33,17 @@ public class ScanActivity extends AppCompatActivity implements ZXingScannerView.
         mScannerView = new ZXingScannerView(this);   // Programmatically initialize the scanner view
 
         setContentView(mScannerView);// Set the scanner view as the content view
-        SharedPreferences sharedPreferences = getSharedPreferences(LoginActivity.SESSION, Context.MODE_PRIVATE);
-        session.create(sharedPreferences.getString(USERNAME,"Default"), users);
+        //sessionhandling - created by suerding
+        sharedUsers = getSharedPreferences(LoginActivity.USERS, Context.MODE_PRIVATE); // users werden aus XML Read übergeben
+        Gson gsonUsers = new Gson();
+        String jsonUsers = sharedUsers.getString("Users", "");
+        users = gsonUsers.fromJson(jsonUsers, UserDAOimpl.class);
+        SharedPreferences sharedSession = getSharedPreferences(LoginActivity.SESSION, Context.MODE_PRIVATE); // eigentliche Session
+        SharedPreferences.Editor editor = sharedSession.edit();
+        Gson gsonUser = new Gson();
+        String jsonUser = sharedSession.getString("SessionUser", "");
+        loggedinUser = gsonUser.fromJson(jsonUser, UserDTO.class);
+        session.create(loggedinUser);
         Log.d("benutzer", session.getSession().getUserName());
         points.processPoints("Gym_Sportfabrik_20190611_7",  session.getSession() );
     }
@@ -55,6 +68,8 @@ public class ScanActivity extends AppCompatActivity implements ZXingScannerView.
     public void handleResult(Result rawResult) {
         // Do something with the result here
         Log.v("tag", rawResult.getText());// Prints scan results
+        SharedPreferences.Editor editorSession = sharedSession.edit();
+        //Punkte müssen der Session gutgeschriieben werden
         points.processPoints(rawResult.getText(), session.getSession());
         // Log.v("tag", rawResult.getBarcodeFormat().toString()); // Prints the scan format (qrcode, pdf417 etc.)
 

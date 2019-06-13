@@ -4,7 +4,7 @@
         <item name="Anzahl">7</item>
     </string-array>
     <string-array name="User1">
-        <item name="userID">1</item>
+        <item name="userID">0</item>
         <item name="userName">SK</item>
         <item name="name">Sebastian Knoblauch</item>
         <item name="passwort">Basti123</item>
@@ -14,7 +14,7 @@
         <item name="friendcount">2</item>
     </string-array>
     <string-array name="User2">
-        <item name="userID">2</item>
+        <item name="userID">1</item>
         <item name="userName">SimonU</item>
         <item name="name">Simon Uerdingen</item>
         <item name="passwort">Simon123</item>
@@ -24,7 +24,7 @@
         <item name="friendcount">3</item>
     </string-array>
     <string-array name="User3">
-        <item name="userID">3</item>
+        <item name="userID">2</item>
         <item name="userName">Fritz</item>
         <item name="name">Fritz Haedric</item>
         <item name="passwort">F1</item>
@@ -34,7 +34,7 @@
         <item name="friendcount">4</item>
     </string-array>
     <string-array name="User4">
-        <item name="userID">4</item>
+        <item name="userID">3</item>
         <item name="userName">SimonFM</item>
         <item name="name">Simon FM</item>
         <item name="passwort">S123</item>
@@ -44,7 +44,7 @@
         <item name="friendcount">5</item>
     </string-array>
     <string-array name="User5">
-        <item name="userID">5</item>
+        <item name="userID">4</item>
         <item name="userName">Imke</item>
         <item name="name">Imke</item>
         <item name="passwort">Imke123</item>
@@ -54,7 +54,7 @@
         <item name="friendcount">6</item>
     </string-array>
     <string-array name="User6">
-        <item name="userID">6</item>
+        <item name="userID">5</item>
         <item name="userName">Tester_1</item>
         <item name="name">Horst Tester</item>
         <item name="passwort">tester123</item>
@@ -64,7 +64,7 @@
         <item name="friendcount">7</item>
     </string-array>
     <string-array name="User7">
-        <item name="userID">7</item>
+        <item name="userID">6</item>
         <item name="userName">Test_2</item>
         <item name="name">Helga Tester</item>
         <item name="passwort">Tester123</item>

@@ -109,6 +109,7 @@ public class UserDAOimpl implements UserDAO {
     }
 
     //created by suerding & sknobla
+    //reale userid im xml
     @Override
     public Integer getUserIdbyName(String username) {
         //this.createUser();
@@ -146,6 +147,7 @@ public class UserDAOimpl implements UserDAO {
 
     }
 
+// manuelle id
     public UserDTO getUserbyID(String userID) {
         UserDTO user = new UserDTO();
         this.createUser();
@@ -183,6 +185,7 @@ public class UserDAOimpl implements UserDAO {
 
         }
     }
+    public List<E>
 
 
 }

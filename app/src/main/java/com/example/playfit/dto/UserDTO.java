@@ -19,6 +19,16 @@ public class UserDTO {
     private List<ShopDTO> shops;
     private List<RewardDTO> rewards;
 
+    public List<UserDTO> getFriends() {
+        return friends;
+    }
+
+    public void setFriends(List<UserDTO> friends) {
+        this.friends = friends;
+    }
+
+    private List<UserDTO> friends;
+
     public String getPassword() {
         return password;
     }

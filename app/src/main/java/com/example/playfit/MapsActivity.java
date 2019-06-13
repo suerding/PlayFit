@@ -25,6 +25,8 @@ import android.widget.TextView;
 
 import com.example.playfit.dao.UserDAOimpl;
 import com.example.playfit.data.Session;
+import com.example.playfit.dto.UserDTO;
+import com.google.gson.Gson;
 
 import static com.example.playfit.LoginActivity.USERNAME;
 
@@ -33,6 +35,8 @@ public class MapsActivity extends AppCompatActivity
 
     private Session session = new Session();
     private UserDAOimpl users;
+    private UserDTO loggedinUser;
+    SharedPreferences sharedUsers;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,9 +47,17 @@ public class MapsActivity extends AppCompatActivity
         FloatingActionButton fab = findViewById(R.id.fab);
 
         //sessionhandling - created by suerding
-        SharedPreferences sharedPreferences = getSharedPreferences(LoginActivity.SESSION, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        session.create(sharedPreferences.getString(USERNAME,"Default"), users);
+        sharedUsers = getSharedPreferences(LoginActivity.USERS, Context.MODE_PRIVATE); // users werden aus XML Read übergeben
+        Gson gsonUsers = new Gson();
+        String jsonUsers = sharedUsers.getString("Users", "");
+        users = gsonUsers.fromJson(jsonUsers, UserDAOimpl.class);
+        SharedPreferences sharedSession = getSharedPreferences(LoginActivity.SESSION, Context.MODE_PRIVATE); // eigentliche Session
+        SharedPreferences.Editor editor = sharedSession.edit();
+        Gson gsonUser = new Gson();
+        String jsonUser = sharedSession.getString("SessionUser", "");
+        loggedinUser = gsonUser.fromJson(jsonUser, UserDTO.class);
+        session.create(loggedinUser);
+        Log.d("benutzer", session.getSession().getUserName());
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -38,6 +38,7 @@ public class FriendsDetailActivity extends AppCompatActivity
     private Session session = new Session();
     private UserDTO friend = new UserDTO();
     private UserDAOimpl users = new UserDAOimpl();
+    private UserDTO loggedinUser;
     SharedPreferences sharedUsers;
 
     @Override
@@ -49,12 +50,16 @@ public class FriendsDetailActivity extends AppCompatActivity
 
         //sessionhandling - created by suerding
         sharedUsers = getSharedPreferences(LoginActivity.USERS, Context.MODE_PRIVATE); // users werden aus XML Read übergeben
-        Gson gson = new Gson();
-        String json = sharedUsers.getString("Users", "");
-        users = gson.fromJson(json, UserDAOimpl.class);
-        SharedPreferences sessionPreferences = getSharedPreferences(LoginActivity.SESSION, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sessionPreferences.edit();
-        session.create(sessionPreferences.getString(USERNAME,"Default"), users);
+        Gson gsonUsers = new Gson();
+        String jsonUsers = sharedUsers.getString("Users", "");
+        users = gsonUsers.fromJson(jsonUsers, UserDAOimpl.class);
+        SharedPreferences sharedSession = getSharedPreferences(LoginActivity.SESSION, Context.MODE_PRIVATE); // eigentliche Session
+        SharedPreferences.Editor editor = sharedSession.edit();
+        Gson gsonUser = new Gson();
+        String jsonUser = sharedSession.getString("SessionUser", "");
+        loggedinUser = gsonUser.fromJson(jsonUser, UserDTO.class);
+        session.create(loggedinUser);
+        Log.d("benutzer", session.getSession().getUserName());
 
         SharedPreferences friendsPreferences = getSharedPreferences(FRIENDSNAME,0);
         String friendsName   = friendsPreferences.getString(FRIENDSNAME, "DEFAULT");

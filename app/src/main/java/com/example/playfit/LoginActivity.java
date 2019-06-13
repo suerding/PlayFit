@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.example.playfit.dao.UserDAOimpl;
 import com.example.playfit.data.Session;
+import com.example.playfit.dto.UserDTO;
 import com.google.gson.Gson;
 
 public class LoginActivity extends AppCompatActivity {
@@ -30,6 +31,7 @@ public class LoginActivity extends AppCompatActivity {
     private String password;
     public Session session = new Session();
     private UserDAOimpl users = new UserDAOimpl();
+    private UserDTO loggedInUser = new UserDTO();
     SharedPreferences sharedSession;
     SharedPreferences sharedUsers;
     public static final String SESSION = "Session" ;
@@ -66,6 +68,8 @@ public class LoginActivity extends AppCompatActivity {
         signupButton = findViewById(R.id.signupButton);
         //users.createUser();
         sharedSession = getSharedPreferences(SESSION, Context.MODE_PRIVATE);
+        final SharedPreferences.Editor sessionEditor = sharedSession.edit();
+
 
         //has to be edited - sollte das manuelle Löschen erübrigen
         usernameField.setOnClickListener(new View.OnClickListener() {
@@ -90,9 +94,13 @@ public class LoginActivity extends AppCompatActivity {
                 ((EditText) findViewById(R.id.password)).getText().clear();
                 if (usernameCheck(username)) {
                     if(passwordCheck(username, password)) {
-                        SharedPreferences.Editor editorSession = sharedSession.edit();
-                        editorSession.putString(USERNAME, username);
-                        editorSession.commit();
+                        //es muss noch gechecked werden ob hier die richitge id zurückgegeben wird!!! -- zz falsche ID!!!
+                       loggedInUser =users.getUserbyID(String.valueOf(users.getUserIdbyName(username)));
+                        Gson gsonSession = new Gson();
+                        String jsonSession = gsonSession.toJson(loggedInUser);
+                        sessionEditor.putString("SessionUser", jsonSession);
+                        sessionEditor.commit();
+
                         Intent loginIntent = new Intent(LoginActivity.this, MainActivity.class);
                         startActivity(loginIntent);
                     } else {

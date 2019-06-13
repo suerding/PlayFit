@@ -15,8 +15,9 @@ public class Session implements Sess{
     private UserDAOimpl users = new UserDAOimpl();
     SharedPreferences sharedUsers;
 
-    public void create(String username, UserDAOimpl users){
-        loggedInUser = users.list().get(users.getUserIdbyName(username));
+    public void create(UserDTO loggedInUser){
+
+        this.loggedInUser = loggedInUser;
 
         return;
     }

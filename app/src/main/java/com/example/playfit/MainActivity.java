@@ -27,6 +27,7 @@ import android.widget.TextView;
 import com.example.playfit.dao.UserDAOimpl;
 import com.example.playfit.data.Points;
 import com.example.playfit.data.Session;
+import com.example.playfit.dto.UserDTO;
 import com.google.gson.Gson;
 
 
@@ -42,6 +43,7 @@ public class MainActivity extends AppCompatActivity
     private Button scanButton;
     private Session session = new Session();
     private UserDAOimpl users = new UserDAOimpl();
+    private UserDTO loggedinUser = new UserDTO();
     SharedPreferences sharedUsers;
 
 
@@ -49,13 +51,16 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         //sessionhandling - created by suerding
         sharedUsers = getSharedPreferences(LoginActivity.USERS, Context.MODE_PRIVATE); // users werden aus XML Read übergeben
-        Gson gson = new Gson();
-        String json = sharedUsers.getString("Users", "");
-        users = gson.fromJson(json, UserDAOimpl.class);
+        Gson gsonUsers = new Gson();
+        String jsonUsers = sharedUsers.getString("Users", "");
+        users = gsonUsers.fromJson(jsonUsers, UserDAOimpl.class);
         SharedPreferences sharedSession = getSharedPreferences(LoginActivity.SESSION, Context.MODE_PRIVATE); // eigentliche Session
         SharedPreferences.Editor editor = sharedSession.edit();
-        session.create(sharedSession.getString(USERNAME,"Default"), users);
-        Log.d("benutzer", session.getSession().getUserName());
+        Gson gsonUser = new Gson();
+        String jsonUser = sharedSession.getString("SessionUser", "");
+        loggedinUser = gsonUser.fromJson(jsonUser, UserDTO.class);
+        session.create(loggedinUser);
+        Log.d("benutzer", loggedinUser.getUserName());
 
 
 

@@ -30,6 +30,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.playfit.dao.FriendsDAOimpl;
+import com.example.playfit.dao.UserDAO;
 import com.example.playfit.dao.UserDAOimpl;
 import com.example.playfit.data.Session;
 import com.example.playfit.dto.UserDTO;
@@ -52,6 +53,7 @@ public class FriendsActivity extends AppCompatActivity
     private ArrayAdapter<String> friendsadapter;
     private ArrayList<String> friendsarrayList;
     private FriendsDAOimpl friends = new FriendsDAOimpl();
+    private UserDTO loggedinUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,15 +71,18 @@ public class FriendsActivity extends AppCompatActivity
             String[] friend = res.getStringArray(i);
             friends.readFriendsXML(friend);
         }
-
         //sessionhandling - created by suerding
         sharedUsers = getSharedPreferences(LoginActivity.USERS, Context.MODE_PRIVATE); // users werden aus XML Read übergeben
-        Gson gson = new Gson();
-        String json = sharedUsers.getString("Users", "");
-        users = gson.fromJson(json, UserDAOimpl.class);
-        SharedPreferences sharedPreferences = getSharedPreferences(LoginActivity.SESSION, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        session.create(sharedPreferences.getString(USERNAME,"Default"), users);
+        Gson gsonUsers = new Gson();
+        String jsonUsers = sharedUsers.getString("Users", "");
+        users = gsonUsers.fromJson(jsonUsers, UserDAOimpl.class);
+        SharedPreferences sharedSession = getSharedPreferences(LoginActivity.SESSION, Context.MODE_PRIVATE); // eigentliche Session
+        SharedPreferences.Editor editor = sharedSession.edit();
+        Gson gsonUser = new Gson();
+        String jsonUser = sharedSession.getString("SessionUser", "");
+        loggedinUser = gsonUser.fromJson(jsonUser, UserDTO.class);
+        session.create(loggedinUser);
+        Log.d("benutzer", session.getSession().getUserName());
 
         //friendButtons();
         friendsList();
@@ -131,13 +136,13 @@ public class FriendsActivity extends AppCompatActivity
 
     //created by suerding
     private void friendsList() {
-        friends.getForUser(session.getSession());
+        UserDAOimpl users = friends.getForUser(session.getSession());
         friendsListView = (ListView) findViewById(R.id.friendsList);
         friendsarrayList = new ArrayList<String>();
         friendsadapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, friendsarrayList);
 
         for(int i = 0; i < friends.list().size(); i++){
-            friendsarrayList.add(friends.list().get(i).getUserName());
+            friendsarrayList.add(users.list().get(i).getUserName());
             friendsadapter.notifyDataSetChanged();
         }
 
