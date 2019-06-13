@@ -18,7 +18,6 @@ public class UserDTO {
     private List<ProductDTO> produkte;
     private List<ShopDTO> shops;
     private List<RewardDTO> rewards;
-
     public List<UserDTO> getFriends() {
         return friends;
     }

@@ -54,6 +54,20 @@ public class LoginActivity extends AppCompatActivity {
             users.readUserXML(user);
 
         }
+        // XML Import Friends
+        Resources res2 = getResources();
+        String[] test2 = res.getStringArray(R.array.MetadataUsers);
+        int startint2 = R.array.MetadataUsers;
+        int counter2 = startint + Integer.parseInt(test[0]);
+        int zaehler = 0;
+        for (int i = startint+1; i <= counter; i++){
+            String[] user = res.getStringArray(i);
+            users.friendships(user, zaehler);
+            zaehler++;
+            Log.d("NUmmer:", String.valueOf(zaehler));
+
+        }
+
         sharedUsers = getSharedPreferences(USERS, Context.MODE_PRIVATE);
         SharedPreferences.Editor usersEditor = sharedUsers.edit();
         Gson gson = new Gson();

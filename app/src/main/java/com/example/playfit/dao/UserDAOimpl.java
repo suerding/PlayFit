@@ -185,11 +185,31 @@ public class UserDAOimpl implements UserDAO {
 
         }
     }
-    public void friendships(String[] xmlusers)
+    public void friendships(String[] xmlusers, int counter)
     {
-        for (int i = 0; i < xmlusers.length;i++){
-            Log.d("Frage:", xmlusers[i]);
+
+        UserDAOimpl tempusers = new UserDAOimpl();
+
+
+        UserDTO user = new UserDTO();
+        String[] tempfriends = xmlusers[8].toString().split(";");
+        for(int i = 0; i < tempfriends.length; i++){
+            Integer tempint = Integer.parseInt(tempfriends[i]);
+            tempusers.add(getUserbyID(tempfriends[i]));
+           // Log.d("FRAGE:", tempusers.list().get(i).getUserName());
+            //Log.d("FRAGE:", String.valueOf(counter));
+
+
+
         }
+        users.get(counter).setFriends(tempusers.list());
+        //for (int i  = 0; i < users.get(counter).getFriends().size(); i++)
+        //{
+            //Log.d("ENDE", users.get(i).getUserName());
+
+        //}
+
+
     }
 
 
