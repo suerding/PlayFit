@@ -196,18 +196,16 @@ public class UserDAOimpl implements UserDAO {
         for(int i = 0; i < tempfriends.length; i++){
             Integer tempint = Integer.parseInt(tempfriends[i]);
             tempusers.add(getUserbyID(tempfriends[i]));
-           // Log.d("FRAGE:", tempusers.list().get(i).getUserName());
-            //Log.d("FRAGE:", String.valueOf(counter));
-
+            Log.d("USER HINZU:", tempusers.list().get(i).getUserName());
+            Log.d("ZU USER:", users.get(counter).getUserName());
 
 
         }
-        users.get(counter).setFriends(tempusers.list());
-        //for (int i  = 0; i < users.get(counter).getFriends().size(); i++)
-        //{
-            //Log.d("ENDE", users.get(i).getUserName());
 
-        //}
+
+        // Verstehe nicht warum es in der folgene Zeile einen fehler gibt
+        //users.get(counter).setFriends(tempusers.list());
+
 
 
     }

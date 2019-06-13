@@ -64,7 +64,6 @@ public class LoginActivity extends AppCompatActivity {
             String[] user = res.getStringArray(i);
             users.friendships(user, zaehler);
             zaehler++;
-            Log.d("NUmmer:", String.valueOf(zaehler));
 
         }
 
