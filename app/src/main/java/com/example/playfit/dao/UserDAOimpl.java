@@ -188,7 +188,7 @@ public class UserDAOimpl implements UserDAO {
     public void friendships(String[] xmlusers, int counter)
     {
 
-        UserDAOimpl tempusers = new UserDAOimpl();
+        List<UserDTO> tempusers = new ArrayList<>();
 
 
         UserDTO user = new UserDTO();
@@ -196,15 +196,20 @@ public class UserDAOimpl implements UserDAO {
         for(int i = 0; i < tempfriends.length; i++){
             Integer tempint = Integer.parseInt(tempfriends[i]);
             tempusers.add(getUserbyID(tempfriends[i]));
-            Log.d("USER HINZU:", tempusers.list().get(i).getUserName());
+            // warum schreibtr er keinen log????ß
+            Log.d("USER HINZU:", tempusers.get(i).getUserName());
             Log.d("ZU USER:", users.get(counter).getUserName());
+
 
 
         }
 
 
         // Verstehe nicht warum es in der folgene Zeile einen fehler gibt
-        //users.get(counter).setFriends(tempusers.list());
+        // weil temmpusers.list() ein List<String> Objekt ist und nicht ein List<UserDTO> Objekt wie erwartet
+
+
+        users.get(counter).setFriends(tempusers);
 
 
 
