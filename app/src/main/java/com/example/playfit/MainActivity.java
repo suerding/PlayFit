@@ -22,6 +22,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.playfit.dao.UserDAOimpl;
@@ -87,6 +88,12 @@ public class MainActivity extends AppCompatActivity
         navUsername.setText("Hi " + session.getSession().getUserName());
         TextView emailTextview = (TextView) headerView.findViewById(R.id.emailText);
         emailTextview.setText(session.getSession().getUserEmail());
+        ImageView profileImage = (ImageView) headerView.findViewById(R.id.profileImage);
+        String resName = "@drawable/"+session.getSession().getUserName();
+
+        int resID = getResources().getIdentifier(resName,null, this.getPackageName());
+        profileImage.setImageResource(resID);
+
 
 
         //Points test

@@ -58,11 +58,11 @@ public class LoginActivity extends AppCompatActivity {
         Resources res2 = getResources();
         String[] test2 = res.getStringArray(R.array.MetadataUsers);
         int startint2 = R.array.MetadataUsers;
-        int counter2 = startint + Integer.parseInt(test[0]);
+        int counter2 = startint2 + Integer.parseInt(test[0]);
         int zaehler = 0;
-        for (int i = startint+1; i <= counter; i++){
+        for (int i = startint2+1; i <= counter; i++){
             String[] user = res.getStringArray(i);
-            users.friendships(user, zaehler);
+            users.friendships(user);
             zaehler++;
 
         }
