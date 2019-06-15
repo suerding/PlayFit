@@ -30,7 +30,6 @@ import com.google.gson.Gson;
 
 
 import static com.example.playfit.FriendsActivity.FRIENDSNAME;
-import static com.example.playfit.LoginActivity.USERNAME;
 
 public class FriendsDetailActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -39,6 +38,7 @@ public class FriendsDetailActivity extends AppCompatActivity
     private UserDTO friend = new UserDTO();
     private UserDAOimpl users = new UserDAOimpl();
     private UserDTO loggedinUser;
+    private NavigationView navigationView;
     SharedPreferences sharedUsers;
 
     @Override
@@ -49,6 +49,24 @@ public class FriendsDetailActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         //sessionhandling - created by suerding
+        sessionHandling();
+
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        navigationView = findViewById(R.id.nav_view);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+        navigationView.setNavigationItemSelectedListener(this);
+
+        //Nav_view header - created by suerding
+        navViewHeader();
+
+        //created by suerding
+        frienddetails();
+    }
+
+    private void sessionHandling(){
         sharedUsers = getSharedPreferences(LoginActivity.USERS, Context.MODE_PRIVATE); // users werden aus XML Read übergeben
         Gson gsonUsers = new Gson();
         String jsonUsers = sharedUsers.getString("Users", "");
@@ -66,24 +84,9 @@ public class FriendsDetailActivity extends AppCompatActivity
         friend = users.list().get(users.getUserIdbyName(friendsName));
 
         Log.d("usertest", friend.getUserName());
+    }
 
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        NavigationView navigationView = findViewById(R.id.nav_view);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
-        navigationView.setNavigationItemSelectedListener(this);
-
-        //Nav_view header - created by suerding
+    private void navViewHeader(){
         View headerView = navigationView.getHeaderView(0);
         TextView navUsername = (TextView) headerView.findViewById(R.id.nav_header_title);
         navUsername.setText("Hi " + session.getSession().getUserName());
@@ -94,10 +97,6 @@ public class FriendsDetailActivity extends AppCompatActivity
         String resName = "@drawable/"+session.getSession().getUserName();
         int resID = getResources().getIdentifier(resName,null, this.getPackageName());
         profileImage.setImageResource(resID);
-
-
-        //created by suerding
-        frienddetails();
     }
 
     private void frienddetails() {
@@ -106,9 +105,12 @@ public class FriendsDetailActivity extends AppCompatActivity
         String friendsUser = friend.getUserName();
         friendsUsernameView.setText(friendsUser);
 
-        //picture
-        ImageView friendsImage = findViewById(R.id.friendsImage);
-        //friendsImage.setImageResource();
+        //picture // Logik von Freund aus Session muss noch gebaut werden
+        ImageView imageView = findViewById(R.id.friendsImage);
+
+        String imageName ="@drawable/" + friend.getUserName() ;
+        int imageID = getResources().getIdentifier(imageName, null, this.getPackageName());
+        imageView.setImageResource(imageID);
 
         //fullname
         TextView friendsNameView = findViewById(R.id.friendsName);
@@ -116,7 +118,7 @@ public class FriendsDetailActivity extends AppCompatActivity
         friendsNameView.setText(friendsName);
 
         //points
-        TextView friendsPointsView = findViewById(R.id.points);
+        TextView friendsPointsView = findViewById(R.id.friendspoints);
         String friendsPoints =  Integer.toString(friend.getUserPoints());
         friendsPointsView.setText(friendsPoints);
 
