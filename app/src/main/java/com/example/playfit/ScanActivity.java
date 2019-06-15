@@ -40,7 +40,16 @@ public class ScanActivity extends AppCompatActivity implements ZXingScannerView.
         mScannerView = new ZXingScannerView(this);   // Programmatically initialize the scanner view
 
         setContentView(mScannerView);// Set the scanner view as the content view
+
         //sessionhandling - created by suerding
+       sessionHandling();
+
+        points.processPoints("Gym_Sportfabrik_20190611_7",  session.getSession() );
+
+
+    }
+
+    private void sessionHandling(){
         sharedUsers = getSharedPreferences(LoginActivity.USERS, Context.MODE_PRIVATE); // users werden aus XML Read übergeben
         Gson gsonUsers = new Gson();
         String jsonUsers = sharedUsers.getString("Users", "");
@@ -52,9 +61,6 @@ public class ScanActivity extends AppCompatActivity implements ZXingScannerView.
         loggedinUser = gsonUser.fromJson(jsonUser, UserDTO.class);
         session.create(loggedinUser);
         Log.d("benutzer", session.getSession().getUserName());
-        points.processPoints("Gym_Sportfabrik_20190611_7",  session.getSession() );
-
-
     }
 
     @Override
