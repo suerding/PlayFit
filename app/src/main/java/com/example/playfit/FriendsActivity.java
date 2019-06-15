@@ -26,6 +26,7 @@ import android.view.Menu;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -54,6 +55,7 @@ public class FriendsActivity extends AppCompatActivity
     private ArrayList<String> friendsarrayList;
     private FriendsDAOimpl friends = new FriendsDAOimpl();
     private UserDTO loggedinUser;
+    private  NavigationView navigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,15 +65,32 @@ public class FriendsActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         //XML Import
-        Resources res = getResources();
-        String[] test = res.getStringArray(R.array.MetadataFriends);
-        int startint = R.array.MetadataFriends;
-        int counter = startint + Integer.parseInt(test[0]);
-        for (int i = startint+1; i <= counter; i++){
-            String[] friend = res.getStringArray(i);
-            friends.readFriendsXML(friend);
-        }
+        xmlImport();
+
         //sessionhandling - created by suerding
+        sessionHandling();
+
+        //friendButtons();
+        friendsList();
+
+
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        navigationView = findViewById(R.id.nav_view);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+        navigationView.setNavigationItemSelectedListener(this);
+
+        //Nav_view header - created by suerding
+        navViewHeader();
+
+
+        //friends list listener
+        friendsListener();
+
+    }
+    private void sessionHandling(){
         sharedUsers = getSharedPreferences(LoginActivity.USERS, Context.MODE_PRIVATE); // users werden aus XML Read übergeben
         Gson gsonUsers = new Gson();
         String jsonUsers = sharedUsers.getString("Users", "");
@@ -83,47 +102,30 @@ public class FriendsActivity extends AppCompatActivity
         loggedinUser = gsonUser.fromJson(jsonUser, UserDTO.class);
         session.create(loggedinUser);
         Log.d("benutzer", session.getSession().getUserName());
+    }
 
-        //friendButtons();
-        friendsList();
+    private void xmlImport(){
+        Resources res = getResources();
+        String[] test = res.getStringArray(R.array.MetadataFriends);
+        int startint = R.array.MetadataFriends;
+        int counter = startint + Integer.parseInt(test[0]);
+        for (int i = startint+1; i <= counter; i++){
+            String[] friend = res.getStringArray(i);
+            friends.readFriendsXML(friend);
+        }
+    }
 
-
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        NavigationView navigationView = findViewById(R.id.nav_view);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
-        navigationView.setNavigationItemSelectedListener(this);
-
-        //Nav_view header - created by suerding
+    private void navViewHeader(){
         View headerView = navigationView.getHeaderView(0);
         TextView navUsername = (TextView) headerView.findViewById(R.id.nav_header_title);
         navUsername.setText("Hi " + session.getSession().getUserName());
         TextView emailTextview = (TextView) headerView.findViewById(R.id.emailText);
         emailTextview.setText(session.getSession().getUserEmail());
 
-        //friends list listener
-        friendsListView = (ListView) findViewById(R.id.friendsList);
-        friendsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String selectedItem = (String) parent.getItemAtPosition(position);
-                setDetails(selectedItem);
-                Intent friendsintent = new Intent(FriendsActivity.this, FriendsDetailActivity.class);
-                startActivity(friendsintent);
-            }
-        });
-
+        ImageView profileImage = (ImageView) headerView.findViewById(R.id.profileImage);
+        String resName = "@drawable/" + session.getSession().getUserName();
+        int resID = getResources().getIdentifier(resName, null, this.getPackageName());
+        profileImage.setImageResource(resID);
     }
 
     private void setDetails(String selectedItem) {
@@ -147,6 +149,19 @@ public class FriendsActivity extends AppCompatActivity
         }
 
         friendsListView.setAdapter(friendsadapter);
+    }
+
+    private void friendsListener(){
+        friendsListView = (ListView) findViewById(R.id.friendsList);
+        friendsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String selectedItem = (String) parent.getItemAtPosition(position);
+                setDetails(selectedItem);
+                Intent friendsintent = new Intent(FriendsActivity.this, FriendsDetailActivity.class);
+                startActivity(friendsintent);
+            }
+        });
     }
 
 

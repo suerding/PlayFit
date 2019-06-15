@@ -21,6 +21,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.playfit.dao.UserDAOimpl;
@@ -80,6 +81,12 @@ public class MapsActivity extends AppCompatActivity
         navUsername.setText("Hi " + session.getSession().getUserName());
         TextView emailTextview = (TextView) headerView.findViewById(R.id.emailText);
         emailTextview.setText(session.getSession().getUserEmail());
+
+        ImageView profileImage = (ImageView) headerView.findViewById(R.id.profileImage);
+        String resName = "@drawable/"+session.getSession().getUserName();
+        int resID = getResources().getIdentifier(resName,null, this.getPackageName());
+        profileImage.setImageResource(resID);
+
 
     }
 

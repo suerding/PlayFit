@@ -90,6 +90,12 @@ public class FriendsDetailActivity extends AppCompatActivity
         TextView emailTextview = (TextView) headerView.findViewById(R.id.emailText);
         emailTextview.setText(session.getSession().getUserEmail());
 
+        ImageView profileImage = (ImageView) headerView.findViewById(R.id.profileImage);
+        String resName = "@drawable/"+session.getSession().getUserName();
+        int resID = getResources().getIdentifier(resName,null, this.getPackageName());
+        profileImage.setImageResource(resID);
+
+
         //created by suerding
         frienddetails();
     }

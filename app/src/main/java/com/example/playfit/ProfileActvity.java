@@ -21,6 +21,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.playfit.dao.UserDAOimpl;
@@ -28,14 +29,13 @@ import com.example.playfit.data.Session;
 import com.example.playfit.dto.UserDTO;
 import com.google.gson.Gson;
 
-import static com.example.playfit.LoginActivity.USERNAME;
-
 public class ProfileActvity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private Session session = new Session();
     private UserDAOimpl users = new UserDAOimpl();
     private UserDTO loggedinUser = new UserDTO();
+    private  NavigationView navigationView;
     SharedPreferences sharedUsers;
 
     @Override
@@ -45,6 +45,26 @@ public class ProfileActvity extends AppCompatActivity
         Toolbar toolbar = findViewById(R.id.toolbar);
 
         //sessionhandling - created by suerding
+        sessionHandling();
+
+        setSupportActionBar(toolbar);
+
+        DrawerLayout drawer = findViewById(R.id.activity_profile);
+        navigationView = findViewById(R.id.nav_profile);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+        navigationView.setNavigationItemSelectedListener(this);
+
+        //Nav_view header - created by suerding
+        navViewHeader();
+
+        //Profiledetails
+        profiledetails();
+    }
+
+    private void sessionHandling(){
         sharedUsers = getSharedPreferences(LoginActivity.USERS, Context.MODE_PRIVATE); // users werden aus XML Read übergeben
         Gson gsonUsers = new Gson();
         String jsonUsers = sharedUsers.getString("Users", "");
@@ -56,30 +76,45 @@ public class ProfileActvity extends AppCompatActivity
         loggedinUser = gsonUser.fromJson(jsonUser, UserDTO.class);
         session.create(loggedinUser);
         Log.d("benutzer", session.getSession().getUserName());
+    }
+    private void profiledetails(){
+        //picture
+        ImageView imageView = findViewById(R.id.detailImageProfile);
+        String imageName ="@drawable/" + session.getSession().getUserName();
+        int imageID = getResources().getIdentifier(imageName, null, this.getPackageName());
+        imageView.setImageResource(imageID);
 
-        setSupportActionBar(toolbar);
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-        DrawerLayout drawer = findViewById(R.id.activity_profile);
-        NavigationView navigationView = findViewById(R.id.nav_profile);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
-        navigationView.setNavigationItemSelectedListener(this);
+        //username
+        TextView username = findViewById(R.id.usernameOfUser);
+        username.setText(session.getSession().getUserName());
 
-        //Nav_view header - created by suerding
+        //Email
+        TextView eMail = findViewById(R.id.eMail);
+        eMail.setText(session.getSession().getUserEmail());
+
+        //Name
+        TextView fullname = findViewById(R.id.fullName);
+        fullname.setText(session.getSession().getName());
+
+        //Points
+        TextView pointsText = findViewById(R.id.pointsText);
+       // pointsText.setText(session.getSession().getUserPoints());
+
+        //level - berechnet aus Total Points
+
+    }
+
+    private void navViewHeader(){
         View headerView = navigationView.getHeaderView(0);
         TextView navUsername = (TextView) headerView.findViewById(R.id.nav_header_title);
         navUsername.setText("Hi " + session.getSession().getUserName());
         TextView emailTextview = (TextView) headerView.findViewById(R.id.emailText);
         emailTextview.setText(session.getSession().getUserEmail());
+
+        ImageView profileImage = (ImageView) headerView.findViewById(R.id.profileImage);
+        String resName = "@drawable/"+session.getSession().getUserName();
+        int resID = getResources().getIdentifier(resName,null, this.getPackageName());
+        profileImage.setImageResource(resID);
     }
 
     @Override

@@ -45,36 +45,15 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         //XML Import
-        Resources res = getResources();
-        String[] test = res.getStringArray(R.array.MetadataUsers);
-        int startint = R.array.MetadataUsers;
-        int counter = startint + Integer.parseInt(test[0]);
-        for (int i = startint+1; i <= counter; i++){
-            String[] user = res.getStringArray(i);
-            users.readUserXML(user);
-
-        }
+        xmlUserImport();
         // XML Import Friends
-        Resources res2 = getResources();
-        String[] test2 = res.getStringArray(R.array.MetadataUsers);
-        int startint2 = R.array.MetadataUsers;
-        int counter2 = startint2 + Integer.parseInt(test[0]);
-        int zaehler = 0;
-        for (int i = startint2+1; i <= counter; i++){
-            String[] user = res.getStringArray(i);
-            users.friendships(user);
-            zaehler++;
+        xmlFriendsImport();
+        login();
+        signUp();
 
-        }
+    }
 
-        sharedUsers = getSharedPreferences(USERS, Context.MODE_PRIVATE);
-        SharedPreferences.Editor usersEditor = sharedUsers.edit();
-        Gson gson = new Gson();
-        String json = gson.toJson(users);
-        usersEditor.putString("Users", json);
-        usersEditor.commit();
-
-
+    private void login(){
         usernameField = findViewById(R.id.username);
         passwordField = findViewById(R.id.password);
         loginButton = findViewById(R.id.loginButton);
@@ -108,7 +87,7 @@ public class LoginActivity extends AppCompatActivity {
                 if (usernameCheck(username)) {
                     if(passwordCheck(username, password)) {
                         //es muss noch gechecked werden ob hier die richitge id zurückgegeben wird!!! -- zz falsche ID!!!
-                       loggedInUser =users.getUserbyID(String.valueOf(users.getUserIdbyName(username)));
+                        loggedInUser =users.getUserbyID(String.valueOf(users.getUserIdbyName(username)));
                         Gson gsonSession = new Gson();
                         String jsonSession = gsonSession.toJson(loggedInUser);
                         sessionEditor.putString("SessionUser", jsonSession);
@@ -131,22 +110,54 @@ public class LoginActivity extends AppCompatActivity {
                     startActivity(loginIntent);
                 }
             }});
+    }
+
+    private void signUp(){
         signupButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-            EditText usernametemp = findViewById(R.id.username);
-            EditText passwordtemp = findViewById(R.id.password);
-            username = usernametemp.getText().toString();
-            password = passwordtemp.getText().toString();
-            users = users.newUser(username, password, users);
-            Log.d("istUser",users.list().get(3).getUserName());
-            Intent loginIntent = new Intent(LoginActivity.this, LoginActivity.class);
-            startActivity(loginIntent);
+                EditText usernametemp = findViewById(R.id.username);
+                EditText passwordtemp = findViewById(R.id.password);
+                username = usernametemp.getText().toString();
+                password = passwordtemp.getText().toString();
+                users = users.newUser(username, password, users);
+                Log.d("istUser",users.list().get(3).getUserName());
+                Intent loginIntent = new Intent(LoginActivity.this, LoginActivity.class);
+                startActivity(loginIntent);
             }
         });
+    }
 
+    private void xmlUserImport(){
+        Resources res = getResources();
+        String[] test = res.getStringArray(R.array.MetadataUsers);
+        int startint = R.array.MetadataUsers;
+        int counter = startint + Integer.parseInt(test[0]);
+        for (int i = startint+1; i <= counter; i++){
+            String[] user = res.getStringArray(i);
+            users.readUserXML(user);
 
+        }
 
+        sharedUsers = getSharedPreferences(USERS, Context.MODE_PRIVATE);
+        SharedPreferences.Editor usersEditor = sharedUsers.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(users);
+        usersEditor.putString("Users", json);
+        usersEditor.commit();
+    }
 
+    private void xmlFriendsImport(){
+        Resources res2 = getResources();
+        String[] test2 = res2.getStringArray(R.array.MetadataUsers);
+        int startint2 = R.array.MetadataUsers;
+        int counter2 = startint2 + Integer.parseInt(test2[0]);
+        int zaehler = 0;
+        for (int i = startint2+1; i <= counter2; i++){
+            String[] user = res2.getStringArray(i);
+            users.friendships(user);
+            zaehler++;
+
+        }
     }
 
     public boolean usernameCheck(String username){

@@ -45,12 +45,44 @@ public class MainActivity extends AppCompatActivity
     private Session session = new Session();
     private UserDAOimpl users = new UserDAOimpl();
     private UserDTO loggedinUser = new UserDTO();
+    private NavigationView navigationView;
     SharedPreferences sharedUsers;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //sessionhandling - created by suerding
+        sessionHandling();
+
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        dashboardButtons();
+
+        //created by sknobla & suerding
+        DrawerLayout drawer = findViewById(R.id.activity_main);
+        navigationView = findViewById(R.id.nav_view);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+        if (navigationView != null) {
+            navigationView.setNavigationItemSelectedListener(this);
+        }
+
+        //Nav_view header - created by suerding
+        navViewHeader();
+
+        //Points test
+        //Points points = new Points();
+        //points.processPoints("Gym_Sportfabrik_20190611_7",  session.getSession() );
+
+
+    }
+
+    private void sessionHandling(){
         sharedUsers = getSharedPreferences(LoginActivity.USERS, Context.MODE_PRIVATE); // users werden aus XML Read übergeben
         Gson gsonUsers = new Gson();
         String jsonUsers = sharedUsers.getString("Users", "");
@@ -62,47 +94,19 @@ public class MainActivity extends AppCompatActivity
         loggedinUser = gsonUser.fromJson(jsonUser, UserDTO.class);
         session.create(loggedinUser);
         Log.d("benutzer", loggedinUser.getUserName());
+    }
 
-
-
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        dashboardButtons();
-        //created by sknobla & suerding
-        DrawerLayout drawer = findViewById(R.id.activity_main);
-        NavigationView navigationView = findViewById(R.id.nav_view);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
-        if (navigationView != null) {
-            navigationView.setNavigationItemSelectedListener(this);
-        }
-
-        //Nav_view header - created by suerding
+    private void navViewHeader(){
         View headerView = navigationView.getHeaderView(0);
         TextView navUsername = (TextView) headerView.findViewById(R.id.nav_header_title);
         navUsername.setText("Hi " + session.getSession().getUserName());
         TextView emailTextview = (TextView) headerView.findViewById(R.id.emailText);
         emailTextview.setText(session.getSession().getUserEmail());
+
         ImageView profileImage = (ImageView) headerView.findViewById(R.id.profileImage);
         String resName = "@drawable/"+session.getSession().getUserName();
-
         int resID = getResources().getIdentifier(resName,null, this.getPackageName());
         profileImage.setImageResource(resID);
-
-
-
-        //Points test
-        //Points points = new Points();
-        //points.processPoints("Gym_Sportfabrik_20190611_7",  session.getSession() );
-
-
-
-
     }
 
     private void dashboardButtons() {

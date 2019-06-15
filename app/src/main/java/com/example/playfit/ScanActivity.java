@@ -2,9 +2,16 @@ package com.example.playfit;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.support.design.widget.NavigationView;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.playfit.dao.UserDAOimpl;
 import com.example.playfit.data.Points;
@@ -46,6 +53,8 @@ public class ScanActivity extends AppCompatActivity implements ZXingScannerView.
         session.create(loggedinUser);
         Log.d("benutzer", session.getSession().getUserName());
         points.processPoints("Gym_Sportfabrik_20190611_7",  session.getSession() );
+
+
     }
 
     @Override
