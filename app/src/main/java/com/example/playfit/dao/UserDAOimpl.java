@@ -53,7 +53,7 @@ public class UserDAOimpl implements UserDAO {
         //Add Fritz - 2
         user.setUserID("3");
         user.setUserName("f");
-        user.setName("Fritz Haedric");
+        user.setName("Fritz Haedrich");
         user.setUserPoints(15);
         user.setUserEmail("fhaedric@smail.uni-koeln.de");
         user.setPassword("f1");
