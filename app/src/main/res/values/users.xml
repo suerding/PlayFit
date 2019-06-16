@@ -28,11 +28,11 @@
     <string-array name="User3">
         <item name="userID">2</item>
         <item name="userName">fritz</item>
-        <item name="name">Fritz Haedric</item>
-        <item name="passwort">F1</item>
-        <item name="userEmail">fritz@mail.de</item>
-        <item name="userPoints">15</item>
-        <item name="totalPoints">237</item>
+        <item name="name">Fritz Haedrich</item>
+        <item name="passwort">f1</item>
+        <item name="userEmail">fritz.hd@gmail.de</item>
+        <item name="userPoints">42</item>
+        <item name="totalPoints">420</item>
         <item name="friendcount">4</item>
         <item name="friends">1;2;4;6</item>
     </string-array>
