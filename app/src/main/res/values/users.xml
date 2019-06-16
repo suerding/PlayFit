@@ -60,7 +60,7 @@
     </string-array>
     <string-array name="User6">
         <item name="userID">5</item>
-        <item name="userName">Tester_1</item>
+        <item name="userName">tester_1</item>
         <item name="name">Horst Tester</item>
         <item name="passwort">tester123</item>
         <item name="userEmail">tester1@mail.de</item>
