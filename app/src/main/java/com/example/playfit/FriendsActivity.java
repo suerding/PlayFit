@@ -232,7 +232,8 @@ public class FriendsActivity extends AppCompatActivity
             Log.d("navSocial","Nav_Social");
         } else if (id == R.id.nav_settings) {
             finish();
-
+            Intent settingsIntent = new Intent(FriendsActivity.this, SettingsActivity.class);
+            startActivity(settingsIntent);
         }
 
         DrawerLayout drawer = findViewById(R.id.activity_main);

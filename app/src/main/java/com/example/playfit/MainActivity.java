@@ -240,6 +240,9 @@ public class MainActivity extends AppCompatActivity
             finish();
             Log.d("navSocial","Nav_Social");
         } else if (id == R.id.nav_settings) {
+            finish();
+            Intent settingsIntent = new Intent(MainActivity.this, SettingsActivity.class);
+            startActivity(settingsIntent);
 
         }else if (id== R.id.nav_logout){
             session.close();

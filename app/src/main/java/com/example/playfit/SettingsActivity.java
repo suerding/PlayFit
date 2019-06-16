@@ -1,7 +1,3 @@
-/*
-created by sknobla, suerding
-finalized by
- */
 package com.example.playfit;
 
 import android.content.Context;
@@ -29,41 +25,37 @@ import com.example.playfit.data.Session;
 import com.example.playfit.dto.UserDTO;
 import com.google.gson.Gson;
 
-public class ProfileActvity extends AppCompatActivity
+public class SettingsActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-
+    private SharedPreferences sharedUsers;
+    private SharedPreferences sharedPreferences;
+    private UserDAOimpl users;
+    private UserDTO loggedinUser;
     private Session session = new Session();
-    private UserDAOimpl users = new UserDAOimpl();
-    private UserDTO loggedinUser = new UserDTO();
     private  NavigationView navigationView;
-    SharedPreferences sharedUsers;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile);
+        setContentView(R.layout.activity_settings);
         Toolbar toolbar = findViewById(R.id.toolbar);
-
-        //sessionhandling - created by suerding
-        sessionHandling();
-
         setSupportActionBar(toolbar);
-
-        DrawerLayout drawer = findViewById(R.id.activity_profile);
-        navigationView = findViewById(R.id.nav_profile);
+        FloatingActionButton fab = findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        navigationView = findViewById(R.id.nav_view);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
-
-        //Nav_view header - created by suerding
-        navViewHeader();
-
-        //Profiledetails
-        profiledetails();
     }
-
     private void sessionHandling(){
         sharedUsers = getSharedPreferences(LoginActivity.USERS, Context.MODE_PRIVATE); // users werden aus XML Read übergeben
         Gson gsonUsers = new Gson();
@@ -75,33 +67,7 @@ public class ProfileActvity extends AppCompatActivity
         String jsonUser = sharedSession.getString("SessionUser", "");
         loggedinUser = gsonUser.fromJson(jsonUser, UserDTO.class);
         session.create(loggedinUser);
-        Log.d("benutzer", session.getSession().getUserName());
-    }
-    private void profiledetails(){
-        //picture
-        ImageView imageView = findViewById(R.id.detailImageProfile);
-        String imageName ="@drawable/" + session.getSession().getUserName();
-        int imageID = getResources().getIdentifier(imageName, null, this.getPackageName());
-        imageView.setImageResource(imageID);
-
-        //username
-        TextView username = findViewById(R.id.usernameOfUser);
-        username.setText(session.getSession().getUserName());
-
-        //Email
-        TextView eMail = findViewById(R.id.eMail);
-        eMail.setText(session.getSession().getUserEmail());
-
-        //Name
-        TextView fullname = findViewById(R.id.fullName);
-        fullname.setText(session.getSession().getName());
-
-        //Points
-        TextView pointsText = findViewById(R.id.pointsText);
-       // pointsText.setText(session.getSession().getUserPoints());
-
-        //level - berechnet aus Total Points
-
+        Log.d("benutzer", loggedinUser.getUserName());
     }
 
     private void navViewHeader(){
@@ -116,10 +82,9 @@ public class ProfileActvity extends AppCompatActivity
         int resID = getResources().getIdentifier(resName,null, this.getPackageName());
         profileImage.setImageResource(resID);
     }
-
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = findViewById(R.id.activity_profile);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -130,7 +95,7 @@ public class ProfileActvity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.profile_actvity, menu);
+        getMenuInflater().inflate(R.menu.settings, menu);
         return true;
     }
 
@@ -149,9 +114,7 @@ public class ProfileActvity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-    //created by suerding - Navigatorlogik
     @SuppressWarnings("StatementWithEmptyBody")
-    @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
@@ -159,39 +122,41 @@ public class ProfileActvity extends AppCompatActivity
         if (id == R.id.nav_home) {
             finish();
             Log.d("navHome","Nav_home");
-            Intent homeIntent = new Intent(ProfileActvity.this, MainActivity.class);
+            Intent homeIntent = new Intent(SettingsActivity.this, MainActivity.class);
             startActivity(homeIntent);
         } else if (id == R.id.nav_profile) {
             finish();
             Log.d("navProfile","Nav_profile");
-            Intent profileIntent = new Intent(ProfileActvity.this, ProfileActvity.class);
+            Intent profileIntent = new Intent(SettingsActivity.this, ProfileActvity.class);
             startActivity(profileIntent);
             return true;
         } else if (id == R.id.nav_friends) {
             finish();
-            Intent friendsIntent = new Intent(ProfileActvity.this, FriendsActivity.class);
+            Intent friendsIntent = new Intent(SettingsActivity.this, FriendsActivity.class);
             startActivity(friendsIntent);
         } else if (id == R.id.nav_maps) {
             finish();
-            Intent mapsIntent = new Intent(ProfileActvity.this, MapsActivity.class);
+            Intent mapsIntent = new Intent(SettingsActivity.this, MapsActivity.class);
             startActivity(mapsIntent);
         } else if (id == R.id.nav_scan) {
             finish();
-            Intent scanIntent = new Intent(ProfileActvity.this, ScanActivity.class);
+            Intent scanIntent = new Intent(SettingsActivity.this, ScanActivity.class);
             startActivity(scanIntent);
         } else if (id == R.id.nav_logout) {
-
+            finish();
             Log.d("navSocial","Nav_Social");
         } else if (id == R.id.nav_settings) {
             finish();
-            Intent settingsIntent = new Intent(ProfileActvity.this, SettingsActivity.class);
+            Intent settingsIntent = new Intent(SettingsActivity.this, SettingsActivity.class);
             startActivity(settingsIntent);
 
+        }else if (id== R.id.nav_logout){
+            session.close();
+            finish();
         }
 
         DrawerLayout drawer = findViewById(R.id.activity_main);
         drawer.closeDrawer(GravityCompat.START);
         return true;
-
     }
 }

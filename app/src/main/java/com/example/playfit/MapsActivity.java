@@ -155,6 +155,9 @@ public class MapsActivity extends AppCompatActivity
             finish();
             Log.d("navSocial","Nav_Social");
         } else if (id == R.id.nav_settings) {
+            finish();
+            Intent settingsIntent = new Intent(MapsActivity.this, SettingsActivity.class);
+            startActivity(settingsIntent);
 
         }
 
