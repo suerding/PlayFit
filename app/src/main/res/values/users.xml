@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="MetadataUsers">
-        <item name="Anzahl">7</item>
+        <item name="Anzahl">8</item>
     </string-array>
     <string-array name="User1">
         <item name="userID">0</item>
@@ -62,7 +62,7 @@
         <item name="userID">5</item>
         <item name="userName">tester_1</item>
         <item name="name">Horst Tester</item>
-        <item name="passwort">tester123</item>
+        <item name="passwort">t1</item>
         <item name="userEmail">tester1@mail.de</item>
         <item name="userPoints">55</item>
         <item name="totalPoints">555</item>
@@ -81,8 +81,8 @@
         <item name="friends">1;2;4;6</item>
     </string-array>
     <string-array name="User8">
-        <item name="userID">6</item>
-        <item name="userName">Peter</item>
+        <item name="userID">7</item>
+        <item name="userName">tester_3</item>
         <item name="name">Helga Tester</item>
         <item name="passwort">13</item>
         <item name="userEmail">tester2@mail.de</item>
