@@ -77,9 +77,9 @@ public class MainActivity extends AppCompatActivity
         //Nav_view header - created by suerding
         navViewHeader();
 
-        //Points test
-        //Points points = new Points();
-        //points.processPoints("Gym_Sportfabrik_20190611_7",  session.getSession() );
+        TextView points = findViewById(R.id.points);
+        points.setText(String.valueOf(session.getSession().getUserPoints()));
+
 
 
     }
