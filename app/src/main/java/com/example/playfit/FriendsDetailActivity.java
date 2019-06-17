@@ -195,16 +195,13 @@ public class FriendsDetailActivity extends AppCompatActivity
             Intent settingsIntent = new Intent(FriendsDetailActivity.this, SettingsActivity.class);
             startActivity(settingsIntent);
         } else if (id == R.id.nav_logout) {
-            session.close();
-            finish();
-            /*
+            //hardlogout -- reboot
             Intent mStartActivity = new Intent(FriendsDetailActivity.this, MainActivity.class);
             int mPendingIntentId = 123456;
             PendingIntent mPendingIntent = PendingIntent.getActivity(FriendsDetailActivity.this, mPendingIntentId, mStartActivity, PendingIntent.FLAG_CANCEL_CURRENT);
             AlarmManager mgr = (AlarmManager)FriendsDetailActivity.this.getSystemService(Context.ALARM_SERVICE);
             mgr.set(AlarmManager.RTC, System.currentTimeMillis() + 100, mPendingIntent);
             System.exit(0);
-            */
         }
         DrawerLayout drawer = findViewById(R.id.activity_main);
         drawer.closeDrawer(GravityCompat.START);

@@ -90,7 +90,13 @@ public class ScanActivity extends AppCompatActivity implements ZXingScannerView.
         SharedPreferences.Editor editorSession = sharedSession.edit();
 
         //Punkte müssen der Session gutgeschriieben werden
-        points.processPoints(rawResult.getText(), session.getSession());
+        final SharedPreferences.Editor sessionEditor = sharedSession.edit();
+        session.getSession().setTotalPoints(users.calcLevel(session.getSession(), rawResult.getText()));
+        Gson gsonSession = new Gson();
+        String jsonSession = gsonSession.toJson(session.getSession());
+        sessionEditor.putString("SessionUser", jsonSession);
+        sessionEditor.commit();
+
         // Log.v("tag", rawResult.getBarcodeFormat().toString()); // Prints the scan format (qrcode, pdf417 etc.)
 
         //MainActivity.tvresult.setText(rawResult.getText());

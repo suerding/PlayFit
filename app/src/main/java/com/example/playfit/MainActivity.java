@@ -117,6 +117,7 @@ public class MainActivity extends AppCompatActivity
         profileButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                finish();
                 Intent profileIntent = new Intent(MainActivity.this,ProfileActvity.class );
                 startActivity(profileIntent);
             }
@@ -127,6 +128,7 @@ public class MainActivity extends AppCompatActivity
         friendsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                finish();
                 Intent friendsIntent = new Intent(MainActivity.this,FriendsActivity.class );
                 startActivity(friendsIntent);
             }
@@ -137,6 +139,7 @@ public class MainActivity extends AppCompatActivity
         mapsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                finish();
                 Intent mapsIntent = new Intent(MainActivity.this,MapsActivity.class );
                 startActivity(mapsIntent);
             }
@@ -147,32 +150,13 @@ public class MainActivity extends AppCompatActivity
         scanButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*try {
-                    Intent intent = new Intent();
-                    intent.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
-                    startActivity(intent);
-                }
-                catch (Exception e){
-                    e.printStackTrace();
-                }*/
-                Intent mapsIntent = new Intent(MainActivity.this,ScanActivity.class );
-                startActivity(mapsIntent);
-
-
-            }
-        });
-
-        /*
-        //created by suerding - scanButton
-        scanButton = findViewById(R.id.buttonScan);
-        scanButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+                finish();
                 Intent scanIntent = new Intent(MainActivity.this,ScanActivity.class );
                 startActivity(scanIntent);
+
+
             }
         });
-        */
 
 
     }
@@ -247,18 +231,14 @@ public class MainActivity extends AppCompatActivity
             startActivity(settingsIntent);
 
         }else if (id== R.id.nav_logout){
-            session.close();
-            finish();
-
-            /*
-            hardlogout -- reboot
+            //hardlogout -- reboot
             Intent mStartActivity = new Intent(MainActivity.this, MainActivity.class);
             int mPendingIntentId = 123456;
             PendingIntent mPendingIntent = PendingIntent.getActivity(MainActivity.this, mPendingIntentId, mStartActivity, PendingIntent.FLAG_CANCEL_CURRENT);
             AlarmManager mgr = (AlarmManager)MainActivity.this.getSystemService(Context.ALARM_SERVICE);
             mgr.set(AlarmManager.RTC, System.currentTimeMillis() + 100, mPendingIntent);
             System.exit(0);
-            */
+
         }
 
         DrawerLayout drawer = findViewById(R.id.activity_main);

@@ -4,6 +4,8 @@ finalized by
  */
 package com.example.playfit;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -152,9 +154,13 @@ public class MapsActivity extends AppCompatActivity
             Intent scanIntent = new Intent(MapsActivity.this, ScanActivity.class);
             startActivity(scanIntent);
         } else if (id == R.id.nav_logout) {
-            session.close();
-            finish();
-            Log.d("navSocial","Nav_Social");
+            //hardlogout -- reboot
+            Intent mStartActivity = new Intent(MapsActivity.this, MainActivity.class);
+            int mPendingIntentId = 123456;
+            PendingIntent mPendingIntent = PendingIntent.getActivity(MapsActivity.this, mPendingIntentId, mStartActivity, PendingIntent.FLAG_CANCEL_CURRENT);
+            AlarmManager mgr = (AlarmManager)MapsActivity.this.getSystemService(Context.ALARM_SERVICE);
+            mgr.set(AlarmManager.RTC, System.currentTimeMillis() + 100, mPendingIntent);
+            System.exit(0);
         } else if (id == R.id.nav_settings) {
             finish();
             Intent settingsIntent = new Intent(MapsActivity.this, SettingsActivity.class);

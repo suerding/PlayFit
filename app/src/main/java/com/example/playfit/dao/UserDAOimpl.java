@@ -6,6 +6,7 @@ package com.example.playfit.dao;
 
 import android.util.Log;
 
+import com.example.playfit.data.Session;
 import com.example.playfit.dto.UserDTO;
 
 import org.xmlpull.v1.XmlPullParser;
@@ -61,7 +62,7 @@ public class UserDAOimpl implements UserDAO {
           user.setUserName(xmlUsers[1]);
           user.setName(xmlUsers[2]);
           user.setUserPoints(Integer.parseInt(xmlUsers[5]));
-          user.setTotalPoints(Integer.parseInt(xmlUsers[5]));
+          user.setTotalPoints(Integer.parseInt(xmlUsers[6]));
           user.setUserEmail(xmlUsers[4]);
           user.setPassword(xmlUsers[3]);
           user.setFriendCount(Integer.parseInt(xmlUsers[7]));
@@ -129,6 +130,25 @@ public class UserDAOimpl implements UserDAO {
         }
         users.get(counter).setFriends(temp);
 
+    }
+
+    public int getLevel(UserDTO user){
+        Log.d("totalpoints", String.valueOf(user.getTotalPoints()));
+        if(user.getTotalPoints() < 50){
+            return 0;
+        }else if(user.getTotalPoints() >= 50 && user.getTotalPoints() <200){
+            return 1;
+        }else if(user.getTotalPoints() >= 200){
+            return 2;
+        }
+        return 3;
+    }
+    public int calcLevel(UserDTO user , String input){
+        int newPoints =  Integer.parseInt(input.split("_")[3]);
+        user.setUserPoints(user.getUserPoints()+newPoints);
+        int totalPoints = user.getTotalPoints() + newPoints;
+
+        return totalPoints;
     }
 
 

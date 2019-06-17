@@ -33,5 +33,8 @@ public class Points {
     private int identifyPoints(String input){
         return Integer.parseInt(input.split("_")[3]);
     }
-    }
+
+
+
+}
 
