@@ -190,14 +190,10 @@ public class FriendsDetailActivity extends AppCompatActivity
             finish();
             Intent scanIntent = new Intent(FriendsDetailActivity.this, ScanActivity.class);
             startActivity(scanIntent);
-        } else if (id == R.id.nav_logout) {
-            finish();
-            Log.d("navSocial", "Nav_Social");
         } else if (id == R.id.nav_settings) {
             finish();
             Intent settingsIntent = new Intent(FriendsDetailActivity.this, SettingsActivity.class);
             startActivity(settingsIntent);
-
         } else if (id == R.id.nav_logout) {
             session.close();
             finish();

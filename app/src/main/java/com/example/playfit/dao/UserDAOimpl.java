@@ -11,6 +11,8 @@ import com.example.playfit.dto.UserDTO;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -128,6 +130,7 @@ public class UserDAOimpl implements UserDAO {
         users.get(counter).setFriends(temp);
 
     }
+
 
 
 }

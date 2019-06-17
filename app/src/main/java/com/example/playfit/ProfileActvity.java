@@ -82,6 +82,7 @@ public class ProfileActvity extends AppCompatActivity
         ImageView imageView = findViewById(R.id.detailImageProfile);
         String imageName ="@drawable/" + session.getSession().getUserName();
         int imageID = getResources().getIdentifier(imageName, null, this.getPackageName());
+        Log.d("drawableID", imageName);
         imageView.setImageResource(imageID);
 
         //username

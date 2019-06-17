@@ -20,6 +20,10 @@ import com.example.playfit.dto.UserDTO;
 import com.google.gson.Gson;
 import com.google.zxing.Result;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
 import static com.example.playfit.LoginActivity.USERNAME;
@@ -48,6 +52,7 @@ public class ScanActivity extends AppCompatActivity implements ZXingScannerView.
 
 
     }
+
 
     private void sessionHandling(){
         sharedUsers = getSharedPreferences(LoginActivity.USERS, Context.MODE_PRIVATE); // users werden aus XML Read übergeben
@@ -81,9 +86,9 @@ public class ScanActivity extends AppCompatActivity implements ZXingScannerView.
     Barcodes werden nach folgendem Muster erstellt: Gym_Sportfabrik_20190611_7
      */
     public void handleResult(Result rawResult) {
-        // Do something with the result here
         Log.v("tag", rawResult.getText());// Prints scan results
         SharedPreferences.Editor editorSession = sharedSession.edit();
+
         //Punkte müssen der Session gutgeschriieben werden
         points.processPoints(rawResult.getText(), session.getSession());
         // Log.v("tag", rawResult.getBarcodeFormat().toString()); // Prints the scan format (qrcode, pdf417 etc.)

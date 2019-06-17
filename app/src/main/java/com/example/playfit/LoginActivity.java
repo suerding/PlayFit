@@ -21,6 +21,10 @@ import com.example.playfit.data.Session;
 import com.example.playfit.dto.UserDTO;
 import com.google.gson.Gson;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
 public class LoginActivity extends AppCompatActivity {
 
     private Button loginButton;
@@ -50,9 +54,25 @@ public class LoginActivity extends AppCompatActivity {
         xmlFriendsImport();
         login();
         signUp();
+        try {
+            writeUsers();
+        }catch (IOException exception){
+            Log.d("IOException", "IOException");
+        }
 
     }
+    public void writeUsers() throws IOException {
+        String resName ="@values/test.xml";
+        int resID = getResources().getIdentifier(resName, "string", this.getPackageName());
+        Log.d("resID", String.valueOf(resID));
 
+
+
+        FileWriter root = new FileWriter("/Users/simonuerdingen/Desktop/test.xml");
+        root.write("test");
+        root.close();
+
+    }
     private void login(){
         usernameField = findViewById(R.id.username);
         passwordField = findViewById(R.id.password);

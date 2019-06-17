@@ -144,6 +144,7 @@ public class FriendsActivity extends AppCompatActivity
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String selectedItem = (String) parent.getItemAtPosition(position);
                 setDetails(selectedItem);
+                finish();
                 Intent friendsintent = new Intent(FriendsActivity.this, FriendsDetailActivity.class);
                 startActivity(friendsintent);
             }

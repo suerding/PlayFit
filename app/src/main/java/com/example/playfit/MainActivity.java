@@ -247,7 +247,6 @@ public class MainActivity extends AppCompatActivity
             startActivity(settingsIntent);
 
         }else if (id== R.id.nav_logout){
-
             session.close();
             finish();
 
