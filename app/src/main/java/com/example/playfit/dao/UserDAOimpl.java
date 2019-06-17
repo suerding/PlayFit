@@ -106,38 +106,26 @@ public class UserDAOimpl implements UserDAO {
         }
     }
 
-    public void friendships(String[] xmlusers)
+    public void friendships(String[] xmlusers, int counter)
     {
         Log.d("CALL","CALL");
-        List<UserDTO> tempusers = new ArrayList<>();
-        UserDTO user = new UserDTO();
         String[] tempfriends = xmlusers[8].split(";");
         Log.d("CALLFriends", tempfriends[0] + tempfriends[1] +tempfriends[2]);
         Log.d("CALLFriends", String.valueOf(tempfriends.length));
+        Integer[] temp = new Integer[tempfriends.length];
 
         for(int i = 0; i < tempfriends.length; i++){
 
-            //Integer tempint = Integer.parseInt(tempfriends[i]);
-            tempusers.add(getUserbyID(tempfriends[i]));
+            temp[i] = Integer.parseInt(tempfriends[i]);
 
-            Log.d("USER_HINZU:",  tempusers.get(i).getUserName());
             //Log.d("ZU_USER:", users.get(counter).getUserName());
-            Log.d("USER_CURRENT", users.get(i).getUserName());
+            Log.d("USER_CURRENT", this.getUserbyID(String.valueOf(temp[i])).getUserName());
 
             //ich glaube das Problem liegt in dem Users objekt (es kann sein, dass das nicht richtig referenziert wird, denn in der folgenden Zeile entsteht der Fehler
-        //    users.get(i).setFriends(tempusers);
+
 
         }
-
-        Log.d("TEMPUSERS", tempusers.get(0).getUserName());
-        Log.d("TEMPUSERS", tempusers.get(1).getUserName());
-
-
-//        Log.d("Friendstest", users.get(0).getFriends().get(0).getUserName());
-        // Verstehe nicht warum es in der folgene Zeile einen fehler gibt
-        // weil temmpusers.list() ein List<String> Objekt ist und nicht ein List<UserDTO> Objekt wie erwartet
-
-
+        users.get(counter).setFriends(temp);
 
     }
 

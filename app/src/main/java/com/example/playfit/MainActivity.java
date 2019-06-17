@@ -4,6 +4,8 @@ finalized by sknobla
  */
 package com.example.playfit;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -245,8 +247,19 @@ public class MainActivity extends AppCompatActivity
             startActivity(settingsIntent);
 
         }else if (id== R.id.nav_logout){
+
             session.close();
             finish();
+
+            /*
+            hardlogout -- reboot
+            Intent mStartActivity = new Intent(MainActivity.this, MainActivity.class);
+            int mPendingIntentId = 123456;
+            PendingIntent mPendingIntent = PendingIntent.getActivity(MainActivity.this, mPendingIntentId, mStartActivity, PendingIntent.FLAG_CANCEL_CURRENT);
+            AlarmManager mgr = (AlarmManager)MainActivity.this.getSystemService(Context.ALARM_SERVICE);
+            mgr.set(AlarmManager.RTC, System.currentTimeMillis() + 100, mPendingIntent);
+            System.exit(0);
+            */
         }
 
         DrawerLayout drawer = findViewById(R.id.activity_main);

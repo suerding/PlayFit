@@ -154,7 +154,7 @@ public class LoginActivity extends AppCompatActivity {
         int zaehler = 0;
         for (int i = startint2+1; i <= counter2; i++){
             String[] user = res2.getStringArray(i);
-            users.friendships(user);
+            users.friendships(user, zaehler);
             zaehler++;
 
         }

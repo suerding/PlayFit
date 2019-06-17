@@ -152,6 +152,7 @@ public class MapsActivity extends AppCompatActivity
             Intent scanIntent = new Intent(MapsActivity.this, ScanActivity.class);
             startActivity(scanIntent);
         } else if (id == R.id.nav_logout) {
+            session.close();
             finish();
             Log.d("navSocial","Nav_Social");
         } else if (id == R.id.nav_settings) {

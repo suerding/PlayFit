@@ -53,7 +53,6 @@ public class FriendsActivity extends AppCompatActivity
     private ListView friendsListView;
     private ArrayAdapter<String> friendsadapter;
     private ArrayList<String> friendsarrayList;
-    private FriendsDAOimpl friends = new FriendsDAOimpl();
     private UserDTO loggedinUser;
     private  NavigationView navigationView;
 
@@ -63,9 +62,6 @@ public class FriendsActivity extends AppCompatActivity
         setContentView(R.layout.activity_friends);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        //XML Import
-        xmlImport();
 
         //sessionhandling - created by suerding
         sessionHandling();
@@ -104,16 +100,6 @@ public class FriendsActivity extends AppCompatActivity
         Log.d("benutzer", session.getSession().getUserName());
     }
 
-    private void xmlImport(){
-        Resources res = getResources();
-        String[] test = res.getStringArray(R.array.MetadataFriends);
-        int startint = R.array.MetadataFriends;
-        int counter = startint + Integer.parseInt(test[0]);
-        for (int i = startint+1; i <= counter; i++){
-            String[] friend = res.getStringArray(i);
-            friends.readFriendsXML(friend);
-        }
-    }
 
     private void navViewHeader(){
         View headerView = navigationView.getHeaderView(0);
@@ -138,13 +124,13 @@ public class FriendsActivity extends AppCompatActivity
 
     //created by suerding
     private void friendsList() {
-        UserDAOimpl users = friends.getForUser(session.getSession());
         friendsListView = (ListView) findViewById(R.id.friendsList);
         friendsarrayList = new ArrayList<String>();
         friendsadapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, friendsarrayList);
-
-        for(int i = 0; i < friends.list().size(); i++){
-            friendsarrayList.add(users.list().get(i).getUserName());
+        Log.d("Laenge", String.valueOf(session.getSession().getFriends().length));
+        for(int i = 0; i < session.getSession().getFriends().length; i++){
+            UserDTO tempUser = users.getUserbyID(String.valueOf(session.getSession().getFriends()[i]));
+            friendsarrayList.add(tempUser.getUserName());
             friendsadapter.notifyDataSetChanged();
         }
 
@@ -228,6 +214,7 @@ public class FriendsActivity extends AppCompatActivity
             Intent scanIntent = new Intent(FriendsActivity.this, ScanActivity.class);
             startActivity(scanIntent);
         } else if (id == R.id.nav_logout) {
+            session.close();
             finish();
             Log.d("navSocial","Nav_Social");
         } else if (id == R.id.nav_settings) {

@@ -4,6 +4,7 @@ finalized by suerding
  */
 package com.example.playfit.dto;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserDTO {
@@ -18,16 +19,16 @@ public class UserDTO {
     private List<ProductDTO> produkte;
     private List<ShopDTO> shops;
     private List<RewardDTO> rewards;
-    private List<UserDTO> friends;
-    public List<UserDTO> getFriends() {
+
+    public Integer[] getFriends() {
         return friends;
     }
 
-    public void setFriends(List<UserDTO> friends) {
+    public void setFriends(Integer[] friends) {
         this.friends = friends;
     }
 
-
+    private Integer[]friends;
 
     public String getPassword() {
         return password;
