@@ -36,4 +36,7 @@ dependencies {
     annotationProcessor 'android.arch.persistence.room:compiler:1.1.1'
     implementation 'com.google.android.gms:play-services-maps:16.1.0'
     implementation 'me.dm7.barcodescanner:zxing:1.9.8'
+    //ab hier für map
+    //implementation 'androidx.appcompat:appcompat:1.0.2'
+
 }
