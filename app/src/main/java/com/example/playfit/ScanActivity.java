@@ -48,7 +48,7 @@ public class ScanActivity extends AppCompatActivity implements ZXingScannerView.
         //sessionhandling - created by suerding
        sessionHandling();
 
-        points.processPoints("Gym_Sportfabrik_20190611_7",  session.getSession() );
+
 
 
     }
@@ -90,12 +90,14 @@ public class ScanActivity extends AppCompatActivity implements ZXingScannerView.
         SharedPreferences.Editor editorSession = sharedSession.edit();
 
         //Punkte müssen der Session gutgeschriieben werden
-        final SharedPreferences.Editor sessionEditor = sharedSession.edit();
-        session.getSession().setTotalPoints(users.calcLevel(session.getSession(), rawResult.getText()));
-        Gson gsonSession = new Gson();
-        String jsonSession = gsonSession.toJson(session.getSession());
-        sessionEditor.putString("SessionUser", jsonSession);
-        sessionEditor.commit();
+        if(rawResult !=null) {
+            final SharedPreferences.Editor sessionEditor = sharedSession.edit();
+            session.getSession().setTotalPoints(users.calcLevel(session.getSession(), rawResult.getText()));
+            Gson gsonSession = new Gson();
+            String jsonSession = gsonSession.toJson(session.getSession());
+            sessionEditor.putString("SessionUser", jsonSession);
+            sessionEditor.commit();
+        }
 
         // Log.v("tag", rawResult.getBarcodeFormat().toString()); // Prints the scan format (qrcode, pdf417 etc.)
 
