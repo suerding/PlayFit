@@ -57,6 +57,8 @@ public class SettingsActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
+
+       // profiledetails();
     }
     private void sessionHandling(){
         sharedUsers = getSharedPreferences(LoginActivity.USERS, Context.MODE_PRIVATE); // users werden aus XML Read übergeben
@@ -71,7 +73,38 @@ public class SettingsActivity extends AppCompatActivity
         session.create(loggedinUser);
         Log.d("benutzer", loggedinUser.getUserName());
     }
+// hier wollte ich die infos vom nutzer ziehen um sie in den Einstellungen anzeigen und ändern zu können
+    /* private void profiledetails(){
+        //picture
+        ImageView imageView = findViewById(R.id.detailImageProfile);
+        String imageName ="@drawable/" + session.getSession().getUserName();
+        int imageID = getResources().getIdentifier(imageName, null, this.getPackageName());
+        Log.d("drawableID", imageName);
+        imageView.setImageResource(imageID);
 
+        //username
+        TextView username = findViewById(R.id.usernameOfUser);
+        username.setText(session.getSession().getUserName());
+
+        //Email
+        TextView eMail = findViewById(R.id.eMail);
+        eMail.setText(session.getSession().getUserEmail());
+
+        //Name
+        TextView fullname = findViewById(R.id.fullName);
+        fullname.setText(session.getSession().getName());
+
+        //Points
+        TextView pointsText = findViewById(R.id.pointsText);
+        // pointsText.setText(session.getSession().getUserPoints());
+
+        //level - berechnet aus Total Points
+        TextView level = findViewById(R.id.levelOfUser);
+        // Log.d("totalpoints", users.getLevel(session.getSession()));
+        level.setText(String.valueOf(users.getLevel(session.getSession())));
+
+    }
+*/
     private void navViewHeader(){
         View headerView = navigationView.getHeaderView(0);
         TextView navUsername = (TextView) headerView.findViewById(R.id.nav_header_title);
