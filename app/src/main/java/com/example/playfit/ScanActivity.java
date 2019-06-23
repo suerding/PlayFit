@@ -1,6 +1,7 @@
 package com.example.playfit;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
@@ -87,10 +88,10 @@ public class ScanActivity extends AppCompatActivity implements ZXingScannerView.
      */
     public void handleResult(Result rawResult) {
         Log.v("tag", rawResult.getText());// Prints scan results
-        SharedPreferences.Editor editorSession = sharedSession.edit();
+     //  SharedPreferences.Editor editorSession = sharedSession.edit();
 
         //Punkte müssen der Session gutgeschriieben werden
-        if(rawResult !=null) {
+     /*   if(rawResult !=null) {
             final SharedPreferences.Editor sessionEditor = sharedSession.edit();
             session.getSession().setTotalPoints(users.calcLevel(session.getSession(), rawResult.getText()));
             Gson gsonSession = new Gson();
@@ -98,12 +99,13 @@ public class ScanActivity extends AppCompatActivity implements ZXingScannerView.
             sessionEditor.putString("SessionUser", jsonSession);
             sessionEditor.commit();
         }
-
+    */
         // Log.v("tag", rawResult.getBarcodeFormat().toString()); // Prints the scan format (qrcode, pdf417 etc.)
 
         //MainActivity.tvresult.setText(rawResult.getText());
-        onBackPressed();
-
+      //  onBackPressed();
+        Intent profileIntent = new Intent(ScanActivity.this, ProfileActvity.class);
+        startActivity(profileIntent);
         // If you would like to resume scanning, call this method below:
         //mScannerView.resumeCameraPreview(this);
     }

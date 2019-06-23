@@ -171,13 +171,21 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
+    public void finish() {
+        super.finish();
+    }
+
+    @Override
     public void onBackPressed() {
-        DrawerLayout drawer = findViewById(R.id.activity_main);
+       DrawerLayout drawer = findViewById(R.id.activity_main);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
-        }
+      // finish();
+            }
+
+
     }
 
     @Override
