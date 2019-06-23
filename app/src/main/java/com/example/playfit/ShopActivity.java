@@ -1,7 +1,6 @@
-/*
-created by suerding
-finalized by sknobla
- */
+/* created by fhaedric
+*
+* */
 package com.example.playfit;
 
 import android.app.AlarmManager;
@@ -9,12 +8,13 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.Resources;
 import android.os.Bundle;
-import android.provider.MediaStore;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
+import android.util.Log;
+import android.view.View;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
@@ -22,67 +22,47 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
-import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.playfit.dao.UserDAOimpl;
-import com.example.playfit.data.Points;
 import com.example.playfit.data.Session;
 import com.example.playfit.dto.UserDTO;
 import com.google.gson.Gson;
 
-
-import static com.example.playfit.LoginActivity.USERNAME;
-import static com.example.playfit.LoginActivity.USERS;
-
-public class MainActivity extends AppCompatActivity
+public class ShopActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private Button shopButton;
-    private Button profileButton;
-    private Button friendsButton;
-    private Button mapsButton;
-    private Button scanButton;
     private Session session = new Session();
     private UserDAOimpl users = new UserDAOimpl();
     private UserDTO loggedinUser = new UserDTO();
-    private NavigationView navigationView;
+    private  NavigationView navigationView;
     SharedPreferences sharedUsers;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_profile);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+
         //sessionhandling - created by suerding
         sessionHandling();
 
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        dashboardButtons();
-
-        //created by sknobla & suerding
-        DrawerLayout drawer = findViewById(R.id.activity_main);
-        navigationView = findViewById(R.id.nav_view);
+        DrawerLayout drawer = findViewById(R.id.activity_profile);
+        navigationView = findViewById(R.id.nav_profile);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
-        if (navigationView != null) {
-            navigationView.setNavigationItemSelectedListener(this);
-        }
+        navigationView.setNavigationItemSelectedListener(this);
 
         //Nav_view header - created by suerding
         navViewHeader();
 
-        TextView points = findViewById(R.id.points);
-        points.setText(String.valueOf(session.getSession().getUserPoints()));
-
-
-
+        //Profiledetails
+        profiledetails();
     }
 
     private void sessionHandling(){
@@ -96,7 +76,37 @@ public class MainActivity extends AppCompatActivity
         String jsonUser = sharedSession.getString("SessionUser", "");
         loggedinUser = gsonUser.fromJson(jsonUser, UserDTO.class);
         session.create(loggedinUser);
-        Log.d("benutzer", loggedinUser.getUserName());
+        Log.d("benutzer", session.getSession().getUserName());
+    }
+    private void profiledetails(){
+        //picture
+        ImageView imageView = findViewById(R.id.detailImageProfile);
+        String imageName ="@drawable/" + session.getSession().getUserName();
+        int imageID = getResources().getIdentifier(imageName, null, this.getPackageName());
+        Log.d("drawableID", imageName);
+        imageView.setImageResource(imageID);
+
+        //username
+        TextView username = findViewById(R.id.usernameOfUser);
+        username.setText(session.getSession().getUserName());
+
+        //Email
+        TextView eMail = findViewById(R.id.eMail);
+        eMail.setText(session.getSession().getUserEmail());
+
+        //Name
+        TextView fullname = findViewById(R.id.fullName);
+        fullname.setText(session.getSession().getName());
+
+        //Points
+        TextView pointsText = findViewById(R.id.pointsText);
+        // pointsText.setText(session.getSession().getUserPoints());
+
+        //level - berechnet aus Total Points
+        TextView level = findViewById(R.id.levelOfUser);
+        // Log.d("totalpoints", users.getLevel(session.getSession()));
+        level.setText(String.valueOf(users.getLevel(session.getSession())));
+
     }
 
     private void navViewHeader(){
@@ -112,67 +122,9 @@ public class MainActivity extends AppCompatActivity
         profileImage.setImageResource(resID);
     }
 
-    private void dashboardButtons() {
-        //created by suerding - profileButton
-        profileButton = findViewById(R.id.buttonProfile);
-        profileButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();                                      // Achtung: ProfileActvity ist falsch geschrieben
-                Intent profileIntent = new Intent(MainActivity.this,ProfileActvity.class );
-                startActivity(profileIntent);
-            }
-        });
-
-        //created by suerding - friendsButton
-        friendsButton = findViewById(R.id.buttonFriends);
-        friendsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-                Intent friendsIntent = new Intent(MainActivity.this,FriendsActivity.class );
-                startActivity(friendsIntent);
-            }
-        });
-
-        //created by suerding - mapsButton
-        mapsButton = findViewById(R.id.buttonMaps);
-        mapsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-                Intent mapsIntent = new Intent(MainActivity.this,MapsActivity.class );
-                startActivity(mapsIntent);
-            }
-        });
-
-        //created by sfriedr8 & fhaedric
-        scanButton = findViewById(R.id.buttonScan);
-        scanButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-                Intent scanIntent = new Intent(MainActivity.this,ScanActivity.class );
-                startActivity(scanIntent);
-            }
-        });
-
-       //created by fhaedric buttonShop
-        shopButton = findViewById(R.id.buttonShop);
-        shopButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-                Intent shopIntent = new Intent(MainActivity.this,ShopActivity.class );
-                startActivity(shopIntent);
-           }
-        });
-
-    }
-
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = findViewById(R.id.activity_main);
+        DrawerLayout drawer = findViewById(R.id.activity_profile);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -183,7 +135,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
+        getMenuInflater().inflate(R.menu.profile_actvity, menu);
         return true;
     }
 
@@ -203,6 +155,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     //created by suerding - Navigatorlogik
+    @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
@@ -211,47 +164,45 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_home) {
             finish();
             Log.d("navHome","Nav_home");
-           Intent homeIntent = new Intent(MainActivity.this, MainActivity.class);
-           startActivity(homeIntent);
+            Intent homeIntent = new Intent(ShopActivity.this, MainActivity.class);
+            startActivity(homeIntent);
         } else if (id == R.id.nav_profile) {
             finish();
             Log.d("navProfile","Nav_profile");
-            Intent profileIntent = new Intent(MainActivity.this, ProfileActvity.class);
+            Intent profileIntent = new Intent(ShopActivity.this, ProfileActvity.class);
             startActivity(profileIntent);
             return true;
         } else if (id == R.id.nav_friends) {
             finish();
-            Intent friendsIntent = new Intent(MainActivity.this, FriendsActivity.class);
+            Intent friendsIntent = new Intent(ShopActivity.this, FriendsActivity.class);
             startActivity(friendsIntent);
         } else if (id == R.id.nav_maps) {
             finish();
-            Intent mapsIntent = new Intent(MainActivity.this, MapsActivity.class);
+            Intent mapsIntent = new Intent(ShopActivity.this, MapsActivity.class);
             startActivity(mapsIntent);
         } else if (id == R.id.nav_scan) {
             finish();
-            Intent scanIntent = new Intent(MainActivity.this, ScanActivity.class);
+            Intent scanIntent = new Intent(ShopActivity.this, ScanActivity.class);
             startActivity(scanIntent);
         } else if (id == R.id.nav_logout) {
-            finish();
-            Log.d("navSocial","Nav_Social");
-        } else if (id == R.id.nav_settings) {
-            finish();
-            Intent settingsIntent = new Intent(MainActivity.this, SettingsActivity.class);
-            startActivity(settingsIntent);
-
-        }else if (id== R.id.nav_logout){
             //hardlogout -- reboot
-            Intent mStartActivity = new Intent(MainActivity.this, MainActivity.class);
+            Intent mStartActivity = new Intent(ShopActivity.this, MainActivity.class);
             int mPendingIntentId = 123456;
-            PendingIntent mPendingIntent = PendingIntent.getActivity(MainActivity.this, mPendingIntentId, mStartActivity, PendingIntent.FLAG_CANCEL_CURRENT);
-            AlarmManager mgr = (AlarmManager)MainActivity.this.getSystemService(Context.ALARM_SERVICE);
+            PendingIntent mPendingIntent = PendingIntent.getActivity(ShopActivity.this, mPendingIntentId, mStartActivity, PendingIntent.FLAG_CANCEL_CURRENT);
+            AlarmManager mgr = (AlarmManager)ShopActivity.this.getSystemService(Context.ALARM_SERVICE);
             mgr.set(AlarmManager.RTC, System.currentTimeMillis() + 100, mPendingIntent);
             System.exit(0);
+        } else if (id == R.id.nav_settings) {
+            finish();
+            Intent settingsIntent = new Intent(ShopActivity.this, SettingsActivity.class);
+            startActivity(settingsIntent);
 
         }
 
         DrawerLayout drawer = findViewById(R.id.activity_main);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+
     }
 }
+
