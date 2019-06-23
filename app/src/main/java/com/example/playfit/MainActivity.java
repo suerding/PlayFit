@@ -234,7 +234,14 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_logout) {
             finish();
             Log.d("navSocial","Nav_Social");
-        } else if (id == R.id.nav_settings) {
+       // }
+        //für shop
+       // else if (id == R.id.nav_scan) {
+         //   finish();
+          //  Intent shopIntent = new Intent(MainActivity.this, ShopActivity.class);
+          //  startActivity(shopIntent);
+
+        }  else if (id == R.id.nav_settings) {
             finish();
             Intent settingsIntent = new Intent(MainActivity.this, SettingsActivity.class);
             startActivity(settingsIntent);
