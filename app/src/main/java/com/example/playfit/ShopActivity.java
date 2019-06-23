@@ -42,7 +42,7 @@ public class ShopActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile);
+        setContentView(R.layout.activity_shop);
         Toolbar toolbar = findViewById(R.id.toolbar);
 
         //sessionhandling - created by suerding
@@ -50,7 +50,7 @@ public class ShopActivity extends AppCompatActivity
 
         setSupportActionBar(toolbar);
 
-        DrawerLayout drawer = findViewById(R.id.activity_profile);
+        DrawerLayout drawer = findViewById(R.id.activity_shop);
         navigationView = findViewById(R.id.nav_profile);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
