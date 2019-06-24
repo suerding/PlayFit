@@ -43,7 +43,8 @@ public class FriendsDetailActivity extends AppCompatActivity
     private UserDTO loggedinUser;
     private NavigationView navigationView;
     SharedPreferences sharedUsers;
-
+    SharedPreferences.Editor editor;
+    SharedPreferences sharedSession;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,6 +74,12 @@ public class FriendsDetailActivity extends AppCompatActivity
         int temp = users.calcLevel(session.getSession(), "Gym_Sportfabrik_20190611_7");
         session.getSession().setTotalPoints(temp);
         Log.d("TEST", users.getLevel(session.getSession()));
+        Log.d("TEST2", users.getLevel(session.getSession()));
+        editor = sharedSession.edit();
+        Gson gsonSession = new Gson();
+        String jsonSession = gsonSession.toJson(session.getSession());
+        editor.putString("SessionUser", jsonSession);
+        editor.commit();
 
     }
 
@@ -81,8 +88,7 @@ public class FriendsDetailActivity extends AppCompatActivity
         Gson gsonUsers = new Gson();
         String jsonUsers = sharedUsers.getString("Users", "");
         users = gsonUsers.fromJson(jsonUsers, UserDAOimpl.class);
-        SharedPreferences sharedSession = getSharedPreferences(LoginActivity.SESSION, Context.MODE_PRIVATE); // eigentliche Session
-        SharedPreferences.Editor editor = sharedSession.edit();
+        sharedSession = getSharedPreferences(LoginActivity.SESSION, Context.MODE_PRIVATE); // eigentliche Session
         Gson gsonUser = new Gson();
         String jsonUser = sharedSession.getString("SessionUser", "");
         loggedinUser = gsonUser.fromJson(jsonUser, UserDTO.class);
@@ -132,7 +138,10 @@ public class FriendsDetailActivity extends AppCompatActivity
         String friendsPoints =  Integer.toString(friend.getUserPoints());
         friendsPointsView.setText(friendsPoints);
 
-        //recentChallenges
+        //level
+        TextView level = findViewById(R.id.level_explicit);
+        String levelText = users.getLevel(friend);
+        level.setText(levelText);
     }
 
     @Override
@@ -210,6 +219,7 @@ public class FriendsDetailActivity extends AppCompatActivity
             mgr.set(AlarmManager.RTC, System.currentTimeMillis() + 100, mPendingIntent);
             System.exit(0);
         }
+        //navigation error - hier muss die rcihtige aktivität angesteuert werden nicht main, allerdings findet er die aktivität nicht20
         DrawerLayout drawer = findViewById(R.id.activity_main);
         drawer.closeDrawer(GravityCompat.START);
         return true;

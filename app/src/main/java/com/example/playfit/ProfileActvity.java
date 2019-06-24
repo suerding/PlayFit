@@ -109,12 +109,12 @@ public class ProfileActvity extends AppCompatActivity
 
         //Points
         TextView pointsText = findViewById(R.id.pointsText);
-       // pointsText.setText(session.getSession().getUserPoints());
+        //pointsText.setText(session.getSession().getUserPoints());
 
         //level - berechnet aus Total Points
         TextView level = findViewById(R.id.levelOfUser);
        // Log.d("totalpoints", users.getLevel(session.getSession()));
-        level.setText(String.valueOf(users.getLevel(session.getSession())));
+        level.setText((users.getLevel(session.getSession())));
 
     }
 

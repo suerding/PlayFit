@@ -91,33 +91,6 @@
         app:layout_constraintTop_toBottomOf="@+id/fullName" />
 
     <TextView
-        android:id="@+id/textView15"
-        android:layout_width="79dp"
-        android:layout_height="33dp"
-        android:layout_marginStart="33dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="30dp"
-        android:text="Points"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/pointsText"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView14" />
-
-    <TextView
-        android:id="@+id/pointsText"
-        android:layout_width="218dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="21dp"
-        android:layout_marginEnd="51dp"
-        android:text="Points"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView15"
-        app:layout_constraintTop_toBottomOf="@+id/eMail" />
-
-    <TextView
         android:id="@+id/textView17"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
