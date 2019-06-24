@@ -17,6 +17,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
 
 public class UserDAOimpl implements UserDAO {
 
@@ -132,16 +133,32 @@ public class UserDAOimpl implements UserDAO {
 
     }
 
-    public int getLevel(UserDTO user){
+    public String getLevel(UserDTO user){
         Log.d("totalpoints", String.valueOf(user.getTotalPoints()));
-        if(user.getTotalPoints() < 50){
-            return 0;
-        }else if(user.getTotalPoints() >= 50 && user.getTotalPoints() <200){
-            return 1;
-        }else if(user.getTotalPoints() >= 200){
-            return 2;
+        if(user.getTotalPoints() < 500){
+            return "Level 1 - Lauch";
+        }else if(user.getTotalPoints() >= 500 && user.getTotalPoints() <1000){
+            return "Level 2 - Möchtegern";
+        }else if(user.getTotalPoints() >= 1000 && user.getTotalPoints() <1500){
+            return "Level 3 - Muskelkater";
+        }else if(user.getTotalPoints() >= 1500 && user.getTotalPoints() <2000){
+            return "Level 4 - Fitnessblogger";
+        }else if(user.getTotalPoints() >= 2000 && user.getTotalPoints() <3000){
+            return "Level 5 - Pumper";
+        }else if(user.getTotalPoints() >= 3000 && user.getTotalPoints() <4000){
+            return "Level 6 - Sportskanone";
+        }else if(user.getTotalPoints() >= 4000 && user.getTotalPoints() <5500){
+            return "Level 7 - McFitti";
+        }else if(user.getTotalPoints() >= 5500 && user.getTotalPoints() <8500){
+            return "Level 8 - Muskelpaket";
+        }else if(user.getTotalPoints() >= 8500 && user.getTotalPoints() <10000){
+            return "Level 9 - Hulk";
+        }else if(user.getTotalPoints()  >=10000) {
+            return "Level 10 - Fitnessgott";
+
         }
-        return 3;
+        return "Level 1 - Lauch";
+
     }
     public int calcLevel(UserDTO user , String input){
         int newPoints =  Integer.parseInt(input.split("_")[3]);
@@ -154,3 +171,4 @@ public class UserDAOimpl implements UserDAO {
 
 
 }
+

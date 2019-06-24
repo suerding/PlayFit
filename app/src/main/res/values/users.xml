@@ -21,7 +21,7 @@
         <item name="passwort">Simon123</item>
         <item name="userEmail">simon@mail.de</item>
         <item name="userPoints">24</item>
-        <item name="totalPoints">127</item>
+        <item name="totalPoints">1297</item>
         <item name="friendcount">3</item>
         <item name="friends">1;2;4</item>
     </string-array>
@@ -32,7 +32,7 @@
         <item name="passwort">f1</item>
         <item name="userEmail">fritz.hd@gmail.de</item>
         <item name="userPoints">42</item>
-        <item name="totalPoints">420</item>
+        <item name="totalPoints">4200</item>
         <item name="friendcount">4</item>
         <item name="friends">1;2;4;6</item>
     </string-array>
@@ -43,7 +43,7 @@
         <item name="passwort">S123</item>
         <item name="userEmail">simonfm@mail.de</item>
         <item name="userPoints">25</item>
-        <item name="totalPoints">102</item>
+        <item name="totalPoints">1020</item>
         <item name="friendcount">5</item>
         <item name="friends">1;2;4;6</item>
     </string-array>
@@ -53,7 +53,7 @@
         <item name="name">Imke</item>
         <item name="passwort">Imke123</item>
         <item name="userEmail">imke@mail.de</item>
-        <item name="userPoints">20</item>
+        <item name="userPoints">2000</item>
         <item name="totalPoints">127</item>
         <item name="friendcount">6</item>
         <item name="friends">1;2;4;6</item>
@@ -65,7 +65,7 @@
         <item name="passwort">t1</item>
         <item name="userEmail">tester1@mail.de</item>
         <item name="userPoints">55</item>
-        <item name="totalPoints">555</item>
+        <item name="totalPoints">5550</item>
         <item name="friendcount">7</item>
         <item name="friends">1;2;4;6</item>
     </string-array>
@@ -76,7 +76,7 @@
         <item name="passwort">Tester123</item>
         <item name="userEmail">tester2@mail.de</item>
         <item name="userPoints">66</item>
-        <item name="totalPoints">666</item>
+        <item name="totalPoints">6606</item>
         <item name="friendcount">8</item>
         <item name="friends">1;2;4;6</item>
     </string-array>
@@ -87,7 +87,7 @@
         <item name="passwort">13</item>
         <item name="userEmail">tester2@mail.de</item>
         <item name="userPoints">66</item>
-        <item name="totalPoints">666</item>
+        <item name="totalPoints">10000</item>
         <item name="friendcount">8</item>
         <item name="friends">1;2;4;6</item>
     </string-array>
