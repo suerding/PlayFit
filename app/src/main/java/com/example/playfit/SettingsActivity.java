@@ -19,6 +19,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -42,23 +43,20 @@ public class SettingsActivity extends AppCompatActivity
         setContentView(R.layout.activity_settings);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+
+        //Sessionhandling & NavViewer
+        sessionHandling();
+
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        navigationView = findViewById(R.id.nav_view);
+        navigationView = findViewById(R.id.nav_settings);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
 
-       // profiledetails();
+        navViewHeader();
+        profiledetails();
     }
     private void sessionHandling(){
         sharedUsers = getSharedPreferences(LoginActivity.USERS, Context.MODE_PRIVATE); // users werden aus XML Read übergeben
@@ -74,17 +72,13 @@ public class SettingsActivity extends AppCompatActivity
         Log.d("benutzer", loggedinUser.getUserName());
     }
 // hier wollte ich die infos vom nutzer ziehen um sie in den Einstellungen anzeigen und ändern zu können
-    /* private void profiledetails(){
-        //picture
-        ImageView imageView = findViewById(R.id.detailImageProfile);
-        String imageName ="@drawable/" + session.getSession().getUserName();
-        int imageID = getResources().getIdentifier(imageName, null, this.getPackageName());
-        Log.d("drawableID", imageName);
-        imageView.setImageResource(imageID);
+        private void profiledetails(){
 
+        /*
         //username
         TextView username = findViewById(R.id.usernameOfUser);
         username.setText(session.getSession().getUserName());
+        */
 
         //Email
         TextView eMail = findViewById(R.id.eMail);
@@ -94,6 +88,8 @@ public class SettingsActivity extends AppCompatActivity
         TextView fullname = findViewById(R.id.fullName);
         fullname.setText(session.getSession().getName());
 
+
+        /*
         //Points
         TextView pointsText = findViewById(R.id.pointsText);
         // pointsText.setText(session.getSession().getUserPoints());
@@ -102,9 +98,11 @@ public class SettingsActivity extends AppCompatActivity
         TextView level = findViewById(R.id.levelOfUser);
         // Log.d("totalpoints", users.getLevel(session.getSession()));
         level.setText(String.valueOf(users.getLevel(session.getSession())));
+        */
 
     }
-*/
+
+
     private void navViewHeader(){
         View headerView = navigationView.getHeaderView(0);
         TextView navUsername = (TextView) headerView.findViewById(R.id.nav_header_title);
