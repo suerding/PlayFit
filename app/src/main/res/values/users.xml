@@ -21,7 +21,7 @@
         <item name="passwort">Simon123</item>
         <item name="userEmail">simon@mail.de</item>
         <item name="userPoints">24</item>
-        <item name="totalPoints">1297</item>
+        <item name="totalPoints">1499</item>
         <item name="friendcount">3</item>
         <item name="friends">1;2;4</item>
     </string-array>

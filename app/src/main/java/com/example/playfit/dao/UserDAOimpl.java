@@ -135,6 +135,7 @@ public class UserDAOimpl implements UserDAO {
 
     public String getLevel(UserDTO user){
         Log.d("totalpoints", String.valueOf(user.getTotalPoints()));
+
         if(user.getTotalPoints() < 500){
             return "Lauch";
         }else if(user.getTotalPoints() >= 500 && user.getTotalPoints() <1000){

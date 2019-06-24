@@ -25,6 +25,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.playfit.dao.UserDAOimpl;
 import com.example.playfit.data.Session;
@@ -64,6 +65,13 @@ public class ProfileActvity extends AppCompatActivity
 
         //Profiledetails
         profiledetails();
+
+        Context context = getApplicationContext();
+        CharSequence text = "Hey! Du bist ein " + users.getLevel(session.getSession());
+        int duration = Toast.LENGTH_SHORT;
+
+        Toast toast = Toast.makeText(context, text, duration);
+        toast.show();
     }
 
     private void sessionHandling(){

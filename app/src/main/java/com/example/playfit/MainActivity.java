@@ -90,7 +90,7 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void run() {
                 Context context = getApplicationContext();
-                CharSequence text = "Simon ist nun ein Bodybuilder!";
+                CharSequence text = "Simon ist nun ein Fitnessblogger!";
                 int duration = Toast.LENGTH_SHORT;
 
                 Toast toast = Toast.makeText(context, text, duration);
