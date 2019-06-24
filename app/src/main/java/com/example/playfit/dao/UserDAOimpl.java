@@ -136,28 +136,28 @@ public class UserDAOimpl implements UserDAO {
     public String getLevel(UserDTO user){
         Log.d("totalpoints", String.valueOf(user.getTotalPoints()));
         if(user.getTotalPoints() < 500){
-            return "Level 1 - Lauch";
+            return "Lauch";
         }else if(user.getTotalPoints() >= 500 && user.getTotalPoints() <1000){
-            return "Level 2 - Möchtegern";
+            return "Möchtegern";
         }else if(user.getTotalPoints() >= 1000 && user.getTotalPoints() <1500){
-            return "Level 3 - Muskelkater";
+            return "Muskelkater";
         }else if(user.getTotalPoints() >= 1500 && user.getTotalPoints() <2000){
-            return "Level 4 - Fitnessblogger";
+            return "Fitnessblogger";
         }else if(user.getTotalPoints() >= 2000 && user.getTotalPoints() <3000){
-            return "Level 5 - Pumper";
+            return "Pumper";
         }else if(user.getTotalPoints() >= 3000 && user.getTotalPoints() <4000){
-            return "Level 6 - Sportskanone";
+            return "Sportskanone";
         }else if(user.getTotalPoints() >= 4000 && user.getTotalPoints() <5500){
-            return "Level 7 - McFitti";
-        }else if(user.getTotalPoints() >= 5500 && user.getTotalPoints() <8500){
-            return "Level 8 - Muskelpaket";
-        }else if(user.getTotalPoints() >= 8500 && user.getTotalPoints() <10000){
-            return "Level 9 - Hulk";
+            return "McFitti";
+        }else if(user.getTotalPoints() >= 5000 && user.getTotalPoints() <7500){
+            return "Muskelpaket";
+        }else if(user.getTotalPoints() >= 7500 && user.getTotalPoints() <10000){
+            return "Hulk";
         }else if(user.getTotalPoints()  >=10000) {
-            return "Level 10 - Fitnessgott";
+            return "Fitnessgott";
 
         }
-        return "Level 1 - Lauch";
+        return "Lauch";
 
     }
     public int calcLevel(UserDTO user , String input){

@@ -35,6 +35,7 @@ import com.google.gson.Gson;
 import static com.example.playfit.FriendsActivity.FRIENDSNAME;
 
 public class FriendsDetailActivity extends AppCompatActivity
+public class FriendsDetailActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private Session session = new Session();
