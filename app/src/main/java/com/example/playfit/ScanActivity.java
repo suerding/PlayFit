@@ -87,10 +87,9 @@ public class ScanActivity extends AppCompatActivity implements ZXingScannerView.
     Barcodes werden nach folgendem Muster erstellt: Gym_Sportfabrik_20190611_7
      */
     public void handleResult(Result rawResult) {
-        Log.v("tag", rawResult.getText());// Prints scan results
-     //  SharedPreferences.Editor editorSession = sharedSession.edit();
+        Log.v("tag", rawResult.getText());// Prints scan results;
 
-        //Punkte müssen der Session gutgeschriieben werden
+        //Punkte werden der Session dem User gutgeschrieben!!!
      /*   if(rawResult !=null) {
             final SharedPreferences.Editor sessionEditor = sharedSession.edit();
             session.getSession().setTotalPoints(users.calcLevel(session.getSession(), rawResult.getText()));
