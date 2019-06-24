@@ -39,6 +39,7 @@ public class MapsActivity extends AppCompatActivity
     private Session session = new Session();
     private UserDAOimpl users;
     private UserDTO loggedinUser;
+    private  NavigationView navigationView;
     SharedPreferences sharedUsers;
 
     @Override
@@ -47,8 +48,39 @@ public class MapsActivity extends AppCompatActivity
         setContentView(R.layout.activity_maps);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        FloatingActionButton fab = findViewById(R.id.fab);
 
+        //sessionhandling by suerding
+        sessionhandling();
+
+
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        navigationView = findViewById(R.id.nav_view);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+        navigationView.setNavigationItemSelectedListener(this);
+
+        //Nav_view header - created by suerding
+        navigationHeader();
+
+
+    }
+
+    private void navigationHeader() {
+        View headerView = navigationView.getHeaderView(0);
+        TextView navUsername = headerView.findViewById(R.id.nav_header_title);
+        navUsername.setText("Hi " + session.getSession().getUserName());
+        TextView emailTextview = headerView.findViewById(R.id.emailText);
+        emailTextview.setText(session.getSession().getUserEmail());
+
+        ImageView profileImage = headerView.findViewById(R.id.profileImage);
+        String resName = "@drawable/"+session.getSession().getUserName();
+        int resID = getResources().getIdentifier(resName,null, this.getPackageName());
+        profileImage.setImageResource(resID);
+    }
+
+    private void sessionhandling() {
         //sessionhandling - created by suerding
         sharedUsers = getSharedPreferences(LoginActivity.USERS, Context.MODE_PRIVATE); // users werden aus XML Read übergeben
         Gson gsonUsers = new Gson();
@@ -61,45 +93,13 @@ public class MapsActivity extends AppCompatActivity
         loggedinUser = gsonUser.fromJson(jsonUser, UserDTO.class);
         session.create(loggedinUser);
         Log.d("benutzer", session.getSession().getUserName());
-
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        NavigationView navigationView = findViewById(R.id.nav_view);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
-        navigationView.setNavigationItemSelectedListener(this);
-
-        //Nav_view header - created by suerding
-        View headerView = navigationView.getHeaderView(0);
-        TextView navUsername = (TextView) headerView.findViewById(R.id.nav_header_title);
-        navUsername.setText("Hi " + session.getSession().getUserName());
-        TextView emailTextview = (TextView) headerView.findViewById(R.id.emailText);
-        emailTextview.setText(session.getSession().getUserEmail());
-
-        ImageView profileImage = (ImageView) headerView.findViewById(R.id.profileImage);
-        String resName = "@drawable/"+session.getSession().getUserName();
-        int resID = getResources().getIdentifier(resName,null, this.getPackageName());
-        profileImage.setImageResource(resID);
-
-
     }
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
+        finish();
+        Intent back = new Intent(MapsActivity.this, MainActivity.class);
+        startActivity(back);
     }
 
     @Override

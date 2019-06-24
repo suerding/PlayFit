@@ -105,12 +105,12 @@ public class FriendsActivity extends AppCompatActivity
 
     private void navViewHeader(){
         View headerView = navigationView.getHeaderView(0);
-        TextView navUsername = (TextView) headerView.findViewById(R.id.nav_header_title);
+        TextView navUsername = headerView.findViewById(R.id.nav_header_title);
         navUsername.setText("Hi " + session.getSession().getUserName());
-        TextView emailTextview = (TextView) headerView.findViewById(R.id.emailText);
+        TextView emailTextview = headerView.findViewById(R.id.emailText);
         emailTextview.setText(session.getSession().getUserEmail());
 
-        ImageView profileImage = (ImageView) headerView.findViewById(R.id.profileImage);
+        ImageView profileImage = headerView.findViewById(R.id.profileImage);
         String resName = "@drawable/" + session.getSession().getUserName();
         int resID = getResources().getIdentifier(resName, null, this.getPackageName());
         profileImage.setImageResource(resID);
@@ -126,7 +126,7 @@ public class FriendsActivity extends AppCompatActivity
 
     //created by suerding
     private void friendsList() {
-        friendsListView = (ListView) findViewById(R.id.friendsList);
+        friendsListView = findViewById(R.id.friendsList);
         friendsarrayList = new ArrayList<String>();
         friendsadapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, friendsarrayList);
         Log.d("Laenge", String.valueOf(session.getSession().getFriends().length));
@@ -140,7 +140,7 @@ public class FriendsActivity extends AppCompatActivity
     }
 
     private void friendsListener(){
-        friendsListView = (ListView) findViewById(R.id.friendsList);
+        friendsListView = findViewById(R.id.friendsList);
         friendsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -156,12 +156,9 @@ public class FriendsActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
+        finish();
+       Intent back = new Intent(FriendsActivity.this, MainActivity.class);
+       startActivity(back);
     }
 
     @Override
@@ -228,10 +225,7 @@ public class FriendsActivity extends AppCompatActivity
             Intent settingsIntent = new Intent(FriendsActivity.this, SettingsActivity.class);
             startActivity(settingsIntent);
         }
-        /*
-        DrawerLayout drawer = findViewById(R.id.activity_main);
-        drawer.closeDrawer(GravityCompat.START);
-        */
+
         return true;
     }
 }

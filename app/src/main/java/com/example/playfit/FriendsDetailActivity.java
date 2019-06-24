@@ -150,14 +150,6 @@ public class FriendsDetailActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        /*
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
-        */
         finish();
         Intent back = new Intent(FriendsDetailActivity.this, FriendsActivity.class);
         startActivity(back);

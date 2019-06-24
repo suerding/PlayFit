@@ -111,12 +111,12 @@ public class ShopActivity extends AppCompatActivity
 
     private void navViewHeader(){
         View headerView = navigationView.getHeaderView(0);
-        TextView navUsername = (TextView) headerView.findViewById(R.id.nav_header_title);
+        TextView navUsername = headerView.findViewById(R.id.nav_header_title);
         navUsername.setText("Hi " + session.getSession().getUserName());
-        TextView emailTextview = (TextView) headerView.findViewById(R.id.emailText);
+        TextView emailTextview = headerView.findViewById(R.id.emailText);
         emailTextview.setText(session.getSession().getUserEmail());
 
-        ImageView profileImage = (ImageView) headerView.findViewById(R.id.profileImage);
+        ImageView profileImage = headerView.findViewById(R.id.profileImage);
         String resName = "@drawable/"+session.getSession().getUserName();
         int resID = getResources().getIdentifier(resName,null, this.getPackageName());
         profileImage.setImageResource(resID);
@@ -124,12 +124,9 @@ public class ShopActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = findViewById(R.id.activity_profile);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
+        finish();
+        Intent back = new Intent(ShopActivity.this, MainActivity.class);
+        startActivity(back);
     }
 
     @Override

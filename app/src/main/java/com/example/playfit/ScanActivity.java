@@ -89,7 +89,7 @@ public class ScanActivity extends AppCompatActivity implements ZXingScannerView.
     public void handleResult(Result rawResult) {
         Log.v("tag", rawResult.getText());// Prints scan results;
 
-        //Punkte werden der Session dem User gutgeschrieben!!!
+        //Punkte werden der Session dem User gutgeschrieben - created by suerding
         if(rawResult !=null) {
             SharedPreferences.Editor sessionEditor = sharedSession.edit();
             session.getSession().setTotalPoints(users.calcLevel(session.getSession(), rawResult.getText()));
@@ -98,10 +98,10 @@ public class ScanActivity extends AppCompatActivity implements ZXingScannerView.
             sessionEditor.putString("SessionUser", jsonSession);
             sessionEditor.commit();
         }
+        //ggf müssen noch elemmente für einen Toas mitgegeben werden
 
-        // Log.v("tag", rawResult.getBarcodeFormat().toString()); // Prints the scan format (qrcode, pdf417 etc.)
 
-        //MainActivity.tvresult.setText(rawResult.getText());
+
       //  onBackPressed();
         Intent profileIntent = new Intent(ScanActivity.this, ProfileActvity.class);
         startActivity(profileIntent);
