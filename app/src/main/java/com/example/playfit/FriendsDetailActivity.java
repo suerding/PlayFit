@@ -34,9 +34,7 @@ import com.google.gson.Gson;
 
 import static com.example.playfit.FriendsActivity.FRIENDSNAME;
 
-public class FriendsDetailActivity extends AppCompatActivity
-public class FriendsDetailActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class FriendsDetailActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private Session session = new Session();
     private UserDTO friend = new UserDTO();
@@ -126,7 +124,10 @@ public class FriendsDetailActivity extends AppCompatActivity
         String friendsPoints =  Integer.toString(friend.getUserPoints());
         friendsPointsView.setText(friendsPoints);
 
-        //recentChallenges
+        //level
+        TextView levelView = findViewById(R.id.level_explicit);
+        String level = users.getLevel(friend);
+        levelView.setText(level);
     }
 
     @Override
@@ -210,3 +211,4 @@ public class FriendsDetailActivity extends AppCompatActivity
     }
 
 }
+

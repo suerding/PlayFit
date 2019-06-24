@@ -132,18 +132,18 @@
 
     <TextView
         android:id="@+id/levelOfUser"
-        android:layout_width="53dp"
-        android:layout_height="46dp"
+        android:layout_width="153dp"
+        android:layout_height="43dp"
         android:layout_marginStart="78dp"
         android:layout_marginEnd="51dp"
         android:layout_marginBottom="135dp"
         android:gravity="center"
         android:text="5"
-        android:textSize="30sp"
+        android:textSize="24sp"
         android:textStyle="normal|bold"
         app:layout_constraintBottom_toTopOf="@+id/fullName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.333"
+        app:layout_constraintHorizontal_bias="0.574"
         app:layout_constraintStart_toEndOf="@+id/detailImageProfile"
         app:layout_constraintTop_toBottomOf="@+id/textView17" />
 

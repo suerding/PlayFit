@@ -256,10 +256,6 @@ public class MainActivity extends AppCompatActivity
             finish();
             Intent scanIntent = new Intent(MainActivity.this, ScanActivity.class);
             startActivity(scanIntent);
-        } else if (id == R.id.nav_logout) {
-            finish();
-            Log.d("navSocial","Nav_Social");
-       // }
         //für shop
        // else if (id == R.id.nav_scan) {
          //   finish();
