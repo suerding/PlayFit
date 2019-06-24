@@ -165,8 +165,14 @@ public class UserDAOimpl implements UserDAO {
         int newPoints =  Integer.parseInt(input.split("_")[3]);
         user.setUserPoints(user.getUserPoints()+newPoints);
         int totalPoints = user.getTotalPoints() + newPoints;
+        user.setTotalPoints(totalPoints);
 
         return totalPoints;
+    }
+
+    public int useReward(UserDTO user, int reward){
+        user.setUserPoints(user.getUserPoints()- reward);
+        return user.getUserPoints();
     }
 
 
