@@ -278,9 +278,10 @@ public class MainActivity extends AppCompatActivity
             System.exit(0);
 
         }
-
+        /*
         DrawerLayout drawer = findViewById(R.id.activity_main);
         drawer.closeDrawer(GravityCompat.START);
+        */
         return true;
     }
 }

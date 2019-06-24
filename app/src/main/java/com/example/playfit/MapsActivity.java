@@ -167,9 +167,10 @@ public class MapsActivity extends AppCompatActivity
             startActivity(settingsIntent);
 
         }
-
+        /*
         DrawerLayout drawer = findViewById(R.id.activity_main);
         drawer.closeDrawer(GravityCompat.START);
+        */
         return true;
 
     }

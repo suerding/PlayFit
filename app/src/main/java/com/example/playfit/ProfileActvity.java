@@ -207,11 +207,12 @@ public class ProfileActvity extends AppCompatActivity
             startActivity(settingsIntent);
 
         }
-
+        /*
         DrawerLayout drawer = findViewById(R.id.activity_main);
         drawer.closeDrawer(GravityCompat.START);
-        return true;
 
+        */
+        return true;
     }
     @Override
     public void finish(){

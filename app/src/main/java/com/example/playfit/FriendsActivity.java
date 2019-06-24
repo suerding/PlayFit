@@ -228,9 +228,10 @@ public class FriendsActivity extends AppCompatActivity
             Intent settingsIntent = new Intent(FriendsActivity.this, SettingsActivity.class);
             startActivity(settingsIntent);
         }
-
+        /*
         DrawerLayout drawer = findViewById(R.id.activity_main);
         drawer.closeDrawer(GravityCompat.START);
+        */
         return true;
     }
 }

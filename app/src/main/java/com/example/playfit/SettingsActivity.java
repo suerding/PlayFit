@@ -194,9 +194,10 @@ public class SettingsActivity extends AppCompatActivity
             mgr.set(AlarmManager.RTC, System.currentTimeMillis() + 100, mPendingIntent);
             System.exit(0);
         }
-
+        /*
         DrawerLayout drawer = findViewById(R.id.activity_main);
         drawer.closeDrawer(GravityCompat.START);
+        */
         return true;
     }
 }

@@ -75,11 +75,7 @@ public class FriendsDetailActivity extends AppCompatActivity
         session.getSession().setTotalPoints(temp);
         Log.d("TEST", users.getLevel(session.getSession()));
         Log.d("TEST2", users.getLevel(session.getSession()));
-        editor = sharedSession.edit();
-        Gson gsonSession = new Gson();
-        String jsonSession = gsonSession.toJson(session.getSession());
-        editor.putString("SessionUser", jsonSession);
-        editor.commit();
+
 
     }
 
@@ -220,8 +216,10 @@ public class FriendsDetailActivity extends AppCompatActivity
             System.exit(0);
         }
         //navigation error - hier muss die rcihtige aktivität angesteuert werden nicht main, allerdings findet er die aktivität nicht20
+        /*
         DrawerLayout drawer = findViewById(R.id.activity_main);
         drawer.closeDrawer(GravityCompat.START);
+        */
         return true;
     }
 
