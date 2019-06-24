@@ -67,6 +67,13 @@ public class FriendsDetailActivity extends AppCompatActivity
 
         //created by suerding
         frienddetails();
+
+
+        Log.d("TEST", users.getLevel(session.getSession()));
+        int temp = users.calcLevel(session.getSession(), "Gym_Sportfabrik_20190611_7");
+        session.getSession().setTotalPoints(temp);
+        Log.d("TEST", users.getLevel(session.getSession()));
+
     }
 
     private void sessionHandling(){

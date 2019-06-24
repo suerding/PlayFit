@@ -213,4 +213,9 @@ public class ProfileActvity extends AppCompatActivity
         return true;
 
     }
+    @Override
+    public void finish(){
+        super.finish();
+    }
+
 }

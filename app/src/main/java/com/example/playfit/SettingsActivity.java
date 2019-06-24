@@ -57,6 +57,8 @@ public class SettingsActivity extends AppCompatActivity
 
         navViewHeader();
         profiledetails();
+
+
     }
     private void sessionHandling(){
         sharedUsers = getSharedPreferences(LoginActivity.USERS, Context.MODE_PRIVATE); // users werden aus XML Read übergeben
