@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.playfit.dao.UserDAOimpl;
 import com.example.playfit.data.Points;
@@ -54,6 +55,12 @@ public class ScanActivity extends AppCompatActivity implements ZXingScannerView.
 
 
     }
+    @Override
+    public void onBackPressed() {
+        finish();
+        Intent back = new Intent(ScanActivity.this, MainActivity.class);
+        startActivity(back);
+    }
 
 
     private void sessionHandling(){
@@ -62,7 +69,7 @@ public class ScanActivity extends AppCompatActivity implements ZXingScannerView.
         String jsonUsers = sharedUsers.getString("Users", "");
         users = gsonUsers.fromJson(jsonUsers, UserDAOimpl.class);
         sharedSession = getSharedPreferences(LoginActivity.SESSION, Context.MODE_PRIVATE); // eigentliche Session
-        SharedPreferences.Editor editor = sharedSession.edit();
+        sessionEditor = sharedSession.edit();
         Gson gsonUser = new Gson();
         String jsonUser = sharedSession.getString("SessionUser", "");
         loggedinUser = gsonUser.fromJson(jsonUser, UserDTO.class);
@@ -93,6 +100,7 @@ public class ScanActivity extends AppCompatActivity implements ZXingScannerView.
         //Punkte werden der Session dem User gutgeschrieben - created by suerding
         if(rawResult !=null) {
             sessionEditor = sharedSession.edit();
+            sessionEditor.clear();
             session.getSession().setTotalPoints(users.calcLevel(session.getSession(), rawResult.getText()));
             Gson gsonSession = new Gson();
             String jsonSession = gsonSession.toJson(session.getSession());
@@ -100,10 +108,14 @@ public class ScanActivity extends AppCompatActivity implements ZXingScannerView.
             sessionEditor.commit();
         }
         //ggf müssen noch elemmente für einen Toas mitgegeben werden
+        Context context = getApplicationContext();
+        int newPoints = Integer.parseInt(rawResult.getText().split("_")[3]);
+        CharSequence text = "+ " + newPoints + " Punkte";
+        int duration = Toast.LENGTH_SHORT;
+        Toast toast = Toast.makeText(context, text, duration);
+        toast.show();
 
-
-
-      //  onBackPressed();
+        finish();
         Intent profileIntent = new Intent(ScanActivity.this, ProfileActvity.class);
         startActivity(profileIntent);
         // If you would like to resume scanning, call this method below:
