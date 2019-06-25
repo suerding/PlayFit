@@ -38,6 +38,7 @@ public class ScanActivity extends AppCompatActivity implements ZXingScannerView.
     private UserDTO loggedinUser = new UserDTO();
     SharedPreferences sharedUsers;
     SharedPreferences sharedSession;
+    private SharedPreferences.Editor sessionEditor;
 
     @Override
     public void onCreate(Bundle state) {
@@ -60,7 +61,7 @@ public class ScanActivity extends AppCompatActivity implements ZXingScannerView.
         Gson gsonUsers = new Gson();
         String jsonUsers = sharedUsers.getString("Users", "");
         users = gsonUsers.fromJson(jsonUsers, UserDAOimpl.class);
-        SharedPreferences sharedSession = getSharedPreferences(LoginActivity.SESSION, Context.MODE_PRIVATE); // eigentliche Session
+        sharedSession = getSharedPreferences(LoginActivity.SESSION, Context.MODE_PRIVATE); // eigentliche Session
         SharedPreferences.Editor editor = sharedSession.edit();
         Gson gsonUser = new Gson();
         String jsonUser = sharedSession.getString("SessionUser", "");
@@ -91,7 +92,7 @@ public class ScanActivity extends AppCompatActivity implements ZXingScannerView.
 
         //Punkte werden der Session dem User gutgeschrieben - created by suerding
         if(rawResult !=null) {
-            SharedPreferences.Editor sessionEditor = sharedSession.edit();
+            sessionEditor = sharedSession.edit();
             session.getSession().setTotalPoints(users.calcLevel(session.getSession(), rawResult.getText()));
             Gson gsonSession = new Gson();
             String jsonSession = gsonSession.toJson(session.getSession());
