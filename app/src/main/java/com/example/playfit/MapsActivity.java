@@ -118,6 +118,9 @@ public class MapsActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            finish();
+            Intent settingsIntent = new Intent(MapsActivity.this, SettingsActivity.class);
+            startActivity(settingsIntent);
             return true;
         }
 

@@ -4,6 +4,7 @@ created by suerding
 
 package com.example.playfit;
 
+import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -171,6 +172,10 @@ public class FriendsDetailActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+
+            finish();
+            Intent settingsIntent = new Intent(FriendsDetailActivity.this, SettingsActivity.class);
+            startActivity(settingsIntent);
             return true;
         }
 

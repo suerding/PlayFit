@@ -5,6 +5,7 @@ finalized by sknobla
  */
 package com.example.playfit;
 
+import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -177,6 +178,9 @@ public class FriendsActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            finish();
+            Intent settingsIntent = new Intent(FriendsActivity.this, SettingsActivity.class);
+            startActivity(settingsIntent);
             return true;
         }
 
