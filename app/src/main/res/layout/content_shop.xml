@@ -45,14 +45,15 @@
         tools:layout_editor_absoluteY="596dp" />
 
     <ListView
-        android:id="@+id/friendsList"
+        android:id="@+id/offerList"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_marginStart="8dp"
         android:layout_marginTop="30dp"
+        android:layout_marginBottom="10dp"
         android:drawSelectorOnTop="false"
         app:layout_constraintBottom_toTopOf="@+id/button4"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.6"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/pointsText" />
 
