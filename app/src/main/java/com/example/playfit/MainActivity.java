@@ -84,6 +84,10 @@ public class MainActivity extends AppCompatActivity
         points.setText(String.valueOf(session.getSession().getUserPoints()));
 
 
+        int toastcounter = 0;
+        if(session.getSession().getUserName()!= "simonu" && toastcounter == 0){
+
+        toastcounter = 1;
 
         final Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
@@ -96,7 +100,8 @@ public class MainActivity extends AppCompatActivity
                 Toast toast = Toast.makeText(context, text, duration);
                 toast.show();
             }
-        }, 10000);
+        }, 5000);
+        }
 
 
 
