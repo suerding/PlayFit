@@ -46,7 +46,7 @@ public class ShopActivity extends AppCompatActivity
         Toolbar toolbar = findViewById(R.id.toolbar);
 
         //sessionhandling - created by suerding
-        //sessionHandling();
+        sessionHandling();
 
         setSupportActionBar(toolbar);
 
@@ -61,11 +61,11 @@ public class ShopActivity extends AppCompatActivity
         //Nav_view header - created by suerding
         navViewHeader();
 
-        //Profiledetails
-        //profiledetails();
+        TextView points = findViewById(R.id.pointsText);
+        points.setText(String.valueOf(session.getSession().getUserPoints()));
     }
 
-    /*
+
     private void sessionHandling(){
         sharedUsers = getSharedPreferences(LoginActivity.USERS, Context.MODE_PRIVATE); // users werden aus XML Read übergeben
         Gson gsonUsers = new Gson();
@@ -81,6 +81,7 @@ public class ShopActivity extends AppCompatActivity
     }
 
 
+    /*
     private void profiledetails(){
         //picture
         ImageView imageView = findViewById(R.id.detailImageProfile);

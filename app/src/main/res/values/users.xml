@@ -42,8 +42,8 @@
         <item name="name">Simon FM</item>
         <item name="passwort">S123</item>
         <item name="userEmail">simonfm@mail.de</item>
-        <item name="userPoints">25</item>
-        <item name="totalPoints">1020</item>
+        <item name="userPoints">1620</item>
+        <item name="totalPoints">1620</item>
         <item name="friendcount">5</item>
         <item name="friends">1;2;4;6</item>
     </string-array>
