@@ -239,7 +239,7 @@ public class MapsActivity extends FragmentActivity
         MarkerOptions markerOptions = new MarkerOptions().position(Zollstock)
                 .title("I am here");
         googleMap.animateCamera(CameraUpdateFactory.newLatLng(Zollstock));
-        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(Zollstock, 5));
+        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(Zollstock, 15));
         map.addMarker(markerOptions);
     }
 
