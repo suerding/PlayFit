@@ -23,7 +23,7 @@
         <item name="userPoints">24</item>
         <item name="totalPoints">1499</item>
         <item name="friendcount">3</item>
-        <item name="friends">0;2;4</item>
+        <item name="friends">0;2;3;4</item>
     </string-array>
     <string-array name="User3">
         <item name="userID">2</item>
@@ -34,7 +34,7 @@
         <item name="userPoints">42</item>
         <item name="totalPoints">4200</item>
         <item name="friendcount">4</item>
-        <item name="friends">1;0;4;6</item>
+        <item name="friends">1;0;3;4;6</item>
     </string-array>
     <string-array name="User4">
         <item name="userID">3</item>
