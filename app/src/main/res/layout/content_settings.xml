@@ -26,84 +26,71 @@
         android:id="@+id/fullName"
         android:layout_width="131dp"
         android:layout_height="35dp"
-        android:layout_marginStart="29dp"
-        android:layout_marginTop="44dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="24dp"
+        android:layout_marginStart="10dp"
         android:text="Full name"
         android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/eMail"
-        app:layout_constraintEnd_toStartOf="@+id/button2"
         app:layout_constraintStart_toEndOf="@+id/textView11"
-        app:layout_constraintTop_toBottomOf="@+id/textView9" />
+        app:layout_constraintTop_toTopOf="@+id/textView11" />
      // app:layout_constraintTop_toBottomOf="@+id/usernameOfUser" />
 
     <TextView
         android:id="@+id/textView14"
-        android:layout_width="81dp"
-        android:layout_height="29dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="21dp"
-        android:text="E-Mail"
+        android:layout_width="85dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="30dp"
+        android:text="E-Mail:"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/eMail"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView11" />
 
     <TextView
         android:id="@+id/textView11"
-        android:layout_width="81dp"
-        android:layout_height="29dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="124dp"
-        android:layout_marginEnd="21dp"
-        android:text="Name"
+        android:layout_width="85dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="30dp"
+        android:text="Name:"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/fullName"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
     <TextView
         android:id="@+id/eMail"
         android:layout_width="157dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="32dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="10dp"
         android:text="TextView"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toStartOf="@+id/button"
+        android:textSize="24sp"
         app:layout_constraintStart_toEndOf="@+id/textView14"
-        app:layout_constraintTop_toBottomOf="@+id/fullName" />
+        app:layout_constraintTop_toTopOf="@+id/textView14" />
 
     <Button
         android:id="@+id/button"
-        android:layout_width="72dp"
+        android:layout_width="65dp"
         android:layout_height="35dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="40dp"
+        android:layout_marginEnd="30dp"
         android:text="Edit"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button2" />
+        app:layout_constraintTop_toTopOf="@+id/eMail" />
 
     <Button
         android:id="@+id/button2"
         android:layout_width="65dp"
-        android:layout_height="38dp"
-        android:layout_marginTop="44dp"
-        android:layout_marginEnd="40dp"
+        android:layout_height="35dp"
+        android:layout_marginEnd="30dp"
         android:text="Edit"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView9" />
+        app:layout_constraintTop_toTopOf="@+id/fullName" />
 
     <Switch
         android:id="@+id/switch2"
         android:layout_width="320dp"
         android:layout_height="30dp"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="50dp"
         android:layout_marginEnd="32dp"
         android:text="Push-Benachrichtigungen"
         app:layout_constraintEnd_toEndOf="parent"
@@ -115,7 +102,7 @@
         android:layout_width="320dp"
         android:layout_height="30dp"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="32dp"
         android:text="Angebote per Newsletter"
         app:layout_constraintEnd_toEndOf="parent"
@@ -127,10 +114,10 @@
         android:id="@+id/button3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="112dp"
-        android:layout_marginBottom="136dp"
+        android:layout_marginBottom="40dp"
         android:text="Account Löschen"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
 
