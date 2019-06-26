@@ -37,4 +37,13 @@
     <string name="title_activity_scan">ScanActivity</string>
     <string name="title_activity_friends_detail">FriendsDetailActivity</string>
     <string name="title_activity_settings">SettingsActivity</string>
+    <string-array name="activities">
+        <item>Basketball</item>
+        <item>Fitnessstudio</item>
+        <item>Joggen</item>
+        <item>Rad fahren</item>
+        <item>Schwimmen</item>
+        <item>Tennis</item>
+        <item>Volleyball</item>
+    </string-array>
 </resources>
